@@ -823,6 +823,22 @@
                             </div>
                         </div>
                         <div class="col-md-6">
+                            <label class="form-label">Nomor Meter PLN</label>
+                            <input type="text" class="form-control" id="f_no_meter_pln" placeholder="Contoh: 12345678901">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Daya Meter (Watt)</label>
+                            <select class="form-select" id="f_daya_meter">
+                                <option value="" disabled selected>Pilih daya...</option>
+                                <option value="450">450 VA</option>
+                                <option value="900">900 VA</option>
+                                <option value="1300">1.300 VA</option>
+                                <option value="2200">2.200 VA</option>
+                                <option value="3300">3.300 VA</option>
+                                <option value="4500">4.500 VA</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
                             <label class="form-label">B. WiFi/Internet per Bulan (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
@@ -1882,6 +1898,11 @@
 `;
             text += `Listrik/Bulan: ${formatRupiah(document.getElementById('f_listrik').value)}
 `;
+            text += `Nomor Meter PLN: ${document.getElementById('f_no_meter_pln').value || '-'}
+`;
+            text += `Daya Meter: ${document.getElementById('f_daya_meter').value ? document.getElementById('f_daya_meter').value + ' VA' : '-'}
+`;
+
             text += `WiFi/Internet/Bulan: ${formatRupiah(document.getElementById('f_internet').value)}
 `;
             text += `Pengeluaran Rutin/Tahun: ${formatRupiah(document.getElementById('f_pengeluaran_tahun').value)}
