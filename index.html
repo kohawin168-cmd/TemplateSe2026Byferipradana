@@ -1062,7 +1062,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         // GANTI NOMOR WHATSAPP INI
-        const WHATSAPP_NUMBER = "6285156375253"; // Format: 62xxxxxxxxxx
+        const WHATSAPP_NUMBER = "6285178509892"; // Format: 62xxxxxxxxxx
 
         function showForm(mode) {
             document.getElementById('homePage').style.display = 'none';
@@ -1260,7 +1260,7 @@
             text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
 
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl;
             return false;
         }
 
@@ -1303,7 +1303,7 @@
             text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
 
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(waUrl, '_blank');
+            window.location.href = waUrl;
             return false;
         }
 
