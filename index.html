@@ -512,19 +512,19 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">Nomor Urut Bangunan</label>
-                            <input type="number" class="form-control" id="f_no_bangunan" required placeholder="Contoh: 001">
+                            <input type="number" class="form-control" id="f_no_bangunan" placeholder="Contoh: 001">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nomor Urut Keluarga</label>
-                            <input type="number" class="form-control" id="f_no_keluarga" required placeholder="Contoh: 01">
+                            <input type="number" class="form-control" id="f_no_keluarga" placeholder="Contoh: 01">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Nama Kepala Keluarga</label>
-                            <input type="text" class="form-control" id="f_nama_kk" required placeholder="Nama lengkap kepala keluarga">
+                            <input type="text" class="form-control" id="f_nama_kk" placeholder="Nama lengkap kepala keluarga">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Nomor Kartu Keluarga</label>
-                            <input type="text" class="form-control" id="f_no_kk" required placeholder="16 digit nomor KK">
+                            <input type="text" class="form-control" id="f_no_kk" placeholder="16 digit nomor KK">
                         </div>
                     </div>
                 </div>
@@ -537,7 +537,7 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label">Pekerjaan Kepala Keluarga</label>
-                            <input type="text" class="form-control" id="f_pekerjaan_kk" required placeholder="Contoh: Pegawai Swasta, Petani, Wiraswasta">
+                            <input type="text" class="form-control" id="f_pekerjaan_kk" placeholder="Contoh: Pegawai Swasta, Petani, Wiraswasta">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Pekerjaan Istri/Anggota Keluarga Lainnya</label>
@@ -547,7 +547,7 @@
                             <label class="form-label">Penghasilan/Bulan Kepala Keluarga (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_penghasilan_kk" required placeholder="5000000">
+                                <input type="number" class="form-control" id="f_penghasilan_kk" placeholder="5000000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -569,7 +569,7 @@
                     <!-- Rumah -->
                     <div class="mb-3">
                         <label class="form-label">A. Kepemilikan Rumah</label>
-                        <select class="form-select" id="f_rumah" onchange="toggleRumah()" required>
+                        <select class="form-select" id="f_rumah" onchange="toggleRumah()">
                             <option value="" selected disabled>Pilih status rumah...</option>
                             <option value="Milik">Milik Sendiri</option>
                             <option value="Sewa">Sewa/Kontrak</option>
@@ -626,7 +626,7 @@
                             <label class="form-label">A. Listrik per Bulan (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_listrik" required placeholder="250000">
+                                <input type="number" class="form-control" id="f_listrik" placeholder="250000">
                             </div>
                         </div>
                         <div class="col-md-6">
@@ -640,7 +640,7 @@
                             <label class="form-label">C. Pengeluaran Rutin per Tahun (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_pengeluaran_tahun" required placeholder="50000000">
+                                <input type="number" class="form-control" id="f_pengeluaran_tahun" placeholder="50000000">
                             </div>
                             <div class="form-text">Termasuk pendidikan, kesehatan, transportasi, dll.</div>
                         </div>
@@ -655,7 +655,7 @@
                     <div class="row g-3">
                         <div class="col-md-6">
                             <label class="form-label">A. Kepala Keluarga</label>
-                            <select class="form-select" id="f_pendidikan_kk" required>
+                            <select class="form-select" id="f_pendidikan_kk">
                                 <option value="" disabled selected>Pilih...</option>
                                 <option value="Tidak Sekolah">Tidak Sekolah</option>
                                 <option value="SD">SD/Sederajat</option>
@@ -860,8 +860,8 @@
                             <i class="bi bi-check-circle-fill"></i>
                             <span id="coordFamilyText"></span>
                         </div>
-                        <input type="hidden" id="f_lat" required>
-                        <input type="hidden" id="f_long" required>
+                        <input type="hidden" id="f_lat">
+                        <input type="hidden" id="f_long">
                     </div>
 
                     <div class="mb-3">
@@ -873,7 +873,7 @@
                                 <span>Klik untuk ambil foto KK</span>
                             </div>
                         </div>
-                        <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewKK')" required>
+                        <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewKK')">
                     </div>
 
                     <div class="mb-3">
@@ -885,7 +885,7 @@
                                 <span>Klik untuk foto rumah depan</span>
                             </div>
                         </div>
-                        <input type="file" id="f_foto_rumah" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRumah')" required>
+                        <input type="file" id="f_foto_rumah" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRumah')">
                     </div>
 
                     <div class="mb-3">
@@ -897,7 +897,7 @@
                                 <span>Klik untuk foto ruang tamu</span>
                             </div>
                         </div>
-                        <input type="file" id="f_foto_ruang" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRuang')" required>
+                        <input type="file" id="f_foto_ruang" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRuang')">
                     </div>
                 </div>
 
@@ -932,44 +932,44 @@
                     <div class="row g-3">
                         <div class="col-12">
                             <label class="form-label">Nomor Urut Bangunan</label>
-                            <input type="number" class="form-control" id="b_no_bangunan" required placeholder="Contoh: 001">
+                            <input type="number" class="form-control" id="b_no_bangunan" placeholder="Contoh: 001">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Nama Usaha</label>
-                            <input type="text" class="form-control" id="b_nama_usaha" required placeholder="Nama lengkap usaha">
+                            <input type="text" class="form-control" id="b_nama_usaha" placeholder="Nama lengkap usaha">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Jenis Usaha</label>
-                            <input type="text" class="form-control" id="b_jenis_usaha" required placeholder="Contoh: Restoran, Toko Kelontong, Bengkel">
+                            <input type="text" class="form-control" id="b_jenis_usaha" placeholder="Contoh: Restoran, Toko Kelontong, Bengkel">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Tahun Mulai Usaha</label>
-                            <input type="number" class="form-control" id="b_tahun_usaha" min="1900" max="2026" required placeholder="2020">
+                            <input type="number" class="form-control" id="b_tahun_usaha" min="1900" max="2026" placeholder="2020">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Biaya Produksi/Tahun (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_biaya_produksi" required placeholder="50000000">
+                                <input type="number" class="form-control" id="b_biaya_produksi" placeholder="50000000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Biaya Operasional/Tahun (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_biaya_operasional" required placeholder="20000000">
+                                <input type="number" class="form-control" id="b_biaya_operasional" placeholder="20000000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Nilai Produksi/Tahun (Rp)</label>
                             <div class="input-group">
                                 <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_nilai_produksi" required placeholder="100000000">
+                                <input type="number" class="form-control" id="b_nilai_produksi" placeholder="100000000">
                             </div>
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Jumlah Pekerja</label>
-                            <input type="number" class="form-control" id="b_pekerja_total" min="1" required placeholder="5">
+                            <input type="number" class="form-control" id="b_pekerja_total" min="1" placeholder="5">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Pekerja Wanita</label>
@@ -985,15 +985,15 @@
                         </div>
                         <div class="col-12">
                             <label class="form-label">Penanggung Jawab/Pemilik Usaha</label>
-                            <input type="text" class="form-control" id="b_pemilik" required placeholder="Nama pemilik usaha">
+                            <input type="text" class="form-control" id="b_pemilik" placeholder="Nama pemilik usaha">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">NIK Pemilik</label>
-                            <input type="text" class="form-control" id="b_nik" required placeholder="16 digit NIK">
+                            <input type="text" class="form-control" id="b_nik" placeholder="16 digit NIK">
                         </div>
                         <div class="col-md-6">
                             <label class="form-label">Umur Pemilik</label>
-                            <input type="number" class="form-control" id="b_umur" min="1" max="120" required placeholder="35">
+                            <input type="number" class="form-control" id="b_umur" min="1" max="120" placeholder="35">
                         </div>
                         <div class="col-12">
                             <label class="form-label">Lokasi Usaha (jika di luar tempat tinggal)</label>
@@ -1017,8 +1017,8 @@
                             <i class="bi bi-check-circle-fill"></i>
                             <span id="coordBusinessText"></span>
                         </div>
-                        <input type="hidden" id="b_lat" required>
-                        <input type="hidden" id="b_long" required>
+                        <input type="hidden" id="b_lat">
+                        <input type="hidden" id="b_long">
                     </div>
 
                     <div class="mb-3">
@@ -1030,7 +1030,7 @@
                                 <span>Klik untuk foto bangunan depan</span>
                             </div>
                         </div>
-                        <input type="file" id="b_foto_bangunan" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewBangunan')" required>
+                        <input type="file" id="b_foto_bangunan" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewBangunan')">
                     </div>
 
                     <div class="mb-3">
@@ -1042,7 +1042,7 @@
                                 <span>Klik untuk foto interior usaha</span>
                             </div>
                         </div>
-                        <input type="file" id="b_foto_interior" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewInterior')" required>
+                        <input type="file" id="b_foto_interior" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewInterior')">
                     </div>
                 </div>
 
@@ -1260,7 +1260,7 @@
             text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
 
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.location.href = waUrl;
+            window.open(waUrl,"_blank");
             return false;
         }
 
@@ -1303,7 +1303,7 @@
             text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
 
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.location.href = waUrl;
+            window.open(waUrl,"_blank");
             return false;
         }
 
