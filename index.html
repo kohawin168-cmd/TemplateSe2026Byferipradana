@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Simple Sensus Ekonomi 2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #1a5f7a;
+            --secondary-color: #57c5b6;
+            --accent-color: #159895;
+            --bg-color: #f0f4f8;
+            --card-bg: #ffffff;
+            --text-dark: #2c3e50;
+            --text-muted: #6c757d;
+            --border-color: #e0e6ed;
+            --success-color: #28a745;
+            --warning-color: #ffc107;
+            --danger-color: #dc3545;
+        }
+
+        * {
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: linear-gradient(135deg, #f0f4f8 0%, #e8f4f8 100%);
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            min-height: 100vh;
+            color: var(--text-dark);
+            padding-bottom: 40px;
+        }
+
+        .app-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 20px 0;
+            box-shadow: 0 4px 20px rgba(26, 95, 122, 0.3);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .app-header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 300px;
+            height: 300px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .app-header h1 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .app-header p {
+            opacity: 0.9;
+            margin: 5px 0 0 0;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 1;
+        }
+
+        .warning-banner {
+            background: linear-gradient(90deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 5px solid var(--warning-color);
+            padding: 15px 20px;
+            margin: 20px 15px;
+            border-radius: 12px;
+            box-shadow: 0 2px 10px rgba(255, 193, 7, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 2px 10px rgba(255, 193, 7, 0.2); }
+            50% { box-shadow: 0 4px 20px rgba(255, 193, 7, 0.4); }
+        }
+
+        .warning-banner i {
+            font-size: 1.5rem;
+            color: #856404;
+        }
+
+        .warning-banner strong {
+            color: #856404;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .mode-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 25px 20px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            border: 2px solid transparent;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mode-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
+            border-color: var(--secondary-color);
+        }
+
+        .mode-card::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--secondary-color);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .mode-card:hover::after {
+            opacity: 1;
+        }
+
+        .mode-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+        }
+
+        .mode-icon.family {
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            color: #1976d2;
+        }
+
+        .mode-icon.business {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            color: #388e3c;
+        }
+
+        .mode-card h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        .mode-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .form-section {
+            display: none;
+            animation: fadeIn 0.4s ease;
+        }
+
+        .form-section.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .form-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 20px;
+            margin: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 0.85rem;
+            color: var(--text-dark);
+            margin-bottom: 6px;
+        }
+
+        .form-control, .form-select {
+            border-radius: 10px;
+            border: 2px solid var(--border-color);
+            padding: 12px 15px;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            background: #fafbfc;
+        }
+
+        .form-control:focus, .form-select:focus {
+            border-color: var(--secondary-color);
+            box-shadow: 0 0 0 3px rgba(87, 197, 182, 0.2);
+            background: white;
+        }
+
+        .input-group-text {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 10px 0 0 10px;
+            font-weight: 600;
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 2px solid var(--border-color);
+            color: var(--text-muted);
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-back:hover {
+            border-color: var(--text-dark);
+            color: var(--text-dark);
+        }
+
+        .btn-submit {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+            border: none;
+            color: white;
+            border-radius: 12px;
+            padding: 14px 30px;
+            font-weight: 700;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.3);
+            transition: all 0.3s;
+            width: 100%;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.4);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .conditional-field {
+            display: none;
+            animation: slideDown 0.3s ease;
+        }
+
+        .conditional-field.show {
+            display: block;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; max-height: 0; }
+            to { opacity: 1; max-height: 200px; }
+        }
+
+        .photo-preview {
+            width: 100%;
+            height: 200px;
+            border: 2px dashed var(--border-color);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: #fafbfc;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .photo-preview:hover {
+            border-color: var(--secondary-color);
+            background: #f0f9ff;
+        }
+
+        .photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: none;
+        }
+
+        .photo-preview.has-image img {
+            display: block;
+        }
+
+        .photo-preview.has-image .photo-placeholder {
+            display: none;
+        }
+
+        .photo-placeholder {
+            text-align: center;
+            color: var(--text-muted);
+        }
+
+        .photo-placeholder i {
+            font-size: 2.5rem;
+            margin-bottom: 8px;
+            color: var(--secondary-color);
+        }
+
+        .photo-placeholder span {
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .coord-display {
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
+            border-radius: 10px;
+            padding: 12px 15px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.8rem;
+            color: var(--primary-color);
+            border: 1px solid #bbdefb;
+            word-break: break-all;
+        }
+
+        .coord-display i {
+            color: var(--success-color);
+            margin-right: 5px;
+        }
+
+        .badge-custom {
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .radio-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .radio-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid var(--border-color);
+            border-radius: 10px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .radio-btn.selected {
+            border-color: var(--secondary-color);
+            background: rgba(87, 197, 182, 0.1);
+            color: var(--primary-color);
+        }
+
+        .radio-btn i {
+            display: block;
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        .progress-bar-custom {
+            height: 6px;
+            background: var(--border-color);
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .progress-bar-custom .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+            border-radius: 3px;
+            transition: width 0.5s ease;
+        }
+
+        .footer-text {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            margin-top: 30px;
+            padding: 0 20px;
+        }
+
+        .floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            z-index: 1000;
+            transition: all 0.3s;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        @media (max-width: 576px) {
+            .app-header h1 {
+                font-size: 1.3rem;
+            }
+            .mode-card {
+                margin: 10px;
+                padding: 20px 15px;
+            }
+            .form-card {
+                margin: 10px;
+                padding: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="app-header text-center">
+        <div class="container">
+            <h1><i class="bi bi-graph-up-arrow me-2"></i>Simple Sensus Ekonomi 2026</h1>
+            <p>Pendataan Ekonomi Keluarga & Usaha</p>
+        </div>
+    </div>
+
+    <!-- Warning Banner -->
+    <div class="warning-banner">
+        <i class="bi bi-exclamation-triangle-fill"></i>
+        <strong>WAJIB TAGGING DAN FOTO RUMAH DEPAN DAN RUANG TAMU!</strong>
+    </div>
+
+    <!-- Home Page -->
+    <div id="homePage" class="container">
+        <div class="row g-0">
+            <div class="col-12">
+                <div class="mode-card" onclick="showForm('family')">
+                    <div class="mode-icon family">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3>Mode Pendataan Keluarga</h3>
+                    <p>Pendataan data ekonomi keluarga termasuk kepemilikan aset, penghasilan, pendidikan, dan usaha keluarga.</p>
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="mode-card" onclick="showForm('business')">
+                    <div class="mode-icon business">
+                        <i class="bi bi-building"></i>
+                    </div>
+                    <h3>Mode Bangunan Khusus Usaha</h3>
+                    <p>Pendataan data usaha pada bangunan khusus komersial atau industri.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mode 1: Pendataan Keluarga -->
+    <div id="familyForm" class="form-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+                <button class="btn-back" onclick="goHome()">
+                    <i class="bi bi-arrow-left me-1"></i> Kembali
+                </button>
+                <span class="badge-custom">Mode Keluarga</span>
+            </div>
+
+            <div class="progress-bar-custom mx-3">
+                <div class="progress-fill" id="familyProgress" style="width: 10%"></div>
+            </div>
+
+            <form id="formKeluarga" onsubmit="return submitFamily(event)">
+                <!-- Data Dasar -->
+                <div class="form-card">
+                    <div class="section-title">
+                        <i class="bi bi-person-vcard"></i> Data Dasar Keluarga
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">Nomor Urut Bangunan</label>
+                            <input type="number" class="form-control" id="f_no_bangunan" required placeholder="Contoh: 001">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nomor Urut Keluarga</label>
+                            <input type="number" class="form-control" id="f_no_keluarga" required placeholder="Contoh: 01">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Nama Kepala Keluarga</label>
+                            <input type="text" class="form-control" id="f_nama_kk" required placeholder="Nama lengkap kepala keluarga">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Nomor Kartu Keluarga</label>
+                            <input type="text" class="form-control" id="f_no_kk" required placeholder="16 digit nomor KK">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pekerjaan & Penghasilan -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-briefcase"></i> Pekerjaan & Penghasilan
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Pekerjaan Kepala Keluarga</label>
+                            <input type="text" class="form-control" id="f_pekerjaan_kk" required placeholder="Contoh: Pegawai Swasta, Petani, Wiraswasta">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Pekerjaan Istri/Anggota Keluarga Lainnya</label>
+                            <input type="text" class="form-control" id="f_pekerjaan_istri" placeholder="Contoh: IRT, Buruh, Pegawai">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Penghasilan/Bulan Kepala Keluarga (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_penghasilan_kk" required placeholder="5000000">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Penghasilan Istri/Anggota (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_penghasilan_anggota" placeholder="2000000">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kepemilikan -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-house-door"></i> Kepemilikan Aset
+                    </div>
+
+                    <!-- Rumah -->
+                    <div class="mb-3">
+                        <label class="form-label">A. Kepemilikan Rumah</label>
+                        <select class="form-select" id="f_rumah" onchange="toggleRumah()" required>
+                            <option value="" selected disabled>Pilih status rumah...</option>
+                            <option value="Milik">Milik Sendiri</option>
+                            <option value="Sewa">Sewa/Kontrak</option>
+                        </select>
+                        <div id="fieldRumahMilik" class="conditional-field mt-2">
+                            <label class="form-label">Jenis Surat</label>
+                            <select class="form-select" id="f_jenis_surat">
+                                <option value="SHM">SHM (Sertifikat Hak Milik)</option>
+                                <option value="SKGR">SKGR (Sertifikat Konversi Girik/Roya)</option>
+                                <option value="Lainnya">Lainnya</option>
+                            </select>
+                        </div>
+                        <div id="fieldRumahSewa" class="conditional-field mt-2">
+                            <label class="form-label">Nilai Sewa per Bulan (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_sewa_bulan" placeholder="1000000">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Motor -->
+                    <div class="mb-3">
+                        <label class="form-label">B. Sepeda Motor (Jumlah Unit)</label>
+                        <input type="number" class="form-control" id="f_motor" min="0" placeholder="0" value="0">
+                    </div>
+
+                    <!-- Mobil -->
+                    <div class="mb-3">
+                        <label class="form-label">C. Mobil (Jumlah Unit)</label>
+                        <input type="number" class="form-control" id="f_mobil" min="0" placeholder="0" value="0">
+                    </div>
+
+                    <!-- Kulkas -->
+                    <div class="mb-3">
+                        <label class="form-label">D. Kulkas (Jumlah Unit)</label>
+                        <input type="number" class="form-control" id="f_kulkas" min="0" placeholder="0" value="0">
+                    </div>
+
+                    <!-- AC -->
+                    <div class="mb-3">
+                        <label class="form-label">E. AC (Jumlah Unit)</label>
+                        <input type="number" class="form-control" id="f_ac" min="0" placeholder="0" value="0">
+                    </div>
+                </div>
+
+                <!-- Pengeluaran -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-cash-stack"></i> Pengeluaran Rutin
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">A. Listrik per Bulan (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_listrik" required placeholder="250000">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">B. WiFi/Internet per Bulan (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_internet" placeholder="300000">
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">C. Pengeluaran Rutin per Tahun (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="f_pengeluaran_tahun" required placeholder="50000000">
+                            </div>
+                            <div class="form-text">Termasuk pendidikan, kesehatan, transportasi, dll.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pendidikan -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-mortarboard"></i> Pendidikan Terakhir
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label">A. Kepala Keluarga</label>
+                            <select class="form-select" id="f_pendidikan_kk" required>
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                                <option value="SD">SD/Sederajat</option>
+                                <option value="SMP">SMP/Sederajat</option>
+                                <option value="SMA">SMA/Sederajat</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">B. Istri</label>
+                            <select class="form-select" id="f_pendidikan_istri">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Tidak Sekolah">Tidak Sekolah</option>
+                                <option value="SD">SD/Sederajat</option>
+                                <option value="SMP">SMP/Sederajat</option>
+                                <option value="SMA">SMA/Sederajat</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                                <option value="S3">S3</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">C. Anak 1</label>
+                            <select class="form-select" id="f_pendidikan_anak1">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Belum Sekolah">Belum Sekolah</option>
+                                <option value="TK">TK</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">D. Anak 2</label>
+                            <select class="form-select" id="f_pendidikan_anak2">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Belum Sekolah">Belum Sekolah</option>
+                                <option value="TK">TK</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">E. Anak 3</label>
+                            <select class="form-select" id="f_pendidikan_anak3">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Belum Sekolah">Belum Sekolah</option>
+                                <option value="TK">TK</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">F. Anak 4</label>
+                            <select class="form-select" id="f_pendidikan_anak4">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Belum Sekolah">Belum Sekolah</option>
+                                <option value="TK">TK</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                            </select>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">G. Anak 5</label>
+                            <select class="form-select" id="f_pendidikan_anak5">
+                                <option value="" disabled selected>Pilih...</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                                <option value="Belum Sekolah">Belum Sekolah</option>
+                                <option value="TK">TK</option>
+                                <option value="SD">SD</option>
+                                <option value="SMP">SMP</option>
+                                <option value="SMA">SMA</option>
+                                <option value="D1/D2">D1/D2</option>
+                                <option value="D3">D3</option>
+                                <option value="S1">S1</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Usaha Keluarga -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-shop"></i> Usaha Keluarga
+                    </div>
+                    <label class="form-label">Apakah keluarga ini memiliki usaha?</label>
+                    <div class="radio-group mb-3">
+                        <div class="radio-btn" onclick="selectUsaha('tidak')" id="btnUsahaTidak">
+                            <i class="bi bi-x-circle"></i>
+                            Tidak
+                        </div>
+                        <div class="radio-btn" onclick="selectUsaha('ya')" id="btnUsahaYa">
+                            <i class="bi bi-check-circle"></i>
+                            Ya
+                        </div>
+                    </div>
+                    <input type="hidden" id="f_punya_usaha" value="">
+
+                    <div id="fieldUsaha" class="conditional-field">
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label">Nama Usaha</label>
+                                <input type="text" class="form-control" id="f_nama_usaha" placeholder="Nama usaha">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Jenis Usaha</label>
+                                <input type="text" class="form-control" id="f_jenis_usaha" placeholder="Contoh: Warung, Konveksi, Bengkel">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Tahun Mulai Usaha</label>
+                                <input type="number" class="form-control" id="f_tahun_usaha" min="1900" max="2026" placeholder="2020">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Biaya Produksi/Tahun (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="f_biaya_produksi" placeholder="10000000">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Biaya Operasional/Tahun (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="f_biaya_operasional" placeholder="5000000">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Nilai Produksi/Tahun (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="f_nilai_produksi" placeholder="50000000">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Jumlah Pekerja</label>
+                                <input type="number" class="form-control" id="f_pekerja_total" min="1" placeholder="1">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Pekerja Wanita</label>
+                                <input type="number" class="form-control" id="f_pekerja_wanita" min="0" placeholder="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Pekerja Pria</label>
+                                <input type="number" class="form-control" id="f_pekerja_pria" min="0" placeholder="0">
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label">Pekerja yang Digaji</label>
+                                <input type="number" class="form-control" id="f_pekerja_gaji" min="0" placeholder="0">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Penanggung Jawab/Pemilik Usaha</label>
+                                <input type="text" class="form-control" id="f_pemilik_usaha" placeholder="Nama pemilik usaha">
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label">Lokasi Usaha (jika di luar tempat tinggal)</label>
+                                <input type="text" class="form-control" id="f_lokasi_usaha" placeholder="Alamat lengkap lokasi usaha">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lokasi & Foto -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-geo-alt"></i> Lokasi & Dokumentasi
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Koordinat Lokasi <span class="text-danger">*</span></label>
+                        <button type="button" class="btn btn-outline-primary w-100 mb-2" onclick="getLocation('family')">
+                            <i class="bi bi-geo-fill me-2"></i>Ambil Lokasi Realtime
+                        </button>
+                        <div id="coordFamily" class="coord-display" style="display:none;">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span id="coordFamilyText"></span>
+                        </div>
+                        <input type="hidden" id="f_lat" required>
+                        <input type="hidden" id="f_long" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto Kartu Keluarga <span class="text-danger">*</span></label>
+                        <div class="photo-preview" onclick="document.getElementById('f_foto_kk').click()">
+                            <img id="previewKK" alt="Preview">
+                            <div class="photo-placeholder">
+                                <i class="bi bi-camera-fill"></i>
+                                <span>Klik untuk ambil foto KK</span>
+                            </div>
+                        </div>
+                        <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewKK')" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto Rumah Tampak Depan <span class="text-danger">*</span></label>
+                        <div class="photo-preview" onclick="document.getElementById('f_foto_rumah').click()">
+                            <img id="previewRumah" alt="Preview">
+                            <div class="photo-placeholder">
+                                <i class="bi bi-house-door-fill"></i>
+                                <span>Klik untuk foto rumah depan</span>
+                            </div>
+                        </div>
+                        <input type="file" id="f_foto_rumah" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRumah')" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto Ruang Tamu <span class="text-danger">*</span></label>
+                        <div class="photo-preview" onclick="document.getElementById('f_foto_ruang').click()">
+                            <img id="previewRuang" alt="Preview">
+                            <div class="photo-placeholder">
+                                <i class="bi bi-door-open-fill"></i>
+                                <span>Klik untuk foto ruang tamu</span>
+                            </div>
+                        </div>
+                        <input type="file" id="f_foto_ruang" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRuang')" required>
+                    </div>
+                </div>
+
+                <div class="px-3 mt-4 mb-5">
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-whatsapp me-2"></i>Kirim Data via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Mode 2: Bangunan Khusus Usaha -->
+    <div id="businessForm" class="form-section">
+        <div class="container">
+            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
+                <button class="btn-back" onclick="goHome()">
+                    <i class="bi bi-arrow-left me-1"></i> Kembali
+                </button>
+                <span class="badge-custom">Mode Bangunan Usaha</span>
+            </div>
+
+            <div class="progress-bar-custom mx-3">
+                <div class="progress-fill" id="businessProgress" style="width: 10%"></div>
+            </div>
+
+            <form id="formUsaha" onsubmit="return submitBusiness(event)">
+                <div class="form-card">
+                    <div class="section-title">
+                        <i class="bi bi-building"></i> Data Bangunan & Usaha
+                    </div>
+                    <div class="row g-3">
+                        <div class="col-12">
+                            <label class="form-label">Nomor Urut Bangunan</label>
+                            <input type="number" class="form-control" id="b_no_bangunan" required placeholder="Contoh: 001">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Nama Usaha</label>
+                            <input type="text" class="form-control" id="b_nama_usaha" required placeholder="Nama lengkap usaha">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Jenis Usaha</label>
+                            <input type="text" class="form-control" id="b_jenis_usaha" required placeholder="Contoh: Restoran, Toko Kelontong, Bengkel">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Tahun Mulai Usaha</label>
+                            <input type="number" class="form-control" id="b_tahun_usaha" min="1900" max="2026" required placeholder="2020">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Biaya Produksi/Tahun (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="b_biaya_produksi" required placeholder="50000000">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Biaya Operasional/Tahun (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="b_biaya_operasional" required placeholder="20000000">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Nilai Produksi/Tahun (Rp)</label>
+                            <div class="input-group">
+                                <span class="input-group-text">Rp</span>
+                                <input type="number" class="form-control" id="b_nilai_produksi" required placeholder="100000000">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Jumlah Pekerja</label>
+                            <input type="number" class="form-control" id="b_pekerja_total" min="1" required placeholder="5">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pekerja Wanita</label>
+                            <input type="number" class="form-control" id="b_pekerja_wanita" min="0" placeholder="2">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pekerja Pria</label>
+                            <input type="number" class="form-control" id="b_pekerja_pria" min="0" placeholder="3">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Pekerja yang Digaji</label>
+                            <input type="number" class="form-control" id="b_pekerja_gaji" min="0" placeholder="4">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Penanggung Jawab/Pemilik Usaha</label>
+                            <input type="text" class="form-control" id="b_pemilik" required placeholder="Nama pemilik usaha">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">NIK Pemilik</label>
+                            <input type="text" class="form-control" id="b_nik" required placeholder="16 digit NIK">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label">Umur Pemilik</label>
+                            <input type="number" class="form-control" id="b_umur" min="1" max="120" required placeholder="35">
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label">Lokasi Usaha (jika di luar tempat tinggal)</label>
+                            <input type="text" class="form-control" id="b_lokasi" placeholder="Alamat lengkap lokasi usaha">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lokasi & Foto -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-geo-alt"></i> Lokasi & Dokumentasi
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Koordinat Lokasi <span class="text-danger">*</span></label>
+                        <button type="button" class="btn btn-outline-primary w-100 mb-2" onclick="getLocation('business')">
+                            <i class="bi bi-geo-fill me-2"></i>Ambil Lokasi Realtime
+                        </button>
+                        <div id="coordBusiness" class="coord-display" style="display:none;">
+                            <i class="bi bi-check-circle-fill"></i>
+                            <span id="coordBusinessText"></span>
+                        </div>
+                        <input type="hidden" id="b_lat" required>
+                        <input type="hidden" id="b_long" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto Bangunan Usaha Tampak Depan <span class="text-danger">*</span></label>
+                        <div class="photo-preview" onclick="document.getElementById('b_foto_bangunan').click()">
+                            <img id="previewBangunan" alt="Preview">
+                            <div class="photo-placeholder">
+                                <i class="bi bi-building"></i>
+                                <span>Klik untuk foto bangunan depan</span>
+                            </div>
+                        </div>
+                        <input type="file" id="b_foto_bangunan" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewBangunan')" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Foto Interior Usaha <span class="text-danger">*</span></label>
+                        <div class="photo-preview" onclick="document.getElementById('b_foto_interior').click()">
+                            <img id="previewInterior" alt="Preview">
+                            <div class="photo-placeholder">
+                                <i class="bi bi-shop-window"></i>
+                                <span>Klik untuk foto interior usaha</span>
+                            </div>
+                        </div>
+                        <input type="file" id="b_foto_interior" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewInterior')" required>
+                    </div>
+                </div>
+
+                <div class="px-3 mt-4 mb-5">
+                    <button type="submit" class="btn-submit">
+                        <i class="bi bi-whatsapp me-2"></i>Kirim Data via WhatsApp
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="footer-text">
+        <i class="bi bi-shield-check me-1"></i>Simple Sensus Ekonomi 2026 - Data dijaga kerahasiaannya
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // GANTI NOMOR WHATSAPP INI
+        const WHATSAPP_NUMBER = "6285156375253"; // Format: 62xxxxxxxxxx
+
+        function showForm(mode) {
+            document.getElementById('homePage').style.display = 'none';
+            if (mode === 'family') {
+                document.getElementById('familyForm').classList.add('active');
+                document.getElementById('businessForm').classList.remove('active');
+            } else {
+                document.getElementById('businessForm').classList.add('active');
+                document.getElementById('familyForm').classList.remove('active');
+            }
+            window.scrollTo(0, 0);
+        }
+
+        function goHome() {
+            document.getElementById('homePage').style.display = 'block';
+            document.getElementById('familyForm').classList.remove('active');
+            document.getElementById('businessForm').classList.remove('active');
+            window.scrollTo(0, 0);
+        }
+
+        function toggleRumah() {
+            const val = document.getElementById('f_rumah').value;
+            document.getElementById('fieldRumahMilik').classList.toggle('show', val === 'Milik');
+            document.getElementById('fieldRumahSewa').classList.toggle('show', val === 'Sewa');
+        }
+
+        function selectUsaha(option) {
+            document.getElementById('f_punya_usaha').value = option;
+            document.getElementById('btnUsahaTidak').classList.toggle('selected', option === 'tidak');
+            document.getElementById('btnUsahaYa').classList.toggle('selected', option === 'ya');
+            document.getElementById('fieldUsaha').classList.toggle('show', option === 'ya');
+        }
+
+        function previewImage(input, previewId) {
+            const file = input.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById(previewId);
+                    img.src = e.target.result;
+                    img.parentElement.classList.add('has-image');
+                };
+                reader.readAsDataURL(file);
+            }
+        }
+
+        function getLocation(mode) {
+            if (!navigator.geolocation) {
+                alert('Browser tidak mendukung geolokasi. Silakan aktifkan GPS.');
+                return;
+            }
+
+            const btn = event.target;
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<i class="bi bi-arrow-repeat spin me-2"></i>Mengambil lokasi...';
+            btn.disabled = true;
+
+            navigator.geolocation.getCurrentPosition(
+                function(position) {
+                    const lat = position.coords.latitude;
+                    const long = position.coords.longitude;
+
+                    if (mode === 'family') {
+                        document.getElementById('f_lat').value = lat;
+                        document.getElementById('f_long').value = long;
+                        document.getElementById('coordFamilyText').textContent = lat + ', ' + long;
+                        document.getElementById('coordFamily').style.display = 'block';
+                    } else {
+                        document.getElementById('b_lat').value = lat;
+                        document.getElementById('b_long').value = long;
+                        document.getElementById('coordBusinessText').textContent = lat + ', ' + long;
+                        document.getElementById('coordBusiness').style.display = 'block';
+                    }
+
+                    btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Lokasi Berhasil Diambil';
+                    btn.classList.remove('btn-outline-primary');
+                    btn.classList.add('btn-success');
+                    setTimeout(() => {
+                        btn.innerHTML = originalText;
+                        btn.disabled = false;
+                        btn.classList.remove('btn-success');
+                        btn.classList.add('btn-outline-primary');
+                    }, 2000);
+                },
+                function(error) {
+                    let msg = 'Gagal mengambil lokasi. ';
+                    switch(error.code) {
+                        case error.PERMISSION_DENIED:
+                            msg += 'Izin lokasi ditolak. Harap aktifkan izin GPS di pengaturan browser.';
+                            break;
+                        case error.POSITION_UNAVAILABLE:
+                            msg += 'Informasi lokasi tidak tersedia.';
+                            break;
+                        case error.TIMEOUT:
+                            msg += 'Waktu pengambilan lokasi habis.';
+                            break;
+                        default:
+                            msg += 'Error tidak diketahui.';
+                    }
+                    alert(msg);
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                },
+                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+            );
+        }
+
+        function formatRupiah(angka) {
+            if (!angka) return '0';
+            return 'Rp ' + parseInt(angka).toLocaleString('id-ID');
+        }
+
+        function submitFamily(e) {
+            e.preventDefault();
+
+            const lat = document.getElementById('f_lat').value;
+            const long = document.getElementById('f_long').value;
+
+            if (!lat || !long) {
+                alert('Lokasi belum diambil! Harap klik "Ambil Lokasi Realtime" terlebih dahulu.');
+                return false;
+            }
+
+            const punyaUsaha = document.getElementById('f_punya_usaha').value;
+            if (!punyaUsaha) {
+                alert('Harap pilih opsi usaha keluarga (Ya/Tidak)!');
+                return false;
+            }
+
+            let text = `*SENSUS EKONOMI 2026 - MODE KELUARGA*\n`;
+            text += `================================\n\n`;
+            text += `*DATA DASAR*\n`;
+            text += `No. Urut Bangunan: ${document.getElementById('f_no_bangunan').value}\n`;
+            text += `No. Urut Keluarga: ${document.getElementById('f_no_keluarga').value}\n`;
+            text += `Nama KK: ${document.getElementById('f_nama_kk').value}\n`;
+            text += `No. KK: ${document.getElementById('f_no_kk').value}\n\n`;
+
+            text += `*PEKERJAAN & PENGHASILAN*\n`;
+            text += `Pekerjaan KK: ${document.getElementById('f_pekerjaan_kk').value}\n`;
+            text += `Pekerjaan Istri/Anggota: ${document.getElementById('f_pekerjaan_istri').value || '-'}\n`;
+            text += `Penghasilan KK/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_kk').value)}\n`;
+            text += `Penghasilan Anggota/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_anggota').value)}\n\n`;
+
+            text += `*KEPEMILIKAN ASET*\n`;
+            const rumah = document.getElementById('f_rumah').value;
+            text += `Rumah: ${rumah}\n`;
+            if (rumah === 'Milik') {
+                text += `  Jenis Surat: ${document.getElementById('f_jenis_surat').value}\n`;
+            } else if (rumah === 'Sewa') {
+                text += `  Sewa/Bulan: ${formatRupiah(document.getElementById('f_sewa_bulan').value)}\n`;
+            }
+            text += `Sepeda Motor: ${document.getElementById('f_motor').value || 0} unit\n`;
+            text += `Mobil: ${document.getElementById('f_mobil').value || 0} unit\n`;
+            text += `Kulkas: ${document.getElementById('f_kulkas').value || 0} unit\n`;
+            text += `AC: ${document.getElementById('f_ac').value || 0} unit\n\n`;
+
+            text += `*PENGELUARAN*\n`;
+            text += `Listrik/Bulan: ${formatRupiah(document.getElementById('f_listrik').value)}\n`;
+            text += `WiFi/Internet/Bulan: ${formatRupiah(document.getElementById('f_internet').value)}\n`;
+            text += `Pengeluaran Rutin/Tahun: ${formatRupiah(document.getElementById('f_pengeluaran_tahun').value)}\n\n`;
+
+            text += `*PENDIDIKAN*\n`;
+            text += `KK: ${document.getElementById('f_pendidikan_kk').value}\n`;
+            text += `Istri: ${document.getElementById('f_pendidikan_istri').value || '-'}\n`;
+            text += `Anak 1: ${document.getElementById('f_pendidikan_anak1').value || '-'}\n`;
+            text += `Anak 2: ${document.getElementById('f_pendidikan_anak2').value || '-'}\n`;
+            text += `Anak 3: ${document.getElementById('f_pendidikan_anak3').value || '-'}\n`;
+            text += `Anak 4: ${document.getElementById('f_pendidikan_anak4').value || '-'}\n`;
+            text += `Anak 5: ${document.getElementById('f_pendidikan_anak5').value || '-'}\n\n`;
+
+            text += `*USAHA KELUARGA*\n`;
+            text += `Memiliki Usaha: ${punyaUsaha.toUpperCase()}\n`;
+            if (punyaUsaha === 'ya') {
+                text += `Nama Usaha: ${document.getElementById('f_nama_usaha').value || '-'}\n`;
+                text += `Jenis Usaha: ${document.getElementById('f_jenis_usaha').value || '-'}\n`;
+                text += `Tahun Mulai: ${document.getElementById('f_tahun_usaha').value || '-'}\n`;
+                text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('f_biaya_produksi').value)}\n`;
+                text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('f_biaya_operasional').value)}\n`;
+                text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('f_nilai_produksi').value)}\n`;
+                text += `Jumlah Pekerja: ${document.getElementById('f_pekerja_total').value || 0}\n`;
+                text += `Pekerja Wanita: ${document.getElementById('f_pekerja_wanita').value || 0}\n`;
+                text += `Pekerja Pria: ${document.getElementById('f_pekerja_pria').value || 0}\n`;
+                text += `Pekerja Digaji: ${document.getElementById('f_pekerja_gaji').value || 0}\n`;
+                text += `Pemilik: ${document.getElementById('f_pemilik_usaha').value || '-'}\n`;
+                text += `Lokasi Usaha: ${document.getElementById('f_lokasi_usaha').value || '-'}\n`;
+            }
+            text += `\n`;
+
+            text += `*LOKASI*\n`;
+            text += `Koordinat: ${lat}, ${long}\n`;
+            text += `Maps: https://maps.google.com/?q=${lat},${long}\n\n`;
+            text += `*Dokumentasi:*\n`;
+            text += `[Foto KK, Rumah Depan, Ruang Tamu dilampirkan]\n\n`;
+            text += `================================\n`;
+            text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+            return false;
+        }
+
+        function submitBusiness(e) {
+            e.preventDefault();
+
+            const lat = document.getElementById('b_lat').value;
+            const long = document.getElementById('b_long').value;
+
+            if (!lat || !long) {
+                alert('Lokasi belum diambil! Harap klik "Ambil Lokasi Realtime" terlebih dahulu.');
+                return false;
+            }
+
+            let text = `*SENSUS EKONOMI 2026 - MODE BANGUNAN USAHA*\n`;
+            text += `================================\n\n`;
+            text += `*DATA BANGUNAN & USAHA*\n`;
+            text += `No. Urut Bangunan: ${document.getElementById('b_no_bangunan').value}\n`;
+            text += `Nama Usaha: ${document.getElementById('b_nama_usaha').value}\n`;
+            text += `Jenis Usaha: ${document.getElementById('b_jenis_usaha').value}\n`;
+            text += `Tahun Mulai: ${document.getElementById('b_tahun_usaha').value}\n`;
+            text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('b_biaya_produksi').value)}\n`;
+            text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('b_biaya_operasional').value)}\n`;
+            text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('b_nilai_produksi').value)}\n`;
+            text += `Jumlah Pekerja: ${document.getElementById('b_pekerja_total').value}\n`;
+            text += `Pekerja Wanita: ${document.getElementById('b_pekerja_wanita').value || 0}\n`;
+            text += `Pekerja Pria: ${document.getElementById('b_pekerja_pria').value || 0}\n`;
+            text += `Pekerja Digaji: ${document.getElementById('b_pekerja_gaji').value || 0}\n`;
+            text += `Penanggung Jawab: ${document.getElementById('b_pemilik').value}\n`;
+            text += `NIK: ${document.getElementById('b_nik').value}\n`;
+            text += `Umur: ${document.getElementById('b_umur').value} tahun\n`;
+            text += `Lokasi Usaha: ${document.getElementById('b_lokasi').value || '-'}\n\n`;
+
+            text += `*LOKASI*\n`;
+            text += `Koordinat: ${lat}, ${long}\n`;
+            text += `Maps: https://maps.google.com/?q=${lat},${long}\n\n`;
+            text += `*Dokumentasi:*\n`;
+            text += `[Foto Bangunan Depan, Interior Usaha dilampirkan]\n\n`;
+            text += `================================\n`;
+            text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
+
+            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+            window.open(waUrl, '_blank');
+            return false;
+        }
+
+        // Progress bar simulation
+        document.querySelectorAll('input, select').forEach(input => {
+            input.addEventListener('change', updateProgress);
+            input.addEventListener('input', updateProgress);
+        });
+
+        function updateProgress() {
+            // Simple progress update logic can be added here
+        }
+    </script>
+</body>
+</html>
