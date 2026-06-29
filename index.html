@@ -448,6 +448,22 @@
                 padding: 15px;
             }
         }
+
+        .spin {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .anggota-row {
+            transition: all 0.3s ease;
+        }
+        .anggota-row:hover {
+            border-color: var(--secondary-color) !important;
+            box-shadow: 0 2px 8px rgba(87, 197, 182, 0.15);
+        }
     </style>
 </head>
 <body>
@@ -529,6 +545,118 @@
                     </div>
                 </div>
 
+                <!-- Sumber Data -->
+                <div class="form-card mt-3">
+                    <div class="section-title">
+                        <i class="bi bi-database"></i> Sumber Data
+                    </div>
+                    <label class="form-label">Pilih sumber data keluarga:</label>
+                    <div class="radio-group mb-3">
+                        <div class="radio-btn" onclick="selectSumberData('prelist')" id="btnSumberPrelist">
+                            <i class="bi bi-file-earmark-text"></i>
+                            Prelist
+                        </div>
+                        <div class="radio-btn" onclick="selectSumberData('assignment')" id="btnSumberAssignment">
+                            <i class="bi bi-plus-circle"></i>
+                            Assignment Baru
+                        </div>
+                    </div>
+                    <input type="hidden" id="f_sumber_data" value="">
+
+                    <!-- Assignment Baru: Foto KK + OCR Scan -->
+                    <div id="fieldAssignmentBaru" class="conditional-field">
+                        <div class="mb-3">
+                            <label class="form-label">Foto Kartu Keluarga <span class="text-danger">*</span></label>
+                            <div class="photo-preview" onclick="document.getElementById('f_foto_kk').click()">
+                                <img id="previewKK" alt="Preview">
+                                <div class="photo-placeholder">
+                                    <i class="bi bi-camera-fill"></i>
+                                    <span>Klik untuk ambil foto KK</span>
+                                </div>
+                            </div>
+                            <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="handleKKUpload(this)">
+                        </div>
+
+                        <!-- OCR Loading -->
+                        <div id="ocrLoading" class="text-center mb-3" style="display:none;">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                            <p class="mt-2 text-muted" style="font-size:0.85rem;">Memindai data KK...</p>
+                        </div>
+
+                        <!-- OCR Results -->
+                        <div id="ocrResult" class="conditional-field">
+                            <div class="alert alert-info" style="font-size:0.85rem;">
+                                <i class="bi bi-info-circle-fill me-2"></i>
+                                <strong>Data terdeteksi dari KK:</strong> Periksa dan sesuaikan jika perlu.
+                            </div>
+                            <div class="row g-3">
+                                <div class="col-12">
+                                    <label class="form-label">No. Kartu Keluarga</label>
+                                    <input type="text" class="form-control" id="f_no_kk_ocr" placeholder="16 digit nomor KK" maxlength="16">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Nama Kepala Keluarga</label>
+                                    <input type="text" class="form-control" id="f_nama_kk_ocr" placeholder="Nama lengkap kepala keluarga">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Alamat</label>
+                                    <textarea class="form-control" id="f_alamat_kk_ocr" rows="2" placeholder="Alamat lengkap"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">RT / RW</label>
+                                    <div class="row g-2">
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" id="f_rt_kk_ocr" placeholder="RT">
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text" class="form-control" id="f_rw_kk_ocr" placeholder="RW">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Kode Pos</label>
+                                    <input type="text" class="form-control" id="f_kodepos_kk_ocr" placeholder="Kode pos" maxlength="5">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Desa/Kelurahan</label>
+                                    <input type="text" class="form-control" id="f_desa_kk_ocr" placeholder="Desa/Kelurahan">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Kecamatan</label>
+                                    <input type="text" class="form-control" id="f_kecamatan_kk_ocr" placeholder="Kecamatan">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Kabupaten/Kota</label>
+                                    <input type="text" class="form-control" id="f_kabupaten_kk_ocr" placeholder="Kabupaten/Kota">
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label">Provinsi</label>
+                                    <input type="text" class="form-control" id="f_provinsi_kk_ocr" placeholder="Provinsi">
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label">Tanggal Dikeluarkan</label>
+                                    <input type="date" class="form-control" id="f_tgl_kk_ocr">
+                                </div>
+                            </div>
+
+                            <!-- Anggota Keluarga dari OCR -->
+                            <div class="mt-4">
+                                <div class="section-title" style="border-bottom:2px solid var(--border-color); padding-bottom:10px;">
+                                    <i class="bi bi-people"></i> Anggota Keluarga (OCR)
+                                </div>
+                                <div id="anggotaKeluargaOCR">
+                                    <!-- Dynamic rows will be inserted here -->
+                                </div>
+                                <button type="button" class="btn btn-outline-primary w-100 mt-2" onclick="tambahAnggotaOCR()">
+                                    <i class="bi bi-plus-lg me-1"></i> Tambah Anggota Keluarga
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Pekerjaan & Penghasilan -->
                 <div class="form-card mt-3">
                     <div class="section-title">
@@ -591,27 +719,92 @@
                         </div>
                     </div>
 
+                    <!-- Luas Tanah -->
+                    <div class="mb-3">
+                        <label class="form-label">B. Luas Tanah (m²)</label>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Panjang (m)</label>
+                                <input type="number" class="form-control" id="f_tanah_panjang" min="0" step="0.1" placeholder="0" oninput="hitungLuasTanah()">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Lebar (m)</label>
+                                <input type="number" class="form-control" id="f_tanah_lebar" min="0" step="0.1" placeholder="0" oninput="hitungLuasTanah()">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Luas (m²)</label>
+                                <input type="number" class="form-control" id="f_tanah_luas" min="0" step="0.1" placeholder="0" readonly style="background:#e9ecef; font-weight:700;">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Luas Bangunan -->
+                    <div class="mb-3">
+                        <label class="form-label">C. Luas Bangunan (m²)</label>
+                        <div class="row g-2">
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Panjang (m)</label>
+                                <input type="number" class="form-control" id="f_bangunan_panjang" min="0" step="0.1" placeholder="0" oninput="hitungLuasBangunan()">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Lebar (m)</label>
+                                <input type="number" class="form-control" id="f_bangunan_lebar" min="0" step="0.1" placeholder="0" oninput="hitungLuasBangunan()">
+                            </div>
+                            <div class="col-4">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Luas (m²)</label>
+                                <input type="number" class="form-control" id="f_bangunan_luas" min="0" step="0.1" placeholder="0" readonly style="background:#e9ecef; font-weight:700;">
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Motor -->
                     <div class="mb-3">
-                        <label class="form-label">B. Sepeda Motor (Jumlah Unit)</label>
-                        <input type="number" class="form-control" id="f_motor" min="0" placeholder="0" value="0">
+                        <label class="form-label">D. Sepeda Motor</label>
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Jumlah Unit</label>
+                                <input type="number" class="form-control" id="f_motor" min="0" placeholder="0" value="0">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Nilai per Unit</label>
+                                <select class="form-select" id="f_motor_harga">
+                                    <option value="" disabled selected>Pilih range harga...</option>
+                                    <option value="Rendah (3-4 Juta)">Rendah: Rp 3.000.000 - 4.000.000</option>
+                                    <option value="Sedang (5-6 Juta)">Sedang: Rp 5.000.000 - 6.000.000</option>
+                                    <option value="Menengah (9-10 Juta)">Menengah: Rp 9.000.000 - 10.000.000</option>
+                                    <option value="Tinggi (10-15 Juta)">Tinggi: Rp 10.000.000 - 15.000.000</option>
+                                </select>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Mobil -->
                     <div class="mb-3">
-                        <label class="form-label">C. Mobil (Jumlah Unit)</label>
-                        <input type="number" class="form-control" id="f_mobil" min="0" placeholder="0" value="0">
+                        <label class="form-label">E. Mobil</label>
+                        <div class="row g-2 mb-2">
+                            <div class="col-6">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Jumlah Unit</label>
+                                <input type="number" class="form-control" id="f_mobil" min="0" placeholder="0" value="0">
+                            </div>
+                            <div class="col-6">
+                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Perkiraan Harga per Unit (Rp)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">Rp</span>
+                                    <input type="number" class="form-control" id="f_mobil_harga" placeholder="150000000">
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
                     <!-- Kulkas -->
                     <div class="mb-3">
-                        <label class="form-label">D. Kulkas (Jumlah Unit)</label>
+                        <label class="form-label">F. Kulkas (Jumlah Unit)</label>
                         <input type="number" class="form-control" id="f_kulkas" min="0" placeholder="0" value="0">
                     </div>
 
                     <!-- AC -->
                     <div class="mb-3">
-                        <label class="form-label">E. AC (Jumlah Unit)</label>
+                        <label class="form-label">G. AC (Jumlah Unit)</label>
                         <input type="number" class="form-control" id="f_ac" min="0" placeholder="0" value="0">
                     </div>
                 </div>
@@ -865,18 +1058,6 @@
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label">Foto Kartu Keluarga <span class="text-danger">*</span></label>
-                        <div class="photo-preview" onclick="document.getElementById('f_foto_kk').click()">
-                            <img id="previewKK" alt="Preview">
-                            <div class="photo-placeholder">
-                                <i class="bi bi-camera-fill"></i>
-                                <span>Klik untuk ambil foto KK</span>
-                            </div>
-                        </div>
-                        <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewKK')">
-                    </div>
-
-                    <div class="mb-3">
                         <label class="form-label">Foto Rumah Tampak Depan <span class="text-danger">*</span></label>
                         <div class="photo-preview" onclick="document.getElementById('f_foto_rumah').click()">
                             <img id="previewRumah" alt="Preview">
@@ -1002,10 +1183,10 @@
                     </div>
                 </div>
 
-                <!-- Lokasi & Foto -->
+                <!-- Lokasi -->
                 <div class="form-card mt-3">
                     <div class="section-title">
-                        <i class="bi bi-geo-alt"></i> Lokasi & Dokumentasi
+                        <i class="bi bi-geo-alt"></i> Lokasi
                     </div>
 
                     <div class="mb-3">
@@ -1019,30 +1200,6 @@
                         </div>
                         <input type="hidden" id="b_lat">
                         <input type="hidden" id="b_long">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Foto Bangunan Usaha Tampak Depan <span class="text-danger">*</span></label>
-                        <div class="photo-preview" onclick="document.getElementById('b_foto_bangunan').click()">
-                            <img id="previewBangunan" alt="Preview">
-                            <div class="photo-placeholder">
-                                <i class="bi bi-building"></i>
-                                <span>Klik untuk foto bangunan depan</span>
-                            </div>
-                        </div>
-                        <input type="file" id="b_foto_bangunan" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewBangunan')">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Foto Interior Usaha <span class="text-danger">*</span></label>
-                        <div class="photo-preview" onclick="document.getElementById('b_foto_interior').click()">
-                            <img id="previewInterior" alt="Preview">
-                            <div class="photo-placeholder">
-                                <i class="bi bi-shop-window"></i>
-                                <span>Klik untuk foto interior usaha</span>
-                            </div>
-                        </div>
-                        <input type="file" id="b_foto_interior" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewInterior')">
                     </div>
                 </div>
 
@@ -1060,9 +1217,10 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script>
         // GANTI NOMOR WHATSAPP INI
-        const WHATSAPP_NUMBER = "6285178509892"; // Format: 62xxxxxxxxxx
+        const WHATSAPP_NUMBER = "6285791111335"; // Format: 62xxxxxxxxxx
 
         function showForm(mode) {
             document.getElementById('homePage').style.display = 'none';
@@ -1087,6 +1245,436 @@
             const val = document.getElementById('f_rumah').value;
             document.getElementById('fieldRumahMilik').classList.toggle('show', val === 'Milik');
             document.getElementById('fieldRumahSewa').classList.toggle('show', val === 'Sewa');
+        }
+
+        function hitungLuasTanah() {
+            const p = parseFloat(document.getElementById('f_tanah_panjang').value) || 0;
+            const l = parseFloat(document.getElementById('f_tanah_lebar').value) || 0;
+            document.getElementById('f_tanah_luas').value = (p * l).toFixed(2);
+        }
+
+        function hitungLuasBangunan() {
+            const p = parseFloat(document.getElementById('f_bangunan_panjang').value) || 0;
+            const l = parseFloat(document.getElementById('f_bangunan_lebar').value) || 0;
+            document.getElementById('f_bangunan_luas').value = (p * l).toFixed(2);
+        }
+
+        // === SUMBER DATA: PRELIST / ASSIGNMENT BARU ===
+        let anggotaCount = 0;
+
+        function selectSumberData(option) {
+            document.getElementById('f_sumber_data').value = option;
+            document.getElementById('btnSumberPrelist').classList.toggle('selected', option === 'prelist');
+            document.getElementById('btnSumberAssignment').classList.toggle('selected', option === 'assignment');
+            document.getElementById('fieldAssignmentBaru').classList.toggle('show', option === 'assignment');
+        }
+
+        function handleKKUpload(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // Show preview
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('previewKK');
+                img.src = e.target.result;
+                img.parentElement.classList.add('has-image');
+
+                // Show loading and start real OCR
+                document.getElementById('ocrLoading').style.display = 'block';
+                document.getElementById('ocrResult').classList.remove('show');
+
+                // Run real Tesseract.js OCR
+                simulateOCRScan();
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // Tesseract.js worker instance
+        let tesseractWorker = null;
+
+        async function initTesseractWorker() {
+            if (!tesseractWorker) {
+                try {
+                    tesseractWorker = await Tesseract.createWorker('ind', 1, {
+                        logger: (m) => {
+                            console.log('Tesseract:', m.status, Math.round(m.progress * 100) + '%');
+                        }
+                    });
+                } catch (err) {
+                    console.error('Gagal init Tesseract:', err);
+                    // Fallback: try English if Indonesian fails
+                    try {
+                        tesseractWorker = await Tesseract.createWorker('eng', 1, {
+                            logger: (m) => {
+                                console.log('Tesseract (eng):', m.status, Math.round(m.progress * 100) + '%');
+                            }
+                        });
+                    } catch (err2) {
+                        console.error('Gagal init Tesseract English juga:', err2);
+                    }
+                }
+            }
+            return tesseractWorker;
+        }
+
+        async function simulateOCRScan() {
+            const imgElement = document.getElementById('previewKK');
+            if (!imgElement.src || imgElement.src === '') {
+                document.getElementById('ocrLoading').style.display = 'none';
+                alert('Gambar KK tidak ditemukan!');
+                return;
+            }
+
+            try {
+                // Initialize worker
+                const worker = await initTesseractWorker();
+                if (!worker) {
+                    throw new Error('Tesseract worker tidak bisa diinisialisasi');
+                }
+
+                // Run OCR
+                const result = await worker.recognize(imgElement.src);
+                const rawText = result.data.text;
+                console.log('OCR Raw Text:', rawText);
+                console.log('OCR Confidence:', result.data.confidence);
+
+                // Parse KK data from OCR text
+                const parsedData = parseKKData(rawText);
+
+                // Fill form fields
+                document.getElementById('f_no_kk_ocr').value = parsedData.noKK || '';
+                document.getElementById('f_nama_kk_ocr').value = parsedData.namaKK || '';
+                document.getElementById('f_alamat_kk_ocr').value = parsedData.alamat || '';
+                document.getElementById('f_rt_kk_ocr').value = parsedData.rt || '';
+                document.getElementById('f_rw_kk_ocr').value = parsedData.rw || '';
+                document.getElementById('f_kodepos_kk_ocr').value = parsedData.kodePos || '';
+                document.getElementById('f_desa_kk_ocr').value = parsedData.desa || '';
+                document.getElementById('f_kecamatan_kk_ocr').value = parsedData.kecamatan || '';
+                document.getElementById('f_kabupaten_kk_ocr').value = parsedData.kabupaten || '';
+                document.getElementById('f_provinsi_kk_ocr').value = parsedData.provinsi || '';
+                document.getElementById('f_tgl_kk_ocr').value = parsedData.tglDikeluarkan || '';
+
+                // Build anggota keluarga from parsed data
+                document.getElementById('anggotaKeluargaOCR').innerHTML = '';
+                anggotaCount = 0;
+
+                if (parsedData.anggota && parsedData.anggota.length > 0) {
+                    parsedData.anggota.forEach(anggota => {
+                        tambahAnggotaOCR();
+                        const lastRow = document.querySelectorAll('.anggota-row')[document.querySelectorAll('.anggota-row').length - 1];
+                        if (lastRow) {
+                            lastRow.querySelector('.anggota-nik').value = anggota.nik || '';
+                            lastRow.querySelector('.anggota-nama').value = anggota.nama || '';
+                            lastRow.querySelector('.anggota-tempat').value = anggota.tempatLahir || '';
+                            lastRow.querySelector('.anggota-tgl').value = anggota.tglLahir || '';
+                            lastRow.querySelector('.anggota-jk').value = anggota.jenisKelamin || '';
+                            lastRow.querySelector('.anggota-status').value = anggota.status || '';
+                        }
+                    });
+                } else {
+                    // Default 3 empty rows if no anggota detected
+                    tambahAnggotaOCR();
+                    tambahAnggotaOCR();
+                    tambahAnggotaOCR();
+                }
+
+                // Hide loading, show result
+                document.getElementById('ocrLoading').style.display = 'none';
+                document.getElementById('ocrResult').classList.add('show');
+
+                // Also fill the main form fields if empty
+                if (!document.getElementById('f_no_kk').value && parsedData.noKK) {
+                    document.getElementById('f_no_kk').value = parsedData.noKK;
+                }
+                if (!document.getElementById('f_nama_kk').value && parsedData.namaKK) {
+                    document.getElementById('f_nama_kk').value = parsedData.namaKK;
+                }
+
+                alert('Foto KK berhasil discan!\n\nSilakan periksa dan koreksi data hasil OCR di bawah.\nAkurasi: ' + Math.round(result.data.confidence) + '%');
+
+            } catch (error) {
+                console.error('OCR Error:', error);
+                document.getElementById('ocrLoading').style.display = 'none';
+                document.getElementById('ocrResult').classList.add('show');
+
+                // Clear and add default rows
+                document.getElementById('anggotaKeluargaOCR').innerHTML = '';
+                anggotaCount = 0;
+                tambahAnggotaOCR();
+                tambahAnggotaOCR();
+                tambahAnggotaOCR();
+
+                alert('OCR gagal: ' + error.message + '\n\nSilakan isi data KK secara manual.');
+            }
+        }
+
+        // Parser untuk data KK Indonesia
+        function parseKKData(rawText) {
+            const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+            const data = {
+                noKK: '',
+                namaKK: '',
+                alamat: '',
+                rt: '',
+                rw: '',
+                kodePos: '',
+                desa: '',
+                kecamatan: '',
+                kabupaten: '',
+                provinsi: '',
+                tglDikeluarkan: '',
+                anggota: []
+            };
+
+            // Extract No KK
+            for (let line of lines) {
+                const kkMatch = line.match(/(No\.?\s*KK|Nomor\s*KK|NO\.?\s*KK)[\s:]*([0-9\s]{16,20})/i);
+                if (kkMatch) {
+                    data.noKK = kkMatch[2].replace(/\s/g, '').trim();
+                    break;
+                }
+                // Try plain 16-digit number
+                const plainKK = line.match(/\b([0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})\b/);
+                if (plainKK && !data.noKK) {
+                    data.noKK = plainKK[1].replace(/\s/g, '');
+                }
+            }
+
+            // Extract Nama Kepala Keluarga
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+                if (/kepala\s*keluarga|nama\s*kk/i.test(line)) {
+                    // Check next line or same line after colon
+                    const namaMatch = line.match(/[:;]\s*([A-Za-z\s\.]+)/i);
+                    if (namaMatch) {
+                        data.namaKK = namaMatch[1].trim();
+                    } else if (lines[i + 1] && !/\d/.test(lines[i + 1].substring(0, 2))) {
+                        data.namaKK = lines[i + 1].trim();
+                    }
+                    break;
+                }
+            }
+
+            // Extract Alamat
+            for (let line of lines) {
+                const alamatMatch = line.match(/alamat[\s:]*(.+)/i);
+                if (alamatMatch) {
+                    data.alamat = alamatMatch[1].trim();
+                    break;
+                }
+            }
+
+            // Extract RT/RW
+            for (let line of lines) {
+                const rtRwMatch = line.match(/RT\s*[\/]?\s*RW[\s:]*([0-9]+)[\s\/]+([0-9]+)/i);
+                if (rtRwMatch) {
+                    data.rt = rtRwMatch[1].padStart(3, '0');
+                    data.rw = rtRwMatch[2].padStart(3, '0');
+                    break;
+                }
+                const rtMatch = line.match(/RT[\s:]*([0-9]+)/i);
+                const rwMatch = line.match(/RW[\s:]*([0-9]+)/i);
+                if (rtMatch) data.rt = rtMatch[1].padStart(3, '0');
+                if (rwMatch) data.rw = rwMatch[1].padStart(3, '0');
+            }
+
+            // Extract Kode Pos
+            for (let line of lines) {
+                const kpMatch = line.match(/kode\s*pos[\s:]*([0-9]{5})/i);
+                if (kpMatch) {
+                    data.kodePos = kpMatch[1];
+                    break;
+                }
+            }
+
+            // Extract Wilayah (Desa, Kec, Kab, Prov)
+            for (let line of lines) {
+                if (/desa|kelurahan/i.test(line)) {
+                    const match = line.match(/(desa|kelurahan)[\s:]*(.+)/i);
+                    if (match) data.desa = match[2].trim();
+                }
+                if (/kecamatan/i.test(line)) {
+                    const match = line.match(/kecamatan[\s:]*(.+)/i);
+                    if (match) data.kecamatan = match[2].trim();
+                }
+                if (/kabupaten|kota/i.test(line)) {
+                    const match = line.match(/(kabupaten|kota)[\s:]*(.+)/i);
+                    if (match) data.kabupaten = match[2].trim();
+                }
+                if (/provinsi/i.test(line)) {
+                    const match = line.match(/provinsi[\s:]*(.+)/i);
+                    if (match) data.provinsi = match[2].trim();
+                }
+            }
+
+            // Extract Tanggal Dikeluarkan
+            for (let line of lines) {
+                const tglMatch = line.match(/(tanggal|tgl)[\s:]*([0-9]{1,2})[\s\-/]([0-9]{1,2})[\s\-/]([0-9]{2,4})/i);
+                if (tglMatch) {
+                    const d = tglMatch[2].padStart(2, '0');
+                    const m = tglMatch[3].padStart(2, '0');
+                    let y = tglMatch[4];
+                    if (y.length === 2) y = '20' + y;
+                    data.tglDikeluarkan = `${y}-${m}-${d}`;
+                    break;
+                }
+            }
+
+            // Extract Anggota Keluarga (table rows)
+            // Look for patterns: NIK, Nama, Tempat/Tgl Lahir, Jenis Kelamin, Status
+            data.anggota = extractAnggotaFromLines(lines);
+
+            return data;
+        }
+
+        function extractAnggotaFromLines(lines) {
+            const anggota = [];
+            let inTable = false;
+
+            for (let i = 0; i < lines.length; i++) {
+                const line = lines[i];
+
+                // Detect NIK pattern (16 digits)
+                const nikMatch = line.match(/\b([0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})\b/);
+                if (nikMatch) {
+                    const nik = nikMatch[1].replace(/\s/g, '');
+                    // Look for name in surrounding lines
+                    let nama = '';
+                    let tempatLahir = '';
+                    let tglLahir = '';
+                    let jenisKelamin = '';
+                    let status = '';
+
+                    // Check next few lines for additional data
+                    for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
+                        const nextLine = lines[j];
+                        if (/LAKI|PEREMPUAN|Laki|Perempuan/i.test(nextLine)) {
+                            jenisKelamin = /LAKI|Laki/i.test(nextLine) ? 'Laki-laki' : 'Perempuan';
+                        }
+                        if (/KEPALA|ISTRI|ANAK|CUCU|MENANTU|ORANG\s*TUA|MERTUA/i.test(nextLine)) {
+                            const statusMatch = nextLine.match(/(KEPALA\s*KELUARGA|ISTRI|ANAK|CUCU|MENANTU|ORANG\s*TUA|MERTUA|FAMILI\s*LAIN|PEMBANTU|LAINNYA)/i);
+                            if (statusMatch) {
+                                status = statusMatch[1].replace(/\s+/g, ' ').trim();
+                                status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
+                            }
+                        }
+                        if (/[0-9]{1,2}[\s\-/][0-9]{1,2}[\s\-/][0-9]{4}/.test(nextLine) && !tglLahir) {
+                            const tglMatch = nextLine.match(/([0-9]{1,2})[\s\-/]([0-9]{1,2})[\s\-/]([0-9]{4})/);
+                            if (tglMatch) {
+                                tempatLahir = nextLine.split(/[0-9]{1,2}[\s\-/]/)[0].replace(/[,;]/g, '').trim();
+                                const d = tglMatch[1].padStart(2, '0');
+                                const m = tglMatch[2].padStart(2, '0');
+                                const y = tglMatch[3];
+                                tglLahir = `${y}-${m}-${d}`;
+                            }
+                        }
+                        // Stop if we hit another NIK
+                        if (/\b[0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\b/.test(nextLine) && j > i) break;
+                    }
+
+                    // Try to get name from previous line
+                    if (i > 0 && !nama) {
+                        const prevLine = lines[i - 1];
+                        if (prevLine.length > 3 && !/\d{4}/.test(prevLine)) {
+                            nama = prevLine;
+                        }
+                    }
+
+                    anggota.push({
+                        nik: nik,
+                        nama: nama,
+                        tempatLahir: tempatLahir,
+                        tglLahir: tglLahir,
+                        jenisKelamin: jenisKelamin,
+                        status: status
+                    });
+                }
+            }
+
+            return anggota;
+        }
+
+        function tambahAnggotaOCR() {
+            anggotaCount++;
+            const container = document.getElementById('anggotaKeluargaOCR');
+            const row = document.createElement('div');
+            row.className = 'anggota-row mb-3 p-3';
+            row.style.cssText = 'background:#f8f9fa; border-radius:10px; border:1px solid var(--border-color);';
+            row.id = 'anggota_' + anggotaCount;
+            row.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <strong style="color:var(--primary-color); font-size:0.9rem;">Anggota #${anggotaCount}</strong>
+                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusAnggotaOCR(${anggotaCount})" style="padding:2px 8px; font-size:0.75rem;">
+                        <i class="bi bi-trash"></i>
+                    </button>
+                </div>
+                <div class="row g-2">
+                    <div class="col-12">
+                        <label class="form-label" style="font-size:0.75rem;">NIK</label>
+                        <input type="text" class="form-control form-control-sm anggota-nik" placeholder="16 digit NIK" maxlength="16">
+                    </div>
+                    <div class="col-12">
+                        <label class="form-label" style="font-size:0.75rem;">Nama Lengkap</label>
+                        <input type="text" class="form-control form-control-sm anggota-nama" placeholder="Nama lengkap">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" style="font-size:0.75rem;">Tempat Lahir</label>
+                        <input type="text" class="form-control form-control-sm anggota-tempat" placeholder="Tempat lahir">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" style="font-size:0.75rem;">Tanggal Lahir</label>
+                        <input type="date" class="form-control form-control-sm anggota-tgl">
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" style="font-size:0.75rem;">Jenis Kelamin</label>
+                        <select class="form-select form-select-sm anggota-jk">
+                            <option value="" disabled selected>Pilih...</option>
+                            <option value="Laki-laki">Laki-laki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <label class="form-label" style="font-size:0.75rem;">Status Hubungan</label>
+                        <select class="form-select form-select-sm anggota-status">
+                            <option value="" disabled selected>Pilih...</option>
+                            <option value="Kepala Keluarga">Kepala Keluarga</option>
+                            <option value="Istri">Istri</option>
+                            <option value="Anak">Anak</option>
+                            <option value="Menantu">Menantu</option>
+                            <option value="Cucu">Cucu</option>
+                            <option value="Orang Tua">Orang Tua</option>
+                            <option value="Mertua">Mertua</option>
+                            <option value="Famili Lain">Famili Lain</option>
+                            <option value="Pembantu">Pembantu</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+                </div>
+            `;
+            container.appendChild(row);
+        }
+
+        function hapusAnggotaOCR(id) {
+            const row = document.getElementById('anggota_' + id);
+            if (row) row.remove();
+        }
+
+        function getAnggotaKeluargaData() {
+            const rows = document.querySelectorAll('.anggota-row');
+            let data = [];
+            rows.forEach(row => {
+                const nik = row.querySelector('.anggota-nik').value;
+                const nama = row.querySelector('.anggota-nama').value;
+                const tempat = row.querySelector('.anggota-tempat').value;
+                const tgl = row.querySelector('.anggota-tgl').value;
+                const jk = row.querySelector('.anggota-jk').value;
+                const status = row.querySelector('.anggota-status').value;
+                if (nik || nama) {
+                    data.push({ nik, nama, tempat, tgl, jk, status });
+                }
+            });
+            return data;
         }
 
         function selectUsaha(option) {
@@ -1192,71 +1780,183 @@
                 return false;
             }
 
-            let text = `*SENSUS EKONOMI 2026 - MODE KELUARGA*\n`;
-            text += `================================\n\n`;
-            text += `*DATA DASAR*\n`;
-            text += `No. Urut Bangunan: ${document.getElementById('f_no_bangunan').value}\n`;
-            text += `No. Urut Keluarga: ${document.getElementById('f_no_keluarga').value}\n`;
-            text += `Nama KK: ${document.getElementById('f_nama_kk').value}\n`;
-            text += `No. KK: ${document.getElementById('f_no_kk').value}\n\n`;
+            let text = `*SENSUS EKONOMI 2026 - MODE KELUARGA*
+`;
+            text += `================================
 
-            text += `*PEKERJAAN & PENGHASILAN*\n`;
-            text += `Pekerjaan KK: ${document.getElementById('f_pekerjaan_kk').value}\n`;
-            text += `Pekerjaan Istri/Anggota: ${document.getElementById('f_pekerjaan_istri').value || '-'}\n`;
-            text += `Penghasilan KK/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_kk').value)}\n`;
-            text += `Penghasilan Anggota/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_anggota').value)}\n\n`;
+`;
+            text += `*DATA DASAR*
+`;
+            text += `No. Urut Bangunan: ${document.getElementById('f_no_bangunan').value}
+`;
+            text += `No. Urut Keluarga: ${document.getElementById('f_no_keluarga').value}
+`;
+            text += `Nama KK: ${document.getElementById('f_nama_kk').value}
+`;
+            text += `No. KK: ${document.getElementById('f_no_kk').value}
+`;
+            text += `Sumber Data: ${document.getElementById('f_sumber_data').value || '-'}
 
-            text += `*KEPEMILIKAN ASET*\n`;
+`;
+
+            // === DATA OCR (jika Assignment Baru) ===
+            const sumberData = document.getElementById('f_sumber_data').value;
+            if (sumberData === 'assignment') {
+                text += `*DATA KARTU KELUARGA (OCR)*
+`;
+                text += `No. KK (OCR): ${document.getElementById('f_no_kk_ocr').value || '-'}
+`;
+                text += `Nama KK (OCR): ${document.getElementById('f_nama_kk_ocr').value || '-'}
+`;
+                text += `Alamat: ${document.getElementById('f_alamat_kk_ocr').value || '-'}
+`;
+                text += `RT/RW: ${document.getElementById('f_rt_kk_ocr').value || '-'} / ${document.getElementById('f_rw_kk_ocr').value || '-'}
+`;
+                text += `Kode Pos: ${document.getElementById('f_kodepos_kk_ocr').value || '-'}
+`;
+                text += `Desa/Kel: ${document.getElementById('f_desa_kk_ocr').value || '-'}
+`;
+                text += `Kecamatan: ${document.getElementById('f_kecamatan_kk_ocr').value || '-'}
+`;
+                text += `Kabupaten/Kota: ${document.getElementById('f_kabupaten_kk_ocr').value || '-'}
+`;
+                text += `Provinsi: ${document.getElementById('f_provinsi_kk_ocr').value || '-'}
+`;
+                text += `Tgl Dikeluarkan: ${document.getElementById('f_tgl_kk_ocr').value || '-'}
+
+`;
+
+                // Anggota keluarga dari OCR
+                const anggota = getAnggotaKeluargaData();
+                if (anggota.length > 0) {
+                    text += `*ANGGOTA KELUARGA (OCR)*
+`;
+                    anggota.forEach((a, i) => {
+                        text += `[${i+1}] ${a.nama || '-'} | NIK: ${a.nik || '-'} | ${a.jk || '-'} | ${a.status || '-'} | ${a.tempat || ''}${a.tgl ? ', ' + a.tgl : ''}
+`;
+                    });
+                    text += `
+`;
+                }
+            }
+
+            text += `*PEKERJAAN & PENGHASILAN*
+`;
+            text += `Pekerjaan KK: ${document.getElementById('f_pekerjaan_kk').value || '-'}
+`;
+            text += `Pekerjaan Istri/Anggota: ${document.getElementById('f_pekerjaan_istri').value || '-'}
+`;
+            text += `Penghasilan KK/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_kk').value)}
+`;
+            text += `Penghasilan Anggota/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_anggota').value)}
+
+`;
+
+            text += `*KEPEMILIKAN ASET*
+`;
             const rumah = document.getElementById('f_rumah').value;
-            text += `Rumah: ${rumah}\n`;
+            text += `Rumah: ${rumah || '-'}
+`;
             if (rumah === 'Milik') {
-                text += `  Jenis Surat: ${document.getElementById('f_jenis_surat').value}\n`;
+                text += `  Jenis Surat: ${document.getElementById('f_jenis_surat').value || '-'}
+`;
             } else if (rumah === 'Sewa') {
-                text += `  Sewa/Bulan: ${formatRupiah(document.getElementById('f_sewa_bulan').value)}\n`;
+                text += `  Sewa/Bulan: ${formatRupiah(document.getElementById('f_sewa_bulan').value)}
+`;
             }
-            text += `Sepeda Motor: ${document.getElementById('f_motor').value || 0} unit\n`;
-            text += `Mobil: ${document.getElementById('f_mobil').value || 0} unit\n`;
-            text += `Kulkas: ${document.getElementById('f_kulkas').value || 0} unit\n`;
-            text += `AC: ${document.getElementById('f_ac').value || 0} unit\n\n`;
+            text += `Luas Tanah: ${document.getElementById('f_tanah_luas').value || 0} m² (P:${document.getElementById('f_tanah_panjang').value || 0}m x L:${document.getElementById('f_tanah_lebar').value || 0}m)
+`;
+            text += `Luas Bangunan: ${document.getElementById('f_bangunan_luas').value || 0} m² (P:${document.getElementById('f_bangunan_panjang').value || 0}m x L:${document.getElementById('f_bangunan_lebar').value || 0}m)
+`;
+            text += `Sepeda Motor: ${document.getElementById('f_motor').value || 0} unit | Nilai: ${document.getElementById('f_motor_harga').value || '-'}
+`;
+            text += `Mobil: ${document.getElementById('f_mobil').value || 0} unit | Perkiraan Harga: ${formatRupiah(document.getElementById('f_mobil_harga').value)}
+`;
+            text += `Kulkas: ${document.getElementById('f_kulkas').value || 0} unit
+`;
+            text += `AC: ${document.getElementById('f_ac').value || 0} unit
 
-            text += `*PENGELUARAN*\n`;
-            text += `Listrik/Bulan: ${formatRupiah(document.getElementById('f_listrik').value)}\n`;
-            text += `WiFi/Internet/Bulan: ${formatRupiah(document.getElementById('f_internet').value)}\n`;
-            text += `Pengeluaran Rutin/Tahun: ${formatRupiah(document.getElementById('f_pengeluaran_tahun').value)}\n\n`;
+`;
 
-            text += `*PENDIDIKAN*\n`;
-            text += `KK: ${document.getElementById('f_pendidikan_kk').value}\n`;
-            text += `Istri: ${document.getElementById('f_pendidikan_istri').value || '-'}\n`;
-            text += `Anak 1: ${document.getElementById('f_pendidikan_anak1').value || '-'}\n`;
-            text += `Anak 2: ${document.getElementById('f_pendidikan_anak2').value || '-'}\n`;
-            text += `Anak 3: ${document.getElementById('f_pendidikan_anak3').value || '-'}\n`;
-            text += `Anak 4: ${document.getElementById('f_pendidikan_anak4').value || '-'}\n`;
-            text += `Anak 5: ${document.getElementById('f_pendidikan_anak5').value || '-'}\n\n`;
+            text += `*PENGELUARAN*
+`;
+            text += `Listrik/Bulan: ${formatRupiah(document.getElementById('f_listrik').value)}
+`;
+            text += `WiFi/Internet/Bulan: ${formatRupiah(document.getElementById('f_internet').value)}
+`;
+            text += `Pengeluaran Rutin/Tahun: ${formatRupiah(document.getElementById('f_pengeluaran_tahun').value)}
 
-            text += `*USAHA KELUARGA*\n`;
-            text += `Memiliki Usaha: ${punyaUsaha.toUpperCase()}\n`;
+`;
+
+            text += `*PENDIDIKAN*
+`;
+            text += `KK: ${document.getElementById('f_pendidikan_kk').value || '-'}
+`;
+            text += `Istri: ${document.getElementById('f_pendidikan_istri').value || '-'}
+`;
+            text += `Anak 1: ${document.getElementById('f_pendidikan_anak1').value || '-'}
+`;
+            text += `Anak 2: ${document.getElementById('f_pendidikan_anak2').value || '-'}
+`;
+            text += `Anak 3: ${document.getElementById('f_pendidikan_anak3').value || '-'}
+`;
+            text += `Anak 4: ${document.getElementById('f_pendidikan_anak4').value || '-'}
+`;
+            text += `Anak 5: ${document.getElementById('f_pendidikan_anak5').value || '-'}
+
+`;
+
+            text += `*USAHA KELUARGA*
+`;
+            text += `Memiliki Usaha: ${punyaUsaha.toUpperCase()}
+`;
             if (punyaUsaha === 'ya') {
-                text += `Nama Usaha: ${document.getElementById('f_nama_usaha').value || '-'}\n`;
-                text += `Jenis Usaha: ${document.getElementById('f_jenis_usaha').value || '-'}\n`;
-                text += `Tahun Mulai: ${document.getElementById('f_tahun_usaha').value || '-'}\n`;
-                text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('f_biaya_produksi').value)}\n`;
-                text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('f_biaya_operasional').value)}\n`;
-                text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('f_nilai_produksi').value)}\n`;
-                text += `Jumlah Pekerja: ${document.getElementById('f_pekerja_total').value || 0}\n`;
-                text += `Pekerja Wanita: ${document.getElementById('f_pekerja_wanita').value || 0}\n`;
-                text += `Pekerja Pria: ${document.getElementById('f_pekerja_pria').value || 0}\n`;
-                text += `Pekerja Digaji: ${document.getElementById('f_pekerja_gaji').value || 0}\n`;
-                text += `Pemilik: ${document.getElementById('f_pemilik_usaha').value || '-'}\n`;
-                text += `Lokasi Usaha: ${document.getElementById('f_lokasi_usaha').value || '-'}\n`;
+                text += `Nama Usaha: ${document.getElementById('f_nama_usaha').value || '-'}
+`;
+                text += `Jenis Usaha: ${document.getElementById('f_jenis_usaha').value || '-'}
+`;
+                text += `Tahun Mulai: ${document.getElementById('f_tahun_usaha').value || '-'}
+`;
+                text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('f_biaya_produksi').value)}
+`;
+                text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('f_biaya_operasional').value)}
+`;
+                text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('f_nilai_produksi').value)}
+`;
+                text += `Jumlah Pekerja: ${document.getElementById('f_pekerja_total').value || 0}
+`;
+                text += `Pekerja Wanita: ${document.getElementById('f_pekerja_wanita').value || 0}
+`;
+                text += `Pekerja Pria: ${document.getElementById('f_pekerja_pria').value || 0}
+`;
+                text += `Pekerja Digaji: ${document.getElementById('f_pekerja_gaji').value || 0}
+`;
+                text += `Pemilik: ${document.getElementById('f_pemilik_usaha').value || '-'}
+`;
+                text += `Lokasi Usaha: ${document.getElementById('f_lokasi_usaha').value || '-'}
+`;
             }
-            text += `\n`;
+            text += `
+`;
 
-            text += `*LOKASI*\n`;
-            text += `Koordinat: ${lat}, ${long}\n`;
-            text += `Maps: https://maps.google.com/?q=${lat},${long}\n\n`;
-            text += `*Dokumentasi:*\n`;
-            text += `[Foto KK, Rumah Depan, Ruang Tamu dilampirkan]\n\n`;
-            text += `================================\n`;
+            text += `*LOKASI*
+`;
+            text += `Koordinat: ${lat}, ${long}
+`;
+            text += `Maps: https://maps.google.com/?q=${lat},${long}
+
+`;
+            text += `*DOKUMENTASI*
+`;
+            text += `Foto KK: ${document.getElementById('f_foto_kk').files.length > 0 ? '✓ Dilampirkan' : '-'}
+`;
+            text += `Foto Rumah Depan: ${document.getElementById('f_foto_rumah').files.length > 0 ? '✓ Dilampirkan' : '-'}
+`;
+            text += `Foto Ruang Tamu: ${document.getElementById('f_foto_ruang').files.length > 0 ? '✓ Dilampirkan' : '-'}
+
+`;
+            text += `================================
+`;
             text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
 
             const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
@@ -1264,7 +1964,7 @@
             return false;
         }
 
-        function submitBusiness(e) {
+function submitBusiness(e) {
             e.preventDefault();
 
             const lat = document.getElementById('b_lat').value;
