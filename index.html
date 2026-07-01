@@ -6,8 +6,15 @@
     <meta name="theme-color" content="#ff6b00">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Sensus 2026">
     <title>Sensus Ekonomi 2026 - Desa Sukadamai</title>
-    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU2Vuc3VzIEVrb25vbWkgMjAyNiAtIERlc2EgU3VrYWRhbWFpIiwic2hvcnRfbmFtZSI6IlNFTlNVUyAyMDI2Iiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZjZiMDAiLCJ0aGVtZV9jb2xvciI6IiNmZjZiMDAiLCJpY29ucyI6W3sic3JjIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3R3ZW1vamkvdHdlbW9qaUAxNS4wLjIvYXNzZXRzLzcyeDcyLzFmM2VkLnBuZyIsInNpemVzIjoiNzJ4NzIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn1dfQ==">
+
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Apple Touch Icon -->
+    <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'%3E%3Crect width='180' height='180' fill='%23ff6b00' rx='32'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='80' font-weight='bold' fill='white'%3ESE%3C/text%3E%3C/svg%3E">
+
     <style>
         :root {
             --primary: #ff6b00;
@@ -22,51 +29,53 @@
             --danger: #c62828;
             --warning: #f9a825;
         }
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        html { scroll-behavior: smooth; }
         body {
-            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
             min-height: 100vh;
-            padding-bottom: 80px;
+            padding-bottom: 100px;
+            -webkit-font-smoothing: antialiased;
         }
         .header {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 20px 16px;
+            padding: 22px 16px 18px;
             text-align: center;
             box-shadow: 0 4px 20px rgba(255,107,0,0.3);
             position: sticky;
             top: 0;
             z-index: 100;
         }
-        .header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; }
-        .header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
-        .container { max-width: 600px; margin: 0 auto; padding: 16px; }
+        .header h1 { font-size: 1.25rem; font-weight: 800; letter-spacing: 0.5px; }
+        .header p { font-size: 0.82rem; opacity: 0.92; margin-top: 3px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 14px; }
         .warning-box {
             background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
             border-left: 5px solid var(--primary);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 16px;
-            margin-bottom: 20px;
-            font-size: 0.9rem;
+            margin-bottom: 16px;
+            font-size: 0.88rem;
             color: #5d4037;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-        .warning-box strong { color: var(--primary-dark); font-size: 1rem; }
+        .warning-box strong { color: var(--primary-dark); font-size: 0.95rem; }
         .warning-box ul { margin: 8px 0 0 18px; }
         .warning-box li { margin: 4px 0; }
         .card {
             background: var(--card);
-            border-radius: 16px;
+            border-radius: 18px;
             padding: 20px;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             box-shadow: 0 4px 20px rgba(0,0,0,0.06);
             border: 1px solid var(--border);
         }
         .card-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 700;
             color: var(--primary-dark);
             margin-bottom: 16px;
@@ -80,7 +89,7 @@
         label {
             display: block;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             color: var(--text);
             margin-bottom: 6px;
         }
@@ -89,17 +98,19 @@
             width: 100%;
             padding: 14px 16px;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             font-size: 1rem;
             background: #fafafa;
             transition: all 0.2s;
             color: var(--text);
+            -webkit-appearance: none;
+            appearance: none;
         }
         input:focus, select:focus, textarea:focus {
             outline: none;
             border-color: var(--primary);
             background: white;
-            box-shadow: 0 0 0 4px rgba(255,107,0,0.1);
+            box-shadow: 0 0 0 4px rgba(255,107,0,0.12);
         }
         textarea { min-height: 80px; resize: vertical; }
         .radio-group, .checkbox-group {
@@ -108,20 +119,18 @@
             gap: 10px;
             margin-top: 6px;
         }
-        .radio-option, .checkbox-option {
-            flex: 1;
-            min-width: 100px;
-        }
+        .radio-option, .checkbox-option { flex: 1; min-width: 90px; }
         .radio-option input, .checkbox-option input { display: none; }
         .radio-option label, .checkbox-option label {
             display: block;
-            padding: 12px 16px;
+            padding: 12px 14px;
             background: #f5f0eb;
             border: 2px solid var(--border);
-            border-radius: 12px;
+            border-radius: 14px;
             text-align: center;
             cursor: pointer;
             font-weight: 600;
+            font-size: 0.88rem;
             transition: all 0.2s;
             margin-bottom: 0;
         }
@@ -129,80 +138,77 @@
             background: var(--primary);
             color: white;
             border-color: var(--primary);
-            box-shadow: 0 4px 12px rgba(255,107,0,0.3);
+            box-shadow: 0 4px 14px rgba(255,107,0,0.3);
         }
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            padding: 16px 24px;
+            padding: 16px 20px;
             border: none;
-            border-radius: 14px;
-            font-size: 1rem;
+            border-radius: 16px;
+            font-size: 0.95rem;
             font-weight: 700;
             cursor: pointer;
             transition: all 0.2s;
             width: 100%;
             margin-bottom: 10px;
             text-decoration: none;
+            touch-action: manipulation;
         }
+        .btn:active { transform: scale(0.97); }
         .btn-primary {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+            box-shadow: 0 4px 18px rgba(255,107,0,0.3);
         }
-        .btn-primary:active { transform: translateY(2px); }
         .btn-success {
             background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
             color: white;
-            box-shadow: 0 4px 20px rgba(46,125,50,0.3);
+            box-shadow: 0 4px 18px rgba(46,125,50,0.3);
         }
         .btn-danger {
             background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
             color: white;
         }
         .btn-secondary {
-            background: #e0e0e0;
-            color: #333;
+            background: #e8e4e0;
+            color: #444;
         }
         .btn-outline {
             background: transparent;
             border: 2px solid var(--primary);
             color: var(--primary);
         }
-        .mode-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            margin-top: 16px;
-        }
+        .mode-grid { display: grid; grid-template-columns: 1fr; gap: 12px; margin-top: 14px; }
         .mode-card {
             background: white;
             border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
+            border-radius: 18px;
+            padding: 22px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.25s;
         }
+        .mode-card:active { transform: scale(0.97); }
         .mode-card:hover, .mode-card.active {
             border-color: var(--primary);
             box-shadow: 0 8px 30px rgba(255,107,0,0.15);
             transform: translateY(-2px);
         }
-        .mode-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
-        .mode-card h3 { color: var(--primary-dark); margin-bottom: 6px; }
-        .mode-card p { color: var(--text-light); font-size: 0.85rem; }
+        .mode-card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+        .mode-card h3 { color: var(--primary-dark); margin-bottom: 5px; font-size: 1rem; }
+        .mode-card p { color: var(--text-light); font-size: 0.82rem; }
         .hidden { display: none !important; }
-        .section { margin-bottom: 20px; }
+        .section { margin-bottom: 18px; }
         .section-title {
             background: linear-gradient(90deg, var(--primary-light), transparent);
             color: var(--primary-dark);
             padding: 10px 16px;
-            border-radius: 10px;
+            border-radius: 12px;
             font-weight: 700;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             margin-bottom: 14px;
         }
         .dynamic-field { animation: slideDown 0.3s ease; }
@@ -213,7 +219,7 @@
         .member-card {
             background: #fff8f0;
             border: 2px dashed var(--primary-light);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 16px;
             margin-bottom: 12px;
             position: relative;
@@ -226,13 +232,14 @@
             color: white;
             border: none;
             border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            font-size: 1rem;
+            width: 30px;
+            height: 30px;
+            font-size: 1.1rem;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            touch-action: manipulation;
         }
         .calc-row {
             display: grid;
@@ -243,20 +250,20 @@
         .calc-result {
             background: #e8f5e9;
             border: 2px solid var(--success);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 14px;
             margin-top: 10px;
             font-weight: 700;
             color: var(--success);
             text-align: center;
-            font-size: 1.1rem;
+            font-size: 1rem;
         }
         .note-box {
             background: #fff3e0;
-            border-radius: 10px;
+            border-radius: 12px;
             padding: 12px 16px;
             margin: 12px 0;
-            font-size: 0.9rem;
+            font-size: 0.87rem;
             color: #5d4037;
             border-left: 4px solid var(--primary);
         }
@@ -267,43 +274,76 @@
             color: white;
             padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
             margin-left: 8px;
         }
-        .bottom-nav {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: white;
-            border-top: 1px solid var(--border);
-            padding: 10px 16px;
+        .data-list { max-height: 350px; overflow-y: auto; }
+        .data-item {
+            background: #f5f0eb;
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 8px;
             display: flex;
+            justify-content: space-between;
+            align-items: center;
             gap: 10px;
-            z-index: 100;
-            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
         }
-        .bottom-nav .btn { margin-bottom: 0; flex: 1; padding: 14px; font-size: 0.9rem; }
+        .data-item-info { flex: 1; min-width: 0; }
+        .data-item-info .title { font-weight: 700; color: var(--text); font-size: 0.9rem; word-break: break-word; }
+        .data-item-info .subtitle { font-size: 0.78rem; color: var(--text-light); }
+        .data-item-actions { display: flex; gap: 6px; flex-shrink: 0; }
+        .data-item-actions button {
+            padding: 8px 12px;
+            border: none;
+            border-radius: 10px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            cursor: pointer;
+            touch-action: manipulation;
+        }
+        .btn-send { background: var(--success); color: white; }
+        .btn-delete { background: var(--danger); color: white; }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+        .badge {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            font-weight: 700;
+        }
+        .badge-orange { background: #fff3e0; color: var(--primary-dark); }
+        .badge-green { background: #e8f5e9; color: var(--success); }
+        .badge-blue { background: #e3f2fd; color: #1565c0; }
+        .input-group { display: flex; gap: 8px; }
+        .input-group input { flex: 1; }
+        .input-group select { width: 120px; min-width: 120px; }
         .gps-btn {
             background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
             color: white;
+            box-shadow: 0 4px 18px rgba(13,71,161,0.3);
         }
         .gps-display {
             background: #e3f2fd;
             border: 2px solid #1976d2;
-            border-radius: 12px;
-            padding: 12px;
-            margin-top: 8px;
+            border-radius: 14px;
+            padding: 14px;
+            margin-top: 10px;
             font-size: 0.85rem;
             word-break: break-all;
             color: #0d47a1;
+            line-height: 1.8;
         }
         .step-indicator {
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
         .step-dot {
             width: 10px;
@@ -322,69 +362,82 @@
             background: #333;
             color: white;
             padding: 14px 28px;
-            border-radius: 12px;
+            border-radius: 14px;
             font-weight: 600;
             z-index: 1000;
             opacity: 0;
             transition: opacity 0.3s;
             pointer-events: none;
             white-space: nowrap;
+            font-size: 0.9rem;
         }
         .toast.show { opacity: 1; }
-        .data-list {
-            max-height: 300px;
-            overflow-y: auto;
-        }
-        .data-item {
-            background: #f5f0eb;
-            border-radius: 10px;
-            padding: 12px;
-            margin-bottom: 8px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .data-item-info { flex: 1; }
-        .data-item-info .title { font-weight: 700; color: var(--text); }
-        .data-item-info .subtitle { font-size: 0.8rem; color: var(--text-light); }
-        .data-item-actions { display: flex; gap: 6px; }
-        .data-item-actions button {
-            padding: 6px 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            cursor: pointer;
-        }
-        .btn-send { background: var(--success); color: white; }
-        .btn-delete { background: var(--danger); color: white; }
-        .empty-state {
+        .pwa-install {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 16px;
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-light);
+            display: none;
         }
-        .empty-state .icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
-        .badge {
+        .pwa-install.show { display: block; animation: slideDown 0.4s ease; }
+        .pwa-install h3 { font-size: 1rem; margin-bottom: 8px; }
+        .pwa-install p { font-size: 0.82rem; opacity: 0.9; margin-bottom: 10px; }
+        .pwa-install .btn { margin-bottom: 0; background: white; color: #764ba2; }
+        .pwa-badge {
             display: inline-block;
-            padding: 4px 10px;
+            background: #4caf50;
+            color: white;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             font-weight: 700;
+            margin-left: 8px;
         }
-        .badge-orange { background: #fff3e0; color: var(--primary-dark); }
-        .badge-green { background: #e8f5e9; color: var(--success); }
-        .badge-blue { background: #e3f2fd; color: #1565c0; }
-        .input-group { display: flex; gap: 8px; }
-        .input-group input { flex: 1; }
-        .input-group select {
-            width: 120px;
-            min-width: 120px;
+        .install-guide {
+            background: #e8f5e9;
+            border: 2px solid var(--success);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            display: none;
         }
+        .install-guide.show { display: block; }
+        .install-guide h4 { color: var(--success); margin-bottom: 8px; }
+        .install-guide ol { margin-left: 18px; }
+        .install-guide li { margin: 4px 0; }
         @media (max-width: 400px) {
             .header h1 { font-size: 1.1rem; }
-            .btn { padding: 14px; font-size: 0.95rem; }
+            .btn { padding: 14px; font-size: 0.9rem; }
+            .calc-row { grid-template-columns: 1fr 100px; }
+        }
+        select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            padding-right: 36px;
         }
     </style>
+    <link rel="icon" type="image/x-icon" href="icons/favicon.ico">
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="icons/icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="96x96" href="icons/icon-96x96.png">
+    <link rel="apple-touch-icon" sizes="128x128" href="icons/icon-128x128.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="icons/icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="icons/icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="icons/icon-192x192.png">
+    <link rel="apple-touch-icon" sizes="384x384" href="icons/icon-384x384.png">
+    <link rel="apple-touch-icon" sizes="512x512" href="icons/icon-512x512.png">
+
+    <!-- Apple Splash Screens -->
+    <link rel="apple-touch-startup-image" href="icons/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="icons/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)">
+    <link rel="apple-touch-startup-image" href="icons/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="icons/splash-1170x2532.png" media="(device-width: 390px) and (device-height: 844px) and (-webkit-device-pixel-ratio: 3)">
+    <link rel="apple-touch-startup-image" href="icons/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)">
+
 <base target="_blank">
 </head>
 <body>
@@ -394,6 +447,25 @@
     </div>
 
     <div class="container">
+        <!-- PWA INSTALL BANNER -->
+        <div class="pwa-install" id="pwaBanner">
+            <h3>📱 Install Aplikasi</h3>
+            <p>Tambahkan ke layar utama agar bisa dibuka seperti aplikasi</p>
+            <button class="btn" onclick="installPWA()">⬇️ Install Sekarang</button>
+            <button class="btn btn-secondary" onclick="dismissPWA()" style="margin-top:8px;">Nanti Saja</button>
+        </div>
+
+        <!-- MANUAL INSTALL GUIDE -->
+        <div class="install-guide" id="installGuide">
+            <h4>📲 Cara Install Manual:</h4>
+            <ol>
+                <li>Buka menu <strong>⋮ (titik tiga)</strong> di pojok kanan atas browser</li>
+                <li>Pilih <strong>"Tambahkan ke Layar Utama"</strong> atau <strong>"Install Aplikasi"</strong></li>
+                <li>Klik <strong>"Tambah"</strong> atau <strong>"Install"</strong></li>
+                <li>Selesai! Aplikasi muncul di layar utama HP</li>
+            </ol>
+        </div>
+
         <!-- WARNING BOX -->
         <div class="warning-box">
             <strong>⚠️ PERINGATAN PENTING:</strong>
@@ -406,7 +478,7 @@
             </ul>
         </div>
 
-        <!-- SCREEN: HOME / MODE SELECT -->
+        <!-- SCREEN: HOME -->
         <div id="screen-home">
             <div class="card">
                 <div class="card-title">🎯 Pilih Mode Pendataan</div>
@@ -429,7 +501,6 @@
                 </div>
             </div>
 
-            <!-- Saved Data List -->
             <div class="card" id="savedDataCard">
                 <div class="card-title">
                     💾 Data Tersimpan
@@ -442,19 +513,25 @@
                     </div>
                 </div>
             </div>
+
+            <div class="card">
+                <div class="card-title">📱 Status Aplikasi</div>
+                <p style="font-size:0.85rem;color:var(--text-light);margin-bottom:8px;">
+                    <span id="pwaStatus">⏳ Memeriksa...</span>
+                </p>
+                <p style="font-size:0.8rem;color:#888;">
+                    Jika belum bisa install, gunakan menu browser → "Tambahkan ke Layar Utama"
+                </p>
+            </div>
         </div>
 
         <!-- SCREEN: SUB-MODE KELUARGA -->
         <div id="screen-submode-keluarga" class="hidden">
             <div class="card">
                 <div class="card-title">🏠 Data Kuisioner Keluarga</div>
-                <p style="margin-bottom:16px;color:var(--text-light);">Pilih sumber data:</p>
-                <button class="btn btn-primary" onclick="startKeluarga('prelist')">
-                    📋 Data dari Prelist
-                </button>
-                <button class="btn btn-outline" onclick="startKeluarga('baru')">
-                    ✨ Assignment Baru
-                </button>
+                <p style="margin-bottom:16px;color:var(--text-light);font-size:0.9rem;">Pilih sumber data:</p>
+                <button class="btn btn-primary" onclick="startKeluarga('prelist')">📋 Data dari Prelist</button>
+                <button class="btn btn-outline" onclick="startKeluarga('baru')">✨ Assignment Baru</button>
                 <button class="btn btn-secondary" onclick="goHome()">← Kembali</button>
             </div>
         </div>
@@ -474,12 +551,12 @@
                     <div class="card-title">📋 Identitas Keluarga</div>
 
                     <div class="note-box">
-                        <strong>WAJIB:</strong> Minta foto/copy Kartu Keluarga dari responden!
+                        <strong>⚠️ WAJIB:</strong> Minta foto/copy Kartu Keluarga dari responden!
                     </div>
 
                     <div class="form-group">
                         <label>Nomor Kartu Keluarga <span class="required">*</span></label>
-                        <input type="text" id="kk_no" placeholder="Contoh: 3201010101010001" required>
+                        <input type="text" id="kk_no" placeholder="Contoh: 3201010101010001" required inputmode="numeric">
                     </div>
                     <div class="form-group">
                         <label>Nama Kepala Keluarga <span class="required">*</span></label>
@@ -649,7 +726,7 @@
                     <div class="section">
                         <div class="section-title">📍 Tagging Lokasi GPS</div>
                         <div class="note-box">
-                            <strong>WAJIB!</strong> Tekan tombol di bawah untuk mengambil koordinat lokasi.
+                            <strong>⚠️ WAJIB!</strong> Tekan tombol di bawah untuk mengambil koordinat lokasi.
                         </div>
                         <button type="button" class="btn gps-btn" onclick="getGPS('keluarga')">📍 Ambil Lokasi GPS</button>
                         <div id="gpsDisplay_keluarga" class="gps-display hidden"></div>
@@ -753,7 +830,6 @@
     <div class="toast" id="toast"></div>
 
     <script>
-
         // ===== STATE =====
         let currentMode = '';
         let currentStep = 1;
@@ -763,12 +839,75 @@
         const STORAGE_KEY = 'sensus_sukadamai_2026';
         const FORM_STATE_KEY = 'sensus_form_state';
         const WA_NUMBER = '6285791111335';
+        let deferredPrompt = null;
 
         // ===== INIT =====
         document.addEventListener('DOMContentLoaded', () => {
             loadSavedData();
             restoreFormState();
+            setupPWA();
         });
+
+        // ===== PWA SETUP =====
+        function setupPWA() {
+            const statusEl = document.getElementById('pwaStatus');
+
+            if (window.matchMedia('(display-mode: standalone)').matches || 
+                window.navigator.standalone === true) {
+                statusEl.innerHTML = '✅ Sudah terinstall sebagai aplikasi';
+                return;
+            }
+
+            window.addEventListener('beforeinstallprompt', (e) => {
+                e.preventDefault();
+                deferredPrompt = e;
+                statusEl.innerHTML = '⬇️ Bisa di-install! Tekan tombol Install di atas';
+                document.getElementById('pwaBanner').classList.add('show');
+            });
+
+            setTimeout(() => {
+                if (!deferredPrompt && statusEl.textContent.includes('Memeriksa')) {
+                    statusEl.innerHTML = 'ℹ️ Gunakan menu browser untuk install';
+                    document.getElementById('installGuide').classList.add('show');
+                }
+            }, 2000);
+
+            window.addEventListener('appinstalled', () => {
+                statusEl.innerHTML = '✅ Berhasil di-install!';
+                document.getElementById('pwaBanner').classList.remove('show');
+                document.getElementById('installGuide').classList.remove('show');
+                deferredPrompt = null;
+                showToast('🎉 Aplikasi berhasil di-install!');
+            });
+        }
+
+        function installPWA() {
+            if (deferredPrompt) {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === 'accepted') {
+                        showToast('✅ Menginstall aplikasi...');
+                    } else {
+                        showToast('❌ Install dibatalkan');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                showToast('Gunakan menu browser → Tambahkan ke Layar Utama');
+                document.getElementById('installGuide').classList.add('show');
+            }
+        }
+
+        function dismissPWA() {
+            document.getElementById('pwaBanner').classList.remove('show');
+        }
+
+        // ===== SERVICE WORKER REGISTRATION =====
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then((reg) => console.log('SW registered:', reg.scope))
+                .catch((err) => console.log('SW registration failed:', err));
+        }
 
         // ===== NAVIGATION =====
         function showScreen(id) {
@@ -912,12 +1051,13 @@
         }
 
         function hapusAnggota(id) {
-            document.getElementById('anggota_' + id).remove();
+            const el = document.getElementById('anggota_' + id);
+            if (el) el.remove();
             saveFormState();
         }
 
-        // ===== USAHA FORM =====
-        function getUsahaHTML(prefix, id, isLangsung) {
+        // ===== USAHA HTML TEMPLATE =====
+        function getUsahaHTML(prefix, id) {
             return `
                 <div class="member-card" id="${prefix}_${id}">
                     <button type="button" class="remove-btn" onclick="hapusUsaha('${prefix}', ${id})">×</button>
@@ -1102,7 +1242,7 @@
         function tambahUsaha() {
             usahaCount++;
             const div = document.createElement('div');
-            div.innerHTML = getUsahaHTML('usaha', usahaCount, false);
+            div.innerHTML = getUsahaHTML('usaha', usahaCount);
             document.getElementById('usahaFields').appendChild(div.firstElementChild);
             saveFormState();
         }
@@ -1110,7 +1250,7 @@
         function tambahUsahaLangsung() {
             usahaLangsungCount++;
             const div = document.createElement('div');
-            div.innerHTML = getUsahaHTML('usahaLangsung', usahaLangsungCount, true);
+            div.innerHTML = getUsahaHTML('usahaLangsung', usahaLangsungCount);
             document.getElementById('usahaFieldsLangsung').appendChild(div.firstElementChild);
             saveFormState();
         }
@@ -1361,7 +1501,6 @@
             });
         }
 
-        // ===== DELETE DATA =====
         function deleteData(idx) {
             if (!confirm('Yakin ingin menghapus data ini?')) return;
             let saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
@@ -1457,7 +1596,6 @@
             const waUrl = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
             window.open(waUrl, '_blank');
 
-            // Hapus data setelah kirim
             setTimeout(() => {
                 let saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
                 saved.splice(idx, 1);
@@ -1500,7 +1638,6 @@
                 anggotaCount: anggotaCount,
                 usahaCount: usahaCount,
                 usahaLangsungCount: usahaLangsungCount,
-                // Form values
                 kk_no: document.getElementById('kk_no')?.value || '',
                 kk_nama: document.getElementById('kk_nama')?.value || '',
                 no_urut_bangunan: document.getElementById('no_urut_bangunan')?.value || '',
@@ -1529,10 +1666,8 @@
                 bk_jenis: document.getElementById('bk_jenis')?.value || '',
                 bk_jenis_lain: document.getElementById('bk_jenis_lain')?.value || '',
                 bk_nama: document.getElementById('bk_nama')?.value || '',
-                // Radio values
                 rumah_milik: document.querySelector('input[name="rumah_milik"]:checked')?.value || '',
                 punya_usaha: document.querySelector('input[name="punya_usaha"]:checked')?.value || '',
-                // GPS
                 gps_lat_keluarga: document.getElementById('gps_lat_keluarga')?.value || '',
                 gps_lon_keluarga: document.getElementById('gps_lon_keluarga')?.value || '',
                 gps_url_keluarga: document.getElementById('gps_url_keluarga')?.value || '',
@@ -1550,8 +1685,6 @@
             try {
                 const state = JSON.parse(localStorage.getItem(FORM_STATE_KEY) || '{}');
                 if (!state.currentMode) return;
-
-                // Restore basic values
                 if (state.kk_no) document.getElementById('kk_no').value = state.kk_no;
                 if (state.kk_nama) document.getElementById('kk_nama').value = state.kk_nama;
                 if (state.no_urut_bangunan) document.getElementById('no_urut_bangunan').value = state.no_urut_bangunan;
@@ -1580,8 +1713,6 @@
                 if (state.bk_jenis) document.getElementById('bk_jenis').value = state.bk_jenis;
                 if (state.bk_jenis_lain) document.getElementById('bk_jenis_lain').value = state.bk_jenis_lain;
                 if (state.bk_nama) document.getElementById('bk_nama').value = state.bk_nama;
-
-                // Restore radios
                 if (state.rumah_milik) {
                     const r = document.querySelector(`input[name="rumah_milik"][value="${state.rumah_milik}"]`);
                     if (r) { r.checked = true; toggleRumahMilik(); }
@@ -1590,8 +1721,6 @@
                     const r = document.querySelector(`input[name="punya_usaha"][value="${state.punya_usaha}"]`);
                     if (r) { r.checked = true; toggleUsaha(); }
                 }
-
-                // Restore GPS displays
                 if (state.gps_lat_keluarga && state.gps_lon_keluarga) {
                     document.getElementById('gps_lat_keluarga').value = state.gps_lat_keluarga;
                     document.getElementById('gps_lon_keluarga').value = state.gps_lon_keluarga;
@@ -1616,8 +1745,6 @@
                     d.innerHTML = `<strong>✅ Lokasi Tertag:</strong><br>Lat: ${state.gps_lat_khusus}<br>Lon: ${state.gps_lon_khusus}<br><a href="${state.gps_url_khusus}" target="_blank" style="color:#1976d2;">📍 Buka di Maps</a>`;
                     d.classList.remove('hidden');
                 }
-
-                // Restore dynamic visibility
                 toggleMotor(); toggleMobil(); toggleKhususLain();
             } catch(e) { console.log('Restore state error', e); }
         }
@@ -1632,18 +1759,6 @@
             t.textContent = msg;
             t.classList.add('show');
             setTimeout(() => t.classList.remove('show'), 3000);
-        }
-
-        // ===== SERVICE WORKER (PWA) =====
-        if ('serviceWorker' in navigator) {
-            const swCode = `
-                self.addEventListener('install', e => self.skipWaiting());
-                self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
-                self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
-            `;
-            const swBlob = new Blob([swCode], { type: 'application/javascript' });
-            const swUrl = URL.createObjectURL(swBlob);
-            navigator.serviceWorker.register(swUrl).catch(() => {});
         }
     </script>
 </body>
