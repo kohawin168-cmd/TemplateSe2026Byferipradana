@@ -1281,9 +1281,9 @@
                     const val = parseRupiah(input.value);
                     const p = parseInt(periode.value) || 30;
                     let total = 0;
-                    if (p === 1) total = val * 365;           // per Hari
-                    else if (p === 7) total = val * 52;        // per Minggu (52 minggu/tahun)
-                    else if (p === 30) total = val * 12;       // per Bulan (12 bulan/tahun)
+                    if (p === 1) total = val * 365;           // per Hari x 365 hari
+                    else if (p === 7) total = val * 52;        // per Minggu (52 minggu dalam 1 tahun)
+                    else if (p === 30) total = val * 12;       // per Bulan (12 bulan dalam 1 tahun)
                     else if (p === 365) total = val;           // per Tahun
                     hasil.textContent = formatRupiahStr(Math.round(total));
                 }
@@ -1301,10 +1301,10 @@
                 const p = parseInt(periode.value) || 30;
                 const jumlahKaryawan = parseInt(jmlKar?.value) || 1;
                 let total = 0;
-                if (p === 1) total = val * jumlahKaryawan * 365;     // per Hari x jumlah karyawan x 365 hari
-                else if (p === 7) total = val * jumlahKaryawan * 52; // per Minggu x jumlah karyawan x 52 minggu
-                else if (p === 30) total = val * jumlahKaryawan * 12; // per Bulan x jumlah karyawan x 12 bulan
-                else if (p === 365) total = val * jumlahKaryawan;    // per Tahun x jumlah karyawan
+                if (p === 1) total = val * jumlahKaryawan * 365;      // per Hari: nilai x jumlah karyawan x 365 hari
+                else if (p === 7) total = val * jumlahKaryawan * 52;   // per Minggu: nilai x jumlah karyawan x 52 minggu
+                else if (p === 30) total = val * jumlahKaryawan * 12; // per Bulan: nilai x jumlah karyawan x 12 bulan
+                else if (p === 365) total = val * jumlahKaryawan;      // per Tahun: nilai x jumlah karyawan
                 hasil.textContent = formatRupiahStr(Math.round(total));
             }
         }
