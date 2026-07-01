@@ -3,2039 +3,1647 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Simple Sensus Ekonomi 2026</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <meta name="theme-color" content="#ff6b00">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Sensus Ekonomi 2026 - Desa Sukadamai</title>
+    <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiU2Vuc3VzIEVrb25vbWkgMjAyNiAtIERlc2EgU3VrYWRhbWFpIiwic2hvcnRfbmFtZSI6IlNFTlNVUyAyMDI2Iiwic3RhcnRfdXJsIjoiLiIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZjZiMDAiLCJ0aGVtZV9jb2xvciI6IiNmZjZiMDAiLCJpY29ucyI6W3sic3JjIjoiaHR0cHM6Ly9jZG4uanNkZWxpdnIubmV0L2doL3R3ZW1vamkvdHdlbW9qaUAxNS4wLjIvYXNzZXRzLzcyeDcyLzFmM2VkLnBuZyIsInNpemVzIjoiNzJ4NzIiLCJ0eXBlIjoiaW1hZ2UvcG5nIn1dfQ==">
     <style>
         :root {
-            --primary-color: #1a5f7a;
-            --secondary-color: #57c5b6;
-            --accent-color: #159895;
-            --bg-color: #f0f4f8;
-            --card-bg: #ffffff;
-            --text-dark: #2c3e50;
-            --text-muted: #6c757d;
-            --border-color: #e0e6ed;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
+            --primary: #ff6b00;
+            --primary-dark: #e55d00;
+            --primary-light: #ff8533;
+            --bg: #f5f0eb;
+            --card: #ffffff;
+            --text: #1a1a1a;
+            --text-light: #555555;
+            --border: #ddd0c8;
+            --success: #2e7d32;
+            --danger: #c62828;
+            --warning: #f9a825;
         }
-
-        * {
-            -webkit-tap-highlight-color: transparent;
-        }
-
+        * { box-sizing: border-box; margin: 0; padding: 0; }
         body {
-            background: linear-gradient(135deg, #f0f4f8 0%, #e8f4f8 100%);
             font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
             min-height: 100vh;
-            color: var(--text-dark);
-            padding-bottom: 40px;
+            padding-bottom: 80px;
         }
-
-        .app-header {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
+        .header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 20px 0;
-            box-shadow: 0 4px 20px rgba(26, 95, 122, 0.3);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .app-header::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 300px;
-            height: 300px;
-            background: rgba(255,255,255,0.1);
-            border-radius: 50%;
-        }
-
-        .app-header h1 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin: 0;
-            position: relative;
-            z-index: 1;
-        }
-
-        .app-header p {
-            opacity: 0.9;
-            margin: 5px 0 0 0;
-            font-size: 0.9rem;
-            position: relative;
-            z-index: 1;
-        }
-
-        .warning-banner {
-            background: linear-gradient(90deg, #fff3cd 0%, #ffeaa7 100%);
-            border-left: 5px solid var(--warning-color);
-            padding: 15px 20px;
-            margin: 20px 15px;
-            border-radius: 12px;
-            box-shadow: 0 2px 10px rgba(255, 193, 7, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 2px 10px rgba(255, 193, 7, 0.2); }
-            50% { box-shadow: 0 4px 20px rgba(255, 193, 7, 0.4); }
-        }
-
-        .warning-banner i {
-            font-size: 1.5rem;
-            color: #856404;
-        }
-
-        .warning-banner strong {
-            color: #856404;
-            font-size: 0.95rem;
-            line-height: 1.4;
-        }
-
-        .mode-card {
-            background: var(--card-bg);
-            border-radius: 16px;
-            padding: 25px 20px;
-            margin: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
-            border: 2px solid transparent;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mode-card:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-            border-color: var(--secondary-color);
-        }
-
-        .mode-card::after {
-            content: '';
-            position: absolute;
+            padding: 20px 16px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+            position: sticky;
             top: 0;
-            left: 0;
-            width: 5px;
-            height: 100%;
-            background: var(--secondary-color);
-            opacity: 0;
-            transition: opacity 0.3s;
+            z-index: 100;
         }
-
-        .mode-card:hover::after {
-            opacity: 1;
+        .header h1 { font-size: 1.3rem; font-weight: 700; letter-spacing: 0.5px; }
+        .header p { font-size: 0.85rem; opacity: 0.9; margin-top: 4px; }
+        .container { max-width: 600px; margin: 0 auto; padding: 16px; }
+        .warning-box {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            border-left: 5px solid var(--primary);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            font-size: 0.9rem;
+            color: #5d4037;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
-
-        .mode-icon {
-            width: 60px;
-            height: 60px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.8rem;
-            margin-bottom: 15px;
-        }
-
-        .mode-icon.family {
-            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
-            color: #1976d2;
-        }
-
-        .mode-icon.business {
-            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
-            color: #388e3c;
-        }
-
-        .mode-card h3 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-            color: var(--text-dark);
-        }
-
-        .mode-card p {
-            color: var(--text-muted);
-            font-size: 0.85rem;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .form-section {
-            display: none;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .form-section.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .form-card {
-            background: var(--card-bg);
+        .warning-box strong { color: var(--primary-dark); font-size: 1rem; }
+        .warning-box ul { margin: 8px 0 0 18px; }
+        .warning-box li { margin: 4px 0; }
+        .card {
+            background: var(--card);
             border-radius: 16px;
             padding: 20px;
-            margin: 15px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            margin-bottom: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+            border: 1px solid var(--border);
         }
-
-        .section-title {
-            font-size: 1rem;
+        .card-title {
+            font-size: 1.1rem;
             font-weight: 700;
-            color: var(--primary-color);
-            margin-bottom: 15px;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
             padding-bottom: 10px;
-            border-bottom: 2px solid var(--border-color);
+            border-bottom: 2px solid var(--primary-light);
             display: flex;
             align-items: center;
             gap: 8px;
         }
-
-        .form-label {
+        .form-group { margin-bottom: 16px; }
+        label {
+            display: block;
             font-weight: 600;
-            font-size: 0.85rem;
-            color: var(--text-dark);
+            font-size: 0.9rem;
+            color: var(--text);
             margin-bottom: 6px;
         }
-
-        .form-control, .form-select {
-            border-radius: 10px;
-            border: 2px solid var(--border-color);
-            padding: 12px 15px;
-            font-size: 0.9rem;
-            transition: all 0.3s;
-            background: #fafbfc;
-        }
-
-        .form-control:focus, .form-select:focus {
-            border-color: var(--secondary-color);
-            box-shadow: 0 0 0 3px rgba(87, 197, 182, 0.2);
-            background: white;
-        }
-
-        .input-group-text {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            border-radius: 10px 0 0 10px;
-            font-weight: 600;
-        }
-
-        .btn-back {
-            background: transparent;
-            border: 2px solid var(--border-color);
-            color: var(--text-muted);
-            border-radius: 10px;
-            padding: 10px 20px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .btn-back:hover {
-            border-color: var(--text-dark);
-            color: var(--text-dark);
-        }
-
-        .btn-submit {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--accent-color) 100%);
-            border: none;
-            color: white;
+        label .required { color: var(--danger); }
+        input[type="text"], input[type="number"], input[type="tel"], select, textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
             border-radius: 12px;
-            padding: 14px 30px;
-            font-weight: 700;
             font-size: 1rem;
-            box-shadow: 0 4px 15px rgba(26, 95, 122, 0.3);
-            transition: all 0.3s;
-            width: 100%;
+            background: #fafafa;
+            transition: all 0.2s;
+            color: var(--text);
         }
-
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(26, 95, 122, 0.4);
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(255,107,0,0.1);
         }
-
-        .btn-submit:active {
-            transform: translateY(0);
-        }
-
-        .conditional-field {
-            display: none;
-            animation: slideDown 0.3s ease;
-        }
-
-        .conditional-field.show {
-            display: block;
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; max-height: 0; }
-            to { opacity: 1; max-height: 200px; }
-        }
-
-        .photo-preview {
-            width: 100%;
-            height: 200px;
-            border: 2px dashed var(--border-color);
-            border-radius: 12px;
+        textarea { min-height: 80px; resize: vertical; }
+        .radio-group, .checkbox-group {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 6px;
+        }
+        .radio-option, .checkbox-option {
+            flex: 1;
+            min-width: 100px;
+        }
+        .radio-option input, .checkbox-option input { display: none; }
+        .radio-option label, .checkbox-option label {
+            display: block;
+            padding: 12px 16px;
+            background: #f5f0eb;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+            margin-bottom: 0;
+        }
+        .radio-option input:checked + label, .checkbox-option input:checked + label {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            box-shadow: 0 4px 12px rgba(255,107,0,0.3);
+        }
+        .btn {
+            display: inline-flex;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 14px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 100%;
+            margin-bottom: 10px;
+            text-decoration: none;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(255,107,0,0.3);
+        }
+        .btn-primary:active { transform: translateY(2px); }
+        .btn-success {
+            background: linear-gradient(135deg, #43a047 0%, #2e7d32 100%);
+            color: white;
+            box-shadow: 0 4px 20px rgba(46,125,50,0.3);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #e53935 0%, #c62828 100%);
+            color: white;
+        }
+        .btn-secondary {
+            background: #e0e0e0;
+            color: #333;
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+        }
+        .mode-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        .mode-card {
+            background: white;
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            text-align: center;
             cursor: pointer;
             transition: all 0.3s;
-            background: #fafbfc;
-            overflow: hidden;
+        }
+        .mode-card:hover, .mode-card.active {
+            border-color: var(--primary);
+            box-shadow: 0 8px 30px rgba(255,107,0,0.15);
+            transform: translateY(-2px);
+        }
+        .mode-card .icon { font-size: 2.5rem; margin-bottom: 12px; }
+        .mode-card h3 { color: var(--primary-dark); margin-bottom: 6px; }
+        .mode-card p { color: var(--text-light); font-size: 0.85rem; }
+        .hidden { display: none !important; }
+        .section { margin-bottom: 20px; }
+        .section-title {
+            background: linear-gradient(90deg, var(--primary-light), transparent);
+            color: var(--primary-dark);
+            padding: 10px 16px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 14px;
+        }
+        .dynamic-field { animation: slideDown 0.3s ease; }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .member-card {
+            background: #fff8f0;
+            border: 2px dashed var(--primary-light);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
             position: relative;
         }
-
-        .photo-preview:hover {
-            border-color: var(--secondary-color);
-            background: #f0f9ff;
-        }
-
-        .photo-preview img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: none;
-        }
-
-        .photo-preview.has-image img {
-            display: block;
-        }
-
-        .photo-preview.has-image .photo-placeholder {
-            display: none;
-        }
-
-        .photo-placeholder {
-            text-align: center;
-            color: var(--text-muted);
-        }
-
-        .photo-placeholder i {
-            font-size: 2.5rem;
-            margin-bottom: 8px;
-            color: var(--secondary-color);
-        }
-
-        .photo-placeholder span {
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .coord-display {
-            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
-            border-radius: 10px;
-            padding: 12px 15px;
-            font-family: 'Courier New', monospace;
-            font-size: 0.8rem;
-            color: var(--primary-color);
-            border: 1px solid #bbdefb;
-            word-break: break-all;
-        }
-
-        .coord-display i {
-            color: var(--success-color);
-            margin-right: 5px;
-        }
-
-        .badge-custom {
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+        .member-card .remove-btn {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: var(--danger);
             color: white;
+            border: none;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .calc-row {
+            display: grid;
+            grid-template-columns: 1fr 120px;
+            gap: 10px;
+            align-items: end;
+        }
+        .calc-result {
+            background: #e8f5e9;
+            border: 2px solid var(--success);
+            border-radius: 12px;
+            padding: 14px;
+            margin-top: 10px;
+            font-weight: 700;
+            color: var(--success);
+            text-align: center;
+            font-size: 1.1rem;
+        }
+        .note-box {
+            background: #fff3e0;
+            border-radius: 10px;
+            padding: 12px 16px;
+            margin: 12px 0;
+            font-size: 0.9rem;
+            color: #5d4037;
+            border-left: 4px solid var(--primary);
+        }
+        .note-box strong { color: var(--primary-dark); }
+        .saved-badge {
+            display: inline-block;
+            background: var(--success);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-top: 1px solid var(--border);
+            padding: 10px 16px;
+            display: flex;
+            gap: 10px;
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+        }
+        .bottom-nav .btn { margin-bottom: 0; flex: 1; padding: 14px; font-size: 0.9rem; }
+        .gps-btn {
+            background: linear-gradient(135deg, #1976d2 0%, #0d47a1 100%);
+            color: white;
+        }
+        .gps-display {
+            background: #e3f2fd;
+            border: 2px solid #1976d2;
+            border-radius: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            word-break: break-all;
+            color: #0d47a1;
+        }
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .step-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--border);
+            transition: all 0.3s;
+        }
+        .step-dot.active { background: var(--primary); transform: scale(1.3); }
+        .step-dot.completed { background: var(--success); }
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #333;
+            color: white;
+            padding: 14px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            z-index: 1000;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            white-space: nowrap;
+        }
+        .toast.show { opacity: 1; }
+        .data-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .data-item {
+            background: #f5f0eb;
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .data-item-info { flex: 1; }
+        .data-item-info .title { font-weight: 700; color: var(--text); }
+        .data-item-info .subtitle { font-size: 0.8rem; color: var(--text-light); }
+        .data-item-actions { display: flex; gap: 6px; }
+        .data-item-actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .btn-send { background: var(--success); color: white; }
+        .btn-delete { background: var(--danger); color: white; }
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: var(--text-light);
+        }
+        .empty-state .icon { font-size: 3rem; margin-bottom: 12px; opacity: 0.5; }
+        .badge {
+            display: inline-block;
             padding: 4px 10px;
             border-radius: 20px;
             font-size: 0.75rem;
-            font-weight: 600;
+            font-weight: 700;
         }
-
-        .radio-group {
-            display: flex;
-            gap: 10px;
+        .badge-orange { background: #fff3e0; color: var(--primary-dark); }
+        .badge-green { background: #e8f5e9; color: var(--success); }
+        .badge-blue { background: #e3f2fd; color: #1565c0; }
+        .input-group { display: flex; gap: 8px; }
+        .input-group input { flex: 1; }
+        .input-group select {
+            width: 120px;
+            min-width: 120px;
         }
-
-        .radio-btn {
-            flex: 1;
-            padding: 12px;
-            border: 2px solid var(--border-color);
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 600;
-            font-size: 0.9rem;
-        }
-
-        .radio-btn.selected {
-            border-color: var(--secondary-color);
-            background: rgba(87, 197, 182, 0.1);
-            color: var(--primary-color);
-        }
-
-        .radio-btn i {
-            display: block;
-            font-size: 1.3rem;
-            margin-bottom: 5px;
-        }
-
-        .progress-bar-custom {
-            height: 6px;
-            background: var(--border-color);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-bottom: 20px;
-        }
-
-        .progress-bar-custom .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-            border-radius: 3px;
-            transition: width 0.5s ease;
-        }
-
-        .footer-text {
-            text-align: center;
-            color: var(--text-muted);
-            font-size: 0.75rem;
-            margin-top: 30px;
-            padding: 0 20px;
-        }
-
-        .floating-btn {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.3rem;
-            z-index: 1000;
-            transition: all 0.3s;
-        }
-
-        .floating-btn:hover {
-            transform: scale(1.1);
-        }
-
-        @media (max-width: 576px) {
-            .app-header h1 {
-                font-size: 1.3rem;
-            }
-            .mode-card {
-                margin: 10px;
-                padding: 20px 15px;
-            }
-            .form-card {
-                margin: 10px;
-                padding: 15px;
-            }
-        }
-
-        .spin {
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .anggota-row {
-            transition: all 0.3s ease;
-        }
-        .anggota-row:hover {
-            border-color: var(--secondary-color) !important;
-            box-shadow: 0 2px 8px rgba(87, 197, 182, 0.15);
+        @media (max-width: 400px) {
+            .header h1 { font-size: 1.1rem; }
+            .btn { padding: 14px; font-size: 0.95rem; }
         }
     </style>
+<base target="_blank">
 </head>
 <body>
-    <!-- Header -->
-    <div class="app-header text-center">
-        <div class="container">
-            <h1><i class="bi bi-graph-up-arrow me-2"></i>Simple Sensus Ekonomi 2026</h1>
-            <p>Pendataan Ekonomi Keluarga & Usaha</p>
+    <div class="header">
+        <h1>📊 SENSUS EKONOMI 2026</h1>
+        <p>Tim PCL Desa Sukadamai</p>
+    </div>
+
+    <div class="container">
+        <!-- WARNING BOX -->
+        <div class="warning-box">
+            <strong>⚠️ PERINGATAN PENTING:</strong>
+            <ul>
+                <li>Jangan lupa <strong>tagging lokasi GPS</strong> di setiap bangunan/usaha!</li>
+                <li>Foto <strong>Meter PLN</strong> (ID Meter harus terlihat jelas)</li>
+                <li>Foto <strong>Rumah tampak depan</strong></li>
+                <li>Foto <strong>Ruang tamu</strong></li>
+                <li>Foto <strong>Kartu Keluarga</strong> (wajib minta foto/copy KK)</li>
+            </ul>
         </div>
-    </div>
 
-    <!-- Warning Banner -->
-    <div class="warning-banner">
-        <i class="bi bi-exclamation-triangle-fill"></i>
-        <strong>WAJIB TAGGING DAN FOTO RUMAH DEPAN DAN RUANG TAMU!</strong>
-    </div>
-
-    <!-- Home Page -->
-    <div id="homePage" class="container">
-        <div class="row g-0">
-            <div class="col-12">
-                <div class="mode-card" onclick="showForm('family')">
-                    <div class="mode-icon family">
-                        <i class="bi bi-people-fill"></i>
+        <!-- SCREEN: HOME / MODE SELECT -->
+        <div id="screen-home">
+            <div class="card">
+                <div class="card-title">🎯 Pilih Mode Pendataan</div>
+                <div class="mode-grid">
+                    <div class="mode-card" onclick="selectMode('keluarga')">
+                        <div class="icon">🏠</div>
+                        <h3>Mode 1: Data Kuisioner Keluarga</h3>
+                        <p>Pendataan keluarga dengan data prelist atau assignment baru</p>
                     </div>
-                    <h3>Mode Pendataan Keluarga</h3>
-                    <p>Pendataan data ekonomi keluarga termasuk kepemilikan aset, penghasilan, pendidikan, dan usaha keluarga.</p>
+                    <div class="mode-card" onclick="selectMode('usaha')">
+                        <div class="icon">🏭</div>
+                        <h3>Mode 2: Bangunan Khusus Usaha</h3>
+                        <p>Pendataan bangunan yang hanya digunakan untuk usaha</p>
+                    </div>
+                    <div class="mode-card" onclick="selectMode('khusus')">
+                        <div class="icon">🏢</div>
+                        <h3>Mode 3: Bangunan Khusus</h3>
+                        <p>Rumah Kosong / Gudang / Sarang Walet / Lainnya</p>
+                    </div>
                 </div>
             </div>
-            <div class="col-12">
-                <div class="mode-card" onclick="showForm('business')">
-                    <div class="mode-icon business">
-                        <i class="bi bi-building"></i>
+
+            <!-- Saved Data List -->
+            <div class="card" id="savedDataCard">
+                <div class="card-title">
+                    💾 Data Tersimpan
+                    <span class="saved-badge" id="savedCount">0</span>
+                </div>
+                <div id="savedDataList" class="data-list">
+                    <div class="empty-state">
+                        <div class="icon">📭</div>
+                        <p>Belum ada data tersimpan</p>
                     </div>
-                    <h3>Mode Bangunan Khusus Usaha</h3>
-                    <p>Pendataan data usaha pada bangunan khusus komersial atau industri.</p>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Mode 1: Pendataan Keluarga -->
-    <div id="familyForm" class="form-section">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
-                <button class="btn-back" onclick="goHome()">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali
+        <!-- SCREEN: SUB-MODE KELUARGA -->
+        <div id="screen-submode-keluarga" class="hidden">
+            <div class="card">
+                <div class="card-title">🏠 Data Kuisioner Keluarga</div>
+                <p style="margin-bottom:16px;color:var(--text-light);">Pilih sumber data:</p>
+                <button class="btn btn-primary" onclick="startKeluarga('prelist')">
+                    📋 Data dari Prelist
                 </button>
-                <span class="badge-custom">Mode Keluarga</span>
+                <button class="btn btn-outline" onclick="startKeluarga('baru')">
+                    ✨ Assignment Baru
+                </button>
+                <button class="btn btn-secondary" onclick="goHome()">← Kembali</button>
+            </div>
+        </div>
+
+        <!-- SCREEN: FORM KELUARGA -->
+        <div id="screen-form-keluarga" class="hidden">
+            <div class="step-indicator" id="stepIndicator">
+                <div class="step-dot active"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
+                <div class="step-dot"></div>
             </div>
 
-            <div class="progress-bar-custom mx-3">
-                <div class="progress-fill" id="familyProgress" style="width: 10%"></div>
+            <form id="formKeluarga" onsubmit="return false;">
+                <!-- STEP 1: IDENTITAS -->
+                <div id="step1" class="card">
+                    <div class="card-title">📋 Identitas Keluarga</div>
+
+                    <div class="note-box">
+                        <strong>WAJIB:</strong> Minta foto/copy Kartu Keluarga dari responden!
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nomor Kartu Keluarga <span class="required">*</span></label>
+                        <input type="text" id="kk_no" placeholder="Contoh: 3201010101010001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Kepala Keluarga <span class="required">*</span></label>
+                        <input type="text" id="kk_nama" placeholder="Nama lengkap kepala keluarga" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Urut Bangunan <span class="required">*</span></label>
+                        <input type="text" id="no_urut_bangunan" placeholder="Contoh: 001" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor Urut Keluarga <span class="required">*</span></label>
+                        <input type="text" id="no_urut_keluarga" placeholder="Contoh: 001" required>
+                    </div>
+
+                    <button type="button" class="btn btn-primary" onclick="nextStep(2)">Lanjut →</button>
+                </div>
+
+                <!-- STEP 2: PEKERJAAN & PENGELUARAN -->
+                <div id="step2" class="card hidden">
+                    <div class="card-title">💼 Pekerjaan & Pengeluaran</div>
+
+                    <div class="section">
+                        <div class="section-title">👤 Kepala Keluarga</div>
+                        <div class="form-group">
+                            <label>Pekerjaan Kepala Keluarga</label>
+                            <input type="text" id="kk_pekerjaan" placeholder="Contoh: Petani, Buruh, PNS, dll">
+                        </div>
+                        <div class="form-group">
+                            <label>Gaji/Pendapatan per Bulan (Rp)</label>
+                            <input type="text" id="kk_gaji" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">👥 Anggota Keluarga Lain yang Bekerja</div>
+                        <div id="anggotaList"></div>
+                        <button type="button" class="btn btn-outline" onclick="tambahAnggota()">+ Tambah Anggota Bekerja</button>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">💰 Pengeluaran Keluarga</div>
+                        <div class="form-group">
+                            <label>Pengeluaran Makanan 7 Hari Terakhir (Rp)</label>
+                            <input type="text" id="peng_makanan" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>Pengeluaran Non-Makanan 30 Hari Terakhir (Rp)</label>
+                            <input type="text" id="peng_nonmakanan" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>Pengeluaran Khusus Tahunan (Rp)</label>
+                            <input type="text" id="peng_tahunan" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>Pengeluaran Listrik per Bulan (Rp)</label>
+                            <input type="text" id="peng_listrik" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>ID Meter / ID PLN</label>
+                            <input type="text" id="id_pln" placeholder="Nomor meter listrik">
+                        </div>
+                        <div class="form-group">
+                            <label>Pengeluaran WiFi/Paket Data per Bulan (Rp)</label>
+                            <input type="text" id="peng_internet" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(1)">← Kembali</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(3)">Lanjut →</button>
+                </div>
+
+                <!-- STEP 3: ASET -->
+                <div id="step3" class="card hidden">
+                    <div class="card-title">🏠 Kepemilikan Aset</div>
+
+                    <div class="form-group">
+                        <label>Kepemilikan Rumah</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="rumah_milik" id="rm_milik" value="Milik" onchange="toggleRumahMilik()">
+                                <label for="rm_milik">🏠 Milik</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="rumah_milik" id="rm_sewa" value="Sewa" onchange="toggleRumahMilik()">
+                                <label for="rm_sewa">🔑 Sewa</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="rumah_milik" id="rm_bebas" value="Bebas Sewa" onchange="toggleRumahMilik()">
+                                <label for="rm_bebas">🎁 Bebas Sewa</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="rumahDetail" class="hidden dynamic-field">
+                        <div class="form-group">
+                            <label>Nilai Rumah Saat Ini (Rp)</label>
+                            <input type="text" id="rumah_nilai" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                        <div class="form-group">
+                            <label>Surat Kepemilikan Rumah</label>
+                            <input type="text" id="rumah_surat" placeholder="Contoh: SHM, HGB, AJB, dll">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jumlah Sepeda Motor</label>
+                        <div class="input-group">
+                            <input type="number" id="jml_motor" placeholder="0" min="0" onchange="toggleMotor()">
+                        </div>
+                    </div>
+                    <div id="motorDetail" class="hidden dynamic-field">
+                        <div class="form-group">
+                            <label>Nilai Total Motor Saat Ini (Rp)</label>
+                            <input type="text" id="motor_nilai" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jumlah Mobil</label>
+                        <div class="input-group">
+                            <input type="number" id="jml_mobil" placeholder="0" min="0" onchange="toggleMobil()">
+                        </div>
+                    </div>
+                    <div id="mobilDetail" class="hidden dynamic-field">
+                        <div class="form-group">
+                            <label>Nilai Total Mobil Saat Ini (Rp)</label>
+                            <input type="text" id="mobil_nilai" placeholder="0" oninput="formatRupiah(this)">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Jumlah AC</label>
+                        <input type="number" id="jml_ac" placeholder="0" min="0">
+                    </div>
+                    <div class="form-group">
+                        <label>Jumlah Kulkas</label>
+                        <input type="number" id="jml_kulkas" placeholder="0" min="0">
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(2)">← Kembali</button>
+                    <button type="button" class="btn btn-primary" onclick="nextStep(4)">Lanjut →</button>
+                </div>
+
+                <!-- STEP 4: USAHA & GPS -->
+                <div id="step4" class="card hidden">
+                    <div class="card-title">🏪 Usaha & Lokasi</div>
+
+                    <div class="form-group">
+                        <label>Apakah keluarga memiliki usaha?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="punya_usaha" id="pu_ya" value="Ya" onchange="toggleUsaha()">
+                                <label for="pu_ya">✅ Ya</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="punya_usaha" id="pu_tidak" value="Tidak" onchange="toggleUsaha()">
+                                <label for="pu_tidak">❌ Tidak</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="usahaForm" class="hidden">
+                        <div id="usahaFields"></div>
+                        <button type="button" class="btn btn-outline" onclick="tambahUsaha()">+ Tambah Usaha</button>
+                    </div>
+
+                    <div class="section">
+                        <div class="section-title">📍 Tagging Lokasi GPS</div>
+                        <div class="note-box">
+                            <strong>WAJIB!</strong> Tekan tombol di bawah untuk mengambil koordinat lokasi.
+                        </div>
+                        <button type="button" class="btn gps-btn" onclick="getGPS('keluarga')">📍 Ambil Lokasi GPS</button>
+                        <div id="gpsDisplay_keluarga" class="gps-display hidden"></div>
+                        <input type="hidden" id="gps_lat_keluarga">
+                        <input type="hidden" id="gps_lon_keluarga">
+                        <input type="hidden" id="gps_url_keluarga">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Tambahan</label>
+                        <textarea id="catatan_keluarga" placeholder="Catatan penting lainnya..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="prevStep(3)">← Kembali</button>
+                    <button type="button" class="btn btn-success" onclick="saveData('keluarga')">💾 Simpan Data</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- SCREEN: FORM USAHA LANGSUNG -->
+        <div id="screen-form-usaha" class="hidden">
+            <div class="card">
+                <div class="card-title">🏭 Bangunan Khusus Usaha</div>
+                <form id="formUsahaLangsung" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Nomor Urut Bangunan <span class="required">*</span></label>
+                        <input type="text" id="ub_no_bangunan" placeholder="Contoh: 001" required>
+                    </div>
+                    <div id="usahaFieldsLangsung"></div>
+                    <button type="button" class="btn btn-outline" onclick="tambahUsahaLangsung()">+ Tambah Usaha</button>
+
+                    <div class="section">
+                        <div class="section-title">📍 Tagging Lokasi GPS</div>
+                        <button type="button" class="btn gps-btn" onclick="getGPS('usaha')">📍 Ambil Lokasi GPS</button>
+                        <div id="gpsDisplay_usaha" class="gps-display hidden"></div>
+                        <input type="hidden" id="gps_lat_usaha">
+                        <input type="hidden" id="gps_lon_usaha">
+                        <input type="hidden" id="gps_url_usaha">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Catatan Tambahan</label>
+                        <textarea id="catatan_usaha" placeholder="Catatan penting lainnya..."></textarea>
+                    </div>
+
+                    <button type="button" class="btn btn-secondary" onclick="goHome()">← Kembali</button>
+                    <button type="button" class="btn btn-success" onclick="saveData('usaha')">💾 Simpan Data</button>
+                </form>
             </div>
+        </div>
 
-            <form id="formKeluarga" onsubmit="return submitFamily(event)">
-                <!-- Data Dasar -->
-                <div class="form-card">
-                    <div class="section-title">
-                        <i class="bi bi-person-vcard"></i> Data Dasar Keluarga
+        <!-- SCREEN: FORM BANGUNAN KHUSUS -->
+        <div id="screen-form-khusus" class="hidden">
+            <div class="card">
+                <div class="card-title">🏢 Bangunan Khusus</div>
+                <form id="formKhusus" onsubmit="return false;">
+                    <div class="form-group">
+                        <label>Nomor Urut Bangunan <span class="required">*</span></label>
+                        <input type="text" id="bk_no_bangunan" placeholder="Contoh: 001" required>
                     </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">Nomor Urut Bangunan</label>
-                            <input type="number" class="form-control" id="f_no_bangunan" placeholder="Contoh: 001">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nomor Urut Keluarga</label>
-                            <input type="number" class="form-control" id="f_no_keluarga" placeholder="Contoh: 01">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Nama Kepala Keluarga</label>
-                            <input type="text" class="form-control" id="f_nama_kk" placeholder="Nama lengkap kepala keluarga">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Nomor Kartu Keluarga</label>
-                            <input type="text" class="form-control" id="f_no_kk" placeholder="16 digit nomor KK">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Sumber Data -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-database"></i> Sumber Data
-                    </div>
-                    <label class="form-label">Pilih sumber data keluarga:</label>
-                    <div class="radio-group mb-3">
-                        <div class="radio-btn" onclick="selectSumberData('prelist')" id="btnSumberPrelist">
-                            <i class="bi bi-file-earmark-text"></i>
-                            Prelist
-                        </div>
-                        <div class="radio-btn" onclick="selectSumberData('assignment')" id="btnSumberAssignment">
-                            <i class="bi bi-plus-circle"></i>
-                            Assignment Baru
-                        </div>
-                    </div>
-                    <input type="hidden" id="f_sumber_data" value="">
-
-                    <!-- Assignment Baru: Foto KK + OCR Scan -->
-                    <div id="fieldAssignmentBaru" class="conditional-field">
-                        <div class="mb-3">
-                            <label class="form-label">Foto Kartu Keluarga <span class="text-danger">*</span></label>
-                            <div class="photo-preview" onclick="document.getElementById('f_foto_kk').click()">
-                                <img id="previewKK" alt="Preview">
-                                <div class="photo-placeholder">
-                                    <i class="bi bi-camera-fill"></i>
-                                    <span>Klik untuk ambil foto KK</span>
-                                </div>
-                            </div>
-                            <input type="file" id="f_foto_kk" accept="image/*" capture="environment" style="display:none" onchange="handleKKUpload(this)">
-                        </div>
-
-                        <!-- OCR Loading -->
-                        <div id="ocrLoading" class="text-center mb-3" style="display:none;">
-                            <div class="spinner-border text-primary" role="status">
-                                <span class="visually-hidden">Loading...</span>
-                            </div>
-                            <p class="mt-2 text-muted" style="font-size:0.85rem;">Memindai data KK...</p>
-                        </div>
-
-                        <!-- OCR Results -->
-                        <div id="ocrResult" class="conditional-field">
-                            <div class="alert alert-info" style="font-size:0.85rem;">
-                                <i class="bi bi-info-circle-fill me-2"></i>
-                                <strong>Data terdeteksi dari KK:</strong> Periksa dan sesuaikan jika perlu.
-                            </div>
-                            <div class="row g-3">
-                                <div class="col-12">
-                                    <label class="form-label">No. Kartu Keluarga</label>
-                                    <input type="text" class="form-control" id="f_no_kk_ocr" placeholder="16 digit nomor KK" maxlength="16">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Nama Kepala Keluarga</label>
-                                    <input type="text" class="form-control" id="f_nama_kk_ocr" placeholder="Nama lengkap kepala keluarga">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Alamat</label>
-                                    <textarea class="form-control" id="f_alamat_kk_ocr" rows="2" placeholder="Alamat lengkap"></textarea>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">RT / RW</label>
-                                    <div class="row g-2">
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="f_rt_kk_ocr" placeholder="RT">
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="text" class="form-control" id="f_rw_kk_ocr" placeholder="RW">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Kode Pos</label>
-                                    <input type="text" class="form-control" id="f_kodepos_kk_ocr" placeholder="Kode pos" maxlength="5">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Desa/Kelurahan</label>
-                                    <input type="text" class="form-control" id="f_desa_kk_ocr" placeholder="Desa/Kelurahan">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Kecamatan</label>
-                                    <input type="text" class="form-control" id="f_kecamatan_kk_ocr" placeholder="Kecamatan">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Kabupaten/Kota</label>
-                                    <input type="text" class="form-control" id="f_kabupaten_kk_ocr" placeholder="Kabupaten/Kota">
-                                </div>
-                                <div class="col-12">
-                                    <label class="form-label">Provinsi</label>
-                                    <input type="text" class="form-control" id="f_provinsi_kk_ocr" placeholder="Provinsi">
-                                </div>
-                                <div class="col-md-6">
-                                    <label class="form-label">Tanggal Dikeluarkan</label>
-                                    <input type="date" class="form-control" id="f_tgl_kk_ocr">
-                                </div>
-                            </div>
-
-                            <!-- Anggota Keluarga dari OCR -->
-                            <div class="mt-4">
-                                <div class="section-title" style="border-bottom:2px solid var(--border-color); padding-bottom:10px;">
-                                    <i class="bi bi-people"></i> Anggota Keluarga (OCR)
-                                </div>
-                                <div id="anggotaKeluargaOCR">
-                                    <!-- Dynamic rows will be inserted here -->
-                                </div>
-                                <button type="button" class="btn btn-outline-primary w-100 mt-2" onclick="tambahAnggotaOCR()">
-                                    <i class="bi bi-plus-lg me-1"></i> Tambah Anggota Keluarga
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pekerjaan & Penghasilan -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-briefcase"></i> Pekerjaan & Penghasilan
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label class="form-label">Pekerjaan Kepala Keluarga</label>
-                            <input type="text" class="form-control" id="f_pekerjaan_kk" placeholder="Contoh: Pegawai Swasta, Petani, Wiraswasta">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Pekerjaan Istri/Anggota Keluarga Lainnya</label>
-                            <input type="text" class="form-control" id="f_pekerjaan_istri" placeholder="Contoh: IRT, Buruh, Pegawai">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Penghasilan/Bulan Kepala Keluarga (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_penghasilan_kk" placeholder="5000000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Penghasilan Istri/Anggota (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_penghasilan_anggota" placeholder="2000000">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kepemilikan -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-house-door"></i> Kepemilikan Aset
-                    </div>
-
-                    <!-- Rumah -->
-                    <div class="mb-3">
-                        <label class="form-label">A. Kepemilikan Rumah</label>
-                        <select class="form-select" id="f_rumah" onchange="toggleRumah()">
-                            <option value="" selected disabled>Pilih status rumah...</option>
-                            <option value="Milik">Milik Sendiri</option>
-                            <option value="Sewa">Sewa/Kontrak</option>
+                    <div class="form-group">
+                        <label>Nama/Jenis Bangunan <span class="required">*</span></label>
+                        <select id="bk_jenis" onchange="toggleKhususLain()">
+                            <option value="">-- Pilih Jenis --</option>
+                            <option value="Rumah Kosong">🏠 Rumah Kosong</option>
+                            <option value="Gudang">📦 Gudang</option>
+                            <option value="Sarang Walet">🐦 Sarang Walet</option>
+                            <option value="Lainnya">🔧 Lainnya</option>
                         </select>
-                        <div id="fieldRumahMilik" class="conditional-field mt-2">
-                            <label class="form-label">Jenis Surat</label>
-                            <select class="form-select" id="f_jenis_surat">
-                                <option value="SHM">SHM (Sertifikat Hak Milik)</option>
-                                <option value="SKGR">SKGR (Sertifikat Konversi Girik/Roya)</option>
-                                <option value="Lainnya">Lainnya</option>
-                            </select>
-                        </div>
-                        <div id="fieldRumahSewa" class="conditional-field mt-2">
-                            <label class="form-label">Nilai Sewa per Bulan (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_sewa_bulan" placeholder="1000000">
-                            </div>
-                        </div>
+                    </div>
+                    <div id="khususLain" class="hidden form-group dynamic-field">
+                        <label>Sebutkan Jenis Bangunan</label>
+                        <input type="text" id="bk_jenis_lain" placeholder="Contoh: Mushola, Pos Ronda, dll">
+                    </div>
+                    <div class="form-group">
+                        <label>Nama Bangunan (jika ada)</label>
+                        <input type="text" id="bk_nama" placeholder="Nama bangunan">
                     </div>
 
-                    <!-- Luas Tanah -->
-                    <div class="mb-3">
-                        <label class="form-label">B. Luas Tanah (m²)</label>
-                        <div class="row g-2">
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Panjang (m)</label>
-                                <input type="number" class="form-control" id="f_tanah_panjang" min="0" step="0.1" placeholder="0" oninput="hitungLuasTanah()">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Lebar (m)</label>
-                                <input type="number" class="form-control" id="f_tanah_lebar" min="0" step="0.1" placeholder="0" oninput="hitungLuasTanah()">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Luas (m²)</label>
-                                <input type="number" class="form-control" id="f_tanah_luas" min="0" step="0.1" placeholder="0" readonly style="background:#e9ecef; font-weight:700;">
-                            </div>
-                        </div>
+                    <div class="section">
+                        <div class="section-title">📍 Tagging Lokasi GPS</div>
+                        <button type="button" class="btn gps-btn" onclick="getGPS('khusus')">📍 Ambil Lokasi GPS</button>
+                        <div id="gpsDisplay_khusus" class="gps-display hidden"></div>
+                        <input type="hidden" id="gps_lat_khusus">
+                        <input type="hidden" id="gps_lon_khusus">
+                        <input type="hidden" id="gps_url_khusus">
                     </div>
 
-                    <!-- Luas Bangunan -->
-                    <div class="mb-3">
-                        <label class="form-label">C. Luas Bangunan (m²)</label>
-                        <div class="row g-2">
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Panjang (m)</label>
-                                <input type="number" class="form-control" id="f_bangunan_panjang" min="0" step="0.1" placeholder="0" oninput="hitungLuasBangunan()">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Lebar (m)</label>
-                                <input type="number" class="form-control" id="f_bangunan_lebar" min="0" step="0.1" placeholder="0" oninput="hitungLuasBangunan()">
-                            </div>
-                            <div class="col-4">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Luas (m²)</label>
-                                <input type="number" class="form-control" id="f_bangunan_luas" min="0" step="0.1" placeholder="0" readonly style="background:#e9ecef; font-weight:700;">
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <label>Catatan Tambahan</label>
+                        <textarea id="catatan_khusus" placeholder="Catatan penting lainnya..."></textarea>
                     </div>
 
-                    <!-- Motor -->
-                    <div class="mb-3">
-                        <label class="form-label">D. Sepeda Motor</label>
-                        <div class="row g-2 mb-2">
-                            <div class="col-6">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Jumlah Unit</label>
-                                <input type="number" class="form-control" id="f_motor" min="0" placeholder="0" value="0">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Nilai per Unit</label>
-                                <select class="form-select" id="f_motor_harga">
-                                    <option value="" disabled selected>Pilih range harga...</option>
-                                    <option value="Rendah (3-4 Juta)">Rendah: Rp 3.000.000 - 4.000.000</option>
-                                    <option value="Sedang (5-6 Juta)">Sedang: Rp 5.000.000 - 6.000.000</option>
-                                    <option value="Menengah (9-10 Juta)">Menengah: Rp 9.000.000 - 10.000.000</option>
-                                    <option value="Tinggi (10-15 Juta)">Tinggi: Rp 10.000.000 - 15.000.000</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Mobil -->
-                    <div class="mb-3">
-                        <label class="form-label">E. Mobil</label>
-                        <div class="row g-2 mb-2">
-                            <div class="col-6">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Jumlah Unit</label>
-                                <input type="number" class="form-control" id="f_mobil" min="0" placeholder="0" value="0">
-                            </div>
-                            <div class="col-6">
-                                <label class="form-label" style="font-size:0.75rem; color:var(--text-muted);">Perkiraan Harga per Unit (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="f_mobil_harga" placeholder="150000000">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Kulkas -->
-                    <div class="mb-3">
-                        <label class="form-label">F. Kulkas (Jumlah Unit)</label>
-                        <input type="number" class="form-control" id="f_kulkas" min="0" placeholder="0" value="0">
-                    </div>
-
-                    <!-- AC -->
-                    <div class="mb-3">
-                        <label class="form-label">G. AC (Jumlah Unit)</label>
-                        <input type="number" class="form-control" id="f_ac" min="0" placeholder="0" value="0">
-                    </div>
-                </div>
-
-                <!-- Pengeluaran -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-cash-stack"></i> Pengeluaran Rutin
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">A. Listrik per Bulan (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_listrik" placeholder="250000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nomor Meter PLN</label>
-                            <input type="text" class="form-control" id="f_no_meter_pln" placeholder="Contoh: 12345678901">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Daya Meter (Watt)</label>
-                            <select class="form-select" id="f_daya_meter">
-                                <option value="" disabled selected>Pilih daya...</option>
-                                <option value="450">450 VA</option>
-                                <option value="900">900 VA</option>
-                                <option value="1300">1.300 VA</option>
-                                <option value="2200">2.200 VA</option>
-                                <option value="3300">3.300 VA</option>
-                                <option value="4500">4.500 VA</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">B. WiFi/Internet per Bulan (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_internet" placeholder="300000">
-                            </div>
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">C. Pengeluaran Rutin per Tahun (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="f_pengeluaran_tahun" placeholder="50000000">
-                            </div>
-                            <div class="form-text">Termasuk pendidikan, kesehatan, transportasi, dll.</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Pendidikan -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-mortarboard"></i> Pendidikan Terakhir
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-md-6">
-                            <label class="form-label">A. Kepala Keluarga</label>
-                            <select class="form-select" id="f_pendidikan_kk">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                <option value="SD">SD/Sederajat</option>
-                                <option value="SMP">SMP/Sederajat</option>
-                                <option value="SMA">SMA/Sederajat</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">B. Istri</label>
-                            <select class="form-select" id="f_pendidikan_istri">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Tidak Sekolah">Tidak Sekolah</option>
-                                <option value="SD">SD/Sederajat</option>
-                                <option value="SMP">SMP/Sederajat</option>
-                                <option value="SMA">SMA/Sederajat</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">C. Anak 1</label>
-                            <select class="form-select" id="f_pendidikan_anak1">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Belum Sekolah">Belum Sekolah</option>
-                                <option value="TK">TK</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">D. Anak 2</label>
-                            <select class="form-select" id="f_pendidikan_anak2">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Belum Sekolah">Belum Sekolah</option>
-                                <option value="TK">TK</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">E. Anak 3</label>
-                            <select class="form-select" id="f_pendidikan_anak3">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Belum Sekolah">Belum Sekolah</option>
-                                <option value="TK">TK</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">F. Anak 4</label>
-                            <select class="form-select" id="f_pendidikan_anak4">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Belum Sekolah">Belum Sekolah</option>
-                                <option value="TK">TK</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                            </select>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">G. Anak 5</label>
-                            <select class="form-select" id="f_pendidikan_anak5">
-                                <option value="" disabled selected>Pilih...</option>
-                                <option value="Tidak Ada">Tidak Ada</option>
-                                <option value="Belum Sekolah">Belum Sekolah</option>
-                                <option value="TK">TK</option>
-                                <option value="SD">SD</option>
-                                <option value="SMP">SMP</option>
-                                <option value="SMA">SMA</option>
-                                <option value="D1/D2">D1/D2</option>
-                                <option value="D3">D3</option>
-                                <option value="S1">S1</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Usaha Keluarga -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-shop"></i> Usaha Keluarga
-                    </div>
-                    <label class="form-label">Apakah keluarga ini memiliki usaha?</label>
-                    <div class="radio-group mb-3">
-                        <div class="radio-btn" onclick="selectUsaha('tidak')" id="btnUsahaTidak">
-                            <i class="bi bi-x-circle"></i>
-                            Tidak
-                        </div>
-                        <div class="radio-btn" onclick="selectUsaha('ya')" id="btnUsahaYa">
-                            <i class="bi bi-check-circle"></i>
-                            Ya
-                        </div>
-                    </div>
-                    <input type="hidden" id="f_punya_usaha" value="">
-
-                    <div id="fieldUsaha" class="conditional-field">
-                        <div class="row g-3">
-                            <div class="col-12">
-                                <label class="form-label">Nama Usaha</label>
-                                <input type="text" class="form-control" id="f_nama_usaha" placeholder="Nama usaha">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Jenis Usaha</label>
-                                <input type="text" class="form-control" id="f_jenis_usaha" placeholder="Contoh: Warung, Konveksi, Bengkel">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Tahun Mulai Usaha</label>
-                                <input type="number" class="form-control" id="f_tahun_usaha" min="1900" max="2026" placeholder="2020">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Biaya Produksi/Tahun (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="f_biaya_produksi" placeholder="10000000">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Biaya Operasional/Tahun (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="f_biaya_operasional" placeholder="5000000">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Nilai Produksi/Tahun (Rp)</label>
-                                <div class="input-group">
-                                    <span class="input-group-text">Rp</span>
-                                    <input type="number" class="form-control" id="f_nilai_produksi" placeholder="50000000">
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Jumlah Pekerja</label>
-                                <input type="number" class="form-control" id="f_pekerja_total" min="1" placeholder="1">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Pekerja Wanita</label>
-                                <input type="number" class="form-control" id="f_pekerja_wanita" min="0" placeholder="0">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Pekerja Pria</label>
-                                <input type="number" class="form-control" id="f_pekerja_pria" min="0" placeholder="0">
-                            </div>
-                            <div class="col-md-6">
-                                <label class="form-label">Pekerja yang Digaji</label>
-                                <input type="number" class="form-control" id="f_pekerja_gaji" min="0" placeholder="0">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Penanggung Jawab/Pemilik Usaha</label>
-                                <input type="text" class="form-control" id="f_pemilik_usaha" placeholder="Nama pemilik usaha">
-                            </div>
-                            <div class="col-12">
-                                <label class="form-label">Lokasi Usaha (jika di luar tempat tinggal)</label>
-                                <input type="text" class="form-control" id="f_lokasi_usaha" placeholder="Alamat lengkap lokasi usaha">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lokasi & Foto -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-geo-alt"></i> Lokasi & Dokumentasi
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Koordinat Lokasi <span class="text-danger">*</span></label>
-                        <button type="button" class="btn btn-outline-primary w-100 mb-2" onclick="getLocation('family')">
-                            <i class="bi bi-geo-fill me-2"></i>Ambil Lokasi Realtime
-                        </button>
-                        <div id="coordFamily" class="coord-display" style="display:none;">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span id="coordFamilyText"></span>
-                        </div>
-                        <input type="hidden" id="f_lat">
-                        <input type="hidden" id="f_long">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Foto Rumah Tampak Depan <span class="text-danger">*</span></label>
-                        <div class="photo-preview" onclick="document.getElementById('f_foto_rumah').click()">
-                            <img id="previewRumah" alt="Preview">
-                            <div class="photo-placeholder">
-                                <i class="bi bi-house-door-fill"></i>
-                                <span>Klik untuk foto rumah depan</span>
-                            </div>
-                        </div>
-                        <input type="file" id="f_foto_rumah" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRumah')">
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Foto Ruang Tamu <span class="text-danger">*</span></label>
-                        <div class="photo-preview" onclick="document.getElementById('f_foto_ruang').click()">
-                            <img id="previewRuang" alt="Preview">
-                            <div class="photo-placeholder">
-                                <i class="bi bi-door-open-fill"></i>
-                                <span>Klik untuk foto ruang tamu</span>
-                            </div>
-                        </div>
-                        <input type="file" id="f_foto_ruang" accept="image/*" capture="environment" style="display:none" onchange="previewImage(this, 'previewRuang')">
-                    </div>
-                </div>
-
-                <div class="px-3 mt-4 mb-5">
-                    <button type="submit" class="btn-submit">
-                        <i class="bi bi-whatsapp me-2"></i>Kirim Data via WhatsApp
-                    </button>
-                </div>
-            </form>
+                    <button type="button" class="btn btn-secondary" onclick="goHome()">← Kembali</button>
+                    <button type="button" class="btn btn-success" onclick="saveData('khusus')">💾 Simpan Data</button>
+                </form>
+            </div>
         </div>
     </div>
 
-    <!-- Mode 2: Bangunan Khusus Usaha -->
-    <div id="businessForm" class="form-section">
-        <div class="container">
-            <div class="d-flex justify-content-between align-items-center mb-3 px-3">
-                <button class="btn-back" onclick="goHome()">
-                    <i class="bi bi-arrow-left me-1"></i> Kembali
-                </button>
-                <span class="badge-custom">Mode Bangunan Usaha</span>
-            </div>
+    <div class="toast" id="toast"></div>
 
-            <div class="progress-bar-custom mx-3">
-                <div class="progress-fill" id="businessProgress" style="width: 10%"></div>
-            </div>
-
-            <form id="formUsaha" onsubmit="return submitBusiness(event)">
-                <div class="form-card">
-                    <div class="section-title">
-                        <i class="bi bi-building"></i> Data Bangunan & Usaha
-                    </div>
-                    <div class="row g-3">
-                        <div class="col-12">
-                            <label class="form-label">Nomor Urut Bangunan</label>
-                            <input type="number" class="form-control" id="b_no_bangunan" placeholder="Contoh: 001">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Nama Usaha</label>
-                            <input type="text" class="form-control" id="b_nama_usaha" placeholder="Nama lengkap usaha">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Jenis Usaha</label>
-                            <input type="text" class="form-control" id="b_jenis_usaha" placeholder="Contoh: Restoran, Toko Kelontong, Bengkel">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Tahun Mulai Usaha</label>
-                            <input type="number" class="form-control" id="b_tahun_usaha" min="1900" max="2026" placeholder="2020">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Biaya Produksi/Tahun (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_biaya_produksi" placeholder="50000000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Biaya Operasional/Tahun (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_biaya_operasional" placeholder="20000000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Nilai Produksi/Tahun (Rp)</label>
-                            <div class="input-group">
-                                <span class="input-group-text">Rp</span>
-                                <input type="number" class="form-control" id="b_nilai_produksi" placeholder="100000000">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Jumlah Pekerja</label>
-                            <input type="number" class="form-control" id="b_pekerja_total" min="1" placeholder="5">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Pekerja Wanita</label>
-                            <input type="number" class="form-control" id="b_pekerja_wanita" min="0" placeholder="2">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Pekerja Pria</label>
-                            <input type="number" class="form-control" id="b_pekerja_pria" min="0" placeholder="3">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Pekerja yang Digaji</label>
-                            <input type="number" class="form-control" id="b_pekerja_gaji" min="0" placeholder="4">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Penanggung Jawab/Pemilik Usaha</label>
-                            <input type="text" class="form-control" id="b_pemilik" placeholder="Nama pemilik usaha">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">NIK Pemilik</label>
-                            <input type="text" class="form-control" id="b_nik" placeholder="16 digit NIK">
-                        </div>
-                        <div class="col-md-6">
-                            <label class="form-label">Umur Pemilik</label>
-                            <input type="number" class="form-control" id="b_umur" min="1" max="120" placeholder="35">
-                        </div>
-                        <div class="col-12">
-                            <label class="form-label">Lokasi Usaha (jika di luar tempat tinggal)</label>
-                            <input type="text" class="form-control" id="b_lokasi" placeholder="Alamat lengkap lokasi usaha">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Lokasi -->
-                <div class="form-card mt-3">
-                    <div class="section-title">
-                        <i class="bi bi-geo-alt"></i> Lokasi
-                    </div>
-
-                    <div class="mb-3">
-                        <label class="form-label">Koordinat Lokasi <span class="text-danger">*</span></label>
-                        <button type="button" class="btn btn-outline-primary w-100 mb-2" onclick="getLocation('business')">
-                            <i class="bi bi-geo-fill me-2"></i>Ambil Lokasi Realtime
-                        </button>
-                        <div id="coordBusiness" class="coord-display" style="display:none;">
-                            <i class="bi bi-check-circle-fill"></i>
-                            <span id="coordBusinessText"></span>
-                        </div>
-                        <input type="hidden" id="b_lat">
-                        <input type="hidden" id="b_long">
-                    </div>
-                </div>
-
-                <div class="px-3 mt-4 mb-5">
-                    <button type="submit" class="btn-submit">
-                        <i class="bi bi-whatsapp me-2"></i>Kirim Data via WhatsApp
-                    </button>
-                </div>
-            </form>
-        </div>
-    </div>
-
-    <div class="footer-text">
-        <i class="bi bi-shield-check me-1"></i>Simple Sensus Ekonomi 2026 - Data dijaga kerahasiaannya
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
     <script>
-        // GANTI NOMOR WHATSAPP INI
-        const WHATSAPP_NUMBER = "6285791111335"; // Format: 62xxxxxxxxxx
 
-        function showForm(mode) {
-            document.getElementById('homePage').style.display = 'none';
-            if (mode === 'family') {
-                document.getElementById('familyForm').classList.add('active');
-                document.getElementById('businessForm').classList.remove('active');
-            } else {
-                document.getElementById('businessForm').classList.add('active');
-                document.getElementById('familyForm').classList.remove('active');
-            }
+        // ===== STATE =====
+        let currentMode = '';
+        let currentStep = 1;
+        let anggotaCount = 0;
+        let usahaCount = 0;
+        let usahaLangsungCount = 0;
+        const STORAGE_KEY = 'sensus_sukadamai_2026';
+        const FORM_STATE_KEY = 'sensus_form_state';
+        const WA_NUMBER = '6285791111335';
+
+        // ===== INIT =====
+        document.addEventListener('DOMContentLoaded', () => {
+            loadSavedData();
+            restoreFormState();
+        });
+
+        // ===== NAVIGATION =====
+        function showScreen(id) {
+            document.querySelectorAll('[id^="screen-"]').forEach(el => el.classList.add('hidden'));
+            document.getElementById('screen-' + id).classList.remove('hidden');
             window.scrollTo(0, 0);
         }
 
         function goHome() {
-            document.getElementById('homePage').style.display = 'block';
-            document.getElementById('familyForm').classList.remove('active');
-            document.getElementById('businessForm').classList.remove('active');
+            currentMode = '';
+            currentStep = 1;
+            showScreen('home');
+            loadSavedData();
+        }
+
+        function selectMode(mode) {
+            currentMode = mode;
+            if (mode === 'keluarga') {
+                showScreen('submode-keluarga');
+            } else if (mode === 'usaha') {
+                usahaLangsungCount = 0;
+                document.getElementById('usahaFieldsLangsung').innerHTML = '';
+                tambahUsahaLangsung();
+                showScreen('form-usaha');
+            } else if (mode === 'khusus') {
+                showScreen('form-khusus');
+            }
+        }
+
+        function startKeluarga(submode) {
+            anggotaCount = 0;
+            usahaCount = 0;
+            document.getElementById('anggotaList').innerHTML = '';
+            document.getElementById('usahaFields').innerHTML = '';
+            document.getElementById('formKeluarga').reset();
+            currentStep = 1;
+            updateStepIndicator();
+            document.querySelectorAll('#formKeluarga .card').forEach((el, i) => {
+                el.classList.toggle('hidden', i !== 0);
+            });
+            showScreen('form-keluarga');
+        }
+
+        function nextStep(step) {
+            if (!validateStep(currentStep)) return;
+            document.getElementById('step' + currentStep).classList.add('hidden');
+            document.getElementById('step' + step).classList.remove('hidden');
+            currentStep = step;
+            updateStepIndicator();
+            window.scrollTo(0, 0);
+            saveFormState();
+        }
+
+        function prevStep(step) {
+            document.getElementById('step' + currentStep).classList.add('hidden');
+            document.getElementById('step' + step).classList.remove('hidden');
+            currentStep = step;
+            updateStepIndicator();
             window.scrollTo(0, 0);
         }
 
-        function toggleRumah() {
-            const val = document.getElementById('f_rumah').value;
-            document.getElementById('fieldRumahMilik').classList.toggle('show', val === 'Milik');
-            document.getElementById('fieldRumahSewa').classList.toggle('show', val === 'Sewa');
+        function updateStepIndicator() {
+            const dots = document.querySelectorAll('#stepIndicator .step-dot');
+            dots.forEach((dot, i) => {
+                dot.classList.remove('active', 'completed');
+                if (i + 1 < currentStep) dot.classList.add('completed');
+                else if (i + 1 === currentStep) dot.classList.add('active');
+            });
         }
 
-        function hitungLuasTanah() {
-            const p = parseFloat(document.getElementById('f_tanah_panjang').value) || 0;
-            const l = parseFloat(document.getElementById('f_tanah_lebar').value) || 0;
-            document.getElementById('f_tanah_luas').value = (p * l).toFixed(2);
+        function validateStep(step) {
+            const container = document.getElementById('step' + step);
+            const required = container.querySelectorAll('[required]');
+            for (let el of required) {
+                if (!el.value.trim()) {
+                    showToast('⚠️ Mohon lengkapi semua field wajib!');
+                    el.focus();
+                    el.style.borderColor = '#c62828';
+                    setTimeout(() => el.style.borderColor = '', 2000);
+                    return false;
+                }
+            }
+            return true;
         }
 
-        function hitungLuasBangunan() {
-            const p = parseFloat(document.getElementById('f_bangunan_panjang').value) || 0;
-            const l = parseFloat(document.getElementById('f_bangunan_lebar').value) || 0;
-            document.getElementById('f_bangunan_luas').value = (p * l).toFixed(2);
+        // ===== DYNAMIC FIELDS =====
+        function toggleRumahMilik() {
+            const val = document.querySelector('input[name="rumah_milik"]:checked')?.value;
+            document.getElementById('rumahDetail').classList.toggle('hidden', val !== 'Milik');
+            saveFormState();
         }
 
-        // === SUMBER DATA: PRELIST / ASSIGNMENT BARU ===
-        let anggotaCount = 0;
-
-        function selectSumberData(option) {
-            document.getElementById('f_sumber_data').value = option;
-            document.getElementById('btnSumberPrelist').classList.toggle('selected', option === 'prelist');
-            document.getElementById('btnSumberAssignment').classList.toggle('selected', option === 'assignment');
-            document.getElementById('fieldAssignmentBaru').classList.toggle('show', option === 'assignment');
+        function toggleMotor() {
+            const val = parseInt(document.getElementById('jml_motor').value) || 0;
+            document.getElementById('motorDetail').classList.toggle('hidden', val === 0);
+            saveFormState();
         }
 
-        function handleKKUpload(input) {
-            const file = input.files[0];
-            if (!file) return;
-
-            // Show preview
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const img = document.getElementById('previewKK');
-                img.src = e.target.result;
-                img.parentElement.classList.add('has-image');
-
-                // Show loading and start real OCR
-                document.getElementById('ocrLoading').style.display = 'block';
-                document.getElementById('ocrResult').classList.remove('show');
-
-                // Run real Tesseract.js OCR
-                simulateOCRScan();
-            };
-            reader.readAsDataURL(file);
+        function toggleMobil() {
+            const val = parseInt(document.getElementById('jml_mobil').value) || 0;
+            document.getElementById('mobilDetail').classList.toggle('hidden', val === 0);
+            saveFormState();
         }
 
-        // Tesseract.js worker instance
-        let tesseractWorker = null;
-
-        async function initTesseractWorker() {
-            if (!tesseractWorker) {
-                try {
-                    tesseractWorker = await Tesseract.createWorker('ind', 1, {
-                        logger: (m) => {
-                            console.log('Tesseract:', m.status, Math.round(m.progress * 100) + '%');
-                        }
-                    });
-                } catch (err) {
-                    console.error('Gagal init Tesseract:', err);
-                    // Fallback: try English if Indonesian fails
-                    try {
-                        tesseractWorker = await Tesseract.createWorker('eng', 1, {
-                            logger: (m) => {
-                                console.log('Tesseract (eng):', m.status, Math.round(m.progress * 100) + '%');
-                            }
-                        });
-                    } catch (err2) {
-                        console.error('Gagal init Tesseract English juga:', err2);
-                    }
-                }
-            }
-            return tesseractWorker;
+        function toggleUsaha() {
+            const val = document.querySelector('input[name="punya_usaha"]:checked')?.value;
+            document.getElementById('usahaForm').classList.toggle('hidden', val !== 'Ya');
+            if (val === 'Ya' && usahaCount === 0) tambahUsaha();
+            saveFormState();
         }
 
-        async function simulateOCRScan() {
-            const imgElement = document.getElementById('previewKK');
-            if (!imgElement.src || imgElement.src === '') {
-                document.getElementById('ocrLoading').style.display = 'none';
-                alert('Gambar KK tidak ditemukan!');
-                return;
-            }
-
-            try {
-                // Initialize worker
-                const worker = await initTesseractWorker();
-                if (!worker) {
-                    throw new Error('Tesseract worker tidak bisa diinisialisasi');
-                }
-
-                // Run OCR
-                const result = await worker.recognize(imgElement.src);
-                const rawText = result.data.text;
-                console.log('OCR Raw Text:', rawText);
-                console.log('OCR Confidence:', result.data.confidence);
-
-                // Parse KK data from OCR text
-                const parsedData = parseKKData(rawText);
-
-                // Fill form fields
-                document.getElementById('f_no_kk_ocr').value = parsedData.noKK || '';
-                document.getElementById('f_nama_kk_ocr').value = parsedData.namaKK || '';
-                document.getElementById('f_alamat_kk_ocr').value = parsedData.alamat || '';
-                document.getElementById('f_rt_kk_ocr').value = parsedData.rt || '';
-                document.getElementById('f_rw_kk_ocr').value = parsedData.rw || '';
-                document.getElementById('f_kodepos_kk_ocr').value = parsedData.kodePos || '';
-                document.getElementById('f_desa_kk_ocr').value = parsedData.desa || '';
-                document.getElementById('f_kecamatan_kk_ocr').value = parsedData.kecamatan || '';
-                document.getElementById('f_kabupaten_kk_ocr').value = parsedData.kabupaten || '';
-                document.getElementById('f_provinsi_kk_ocr').value = parsedData.provinsi || '';
-                document.getElementById('f_tgl_kk_ocr').value = parsedData.tglDikeluarkan || '';
-
-                // Build anggota keluarga from parsed data
-                document.getElementById('anggotaKeluargaOCR').innerHTML = '';
-                anggotaCount = 0;
-
-                if (parsedData.anggota && parsedData.anggota.length > 0) {
-                    parsedData.anggota.forEach(anggota => {
-                        tambahAnggotaOCR();
-                        const lastRow = document.querySelectorAll('.anggota-row')[document.querySelectorAll('.anggota-row').length - 1];
-                        if (lastRow) {
-                            lastRow.querySelector('.anggota-nik').value = anggota.nik || '';
-                            lastRow.querySelector('.anggota-nama').value = anggota.nama || '';
-                            lastRow.querySelector('.anggota-tempat').value = anggota.tempatLahir || '';
-                            lastRow.querySelector('.anggota-tgl').value = anggota.tglLahir || '';
-                            lastRow.querySelector('.anggota-jk').value = anggota.jenisKelamin || '';
-                            lastRow.querySelector('.anggota-status').value = anggota.status || '';
-                        }
-                    });
-                } else {
-                    // Default 3 empty rows if no anggota detected
-                    tambahAnggotaOCR();
-                    tambahAnggotaOCR();
-                    tambahAnggotaOCR();
-                }
-
-                // Hide loading, show result
-                document.getElementById('ocrLoading').style.display = 'none';
-                document.getElementById('ocrResult').classList.add('show');
-
-                // Also fill the main form fields if empty
-                if (!document.getElementById('f_no_kk').value && parsedData.noKK) {
-                    document.getElementById('f_no_kk').value = parsedData.noKK;
-                }
-                if (!document.getElementById('f_nama_kk').value && parsedData.namaKK) {
-                    document.getElementById('f_nama_kk').value = parsedData.namaKK;
-                }
-
-                alert('Foto KK berhasil discan!\n\nSilakan periksa dan koreksi data hasil OCR di bawah.\nAkurasi: ' + Math.round(result.data.confidence) + '%');
-
-            } catch (error) {
-                console.error('OCR Error:', error);
-                document.getElementById('ocrLoading').style.display = 'none';
-                document.getElementById('ocrResult').classList.add('show');
-
-                // Clear and add default rows
-                document.getElementById('anggotaKeluargaOCR').innerHTML = '';
-                anggotaCount = 0;
-                tambahAnggotaOCR();
-                tambahAnggotaOCR();
-                tambahAnggotaOCR();
-
-                alert('OCR gagal: ' + error.message + '\n\nSilakan isi data KK secara manual.');
-            }
+        function toggleKhususLain() {
+            const val = document.getElementById('bk_jenis').value;
+            document.getElementById('khususLain').classList.toggle('hidden', val !== 'Lainnya');
+            saveFormState();
         }
 
-        // Parser untuk data KK Indonesia
-        function parseKKData(rawText) {
-            const lines = rawText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
-            const data = {
-                noKK: '',
-                namaKK: '',
-                alamat: '',
-                rt: '',
-                rw: '',
-                kodePos: '',
-                desa: '',
-                kecamatan: '',
-                kabupaten: '',
-                provinsi: '',
-                tglDikeluarkan: '',
-                anggota: []
-            };
-
-            // Extract No KK
-            for (let line of lines) {
-                const kkMatch = line.match(/(No\.?\s*KK|Nomor\s*KK|NO\.?\s*KK)[\s:]*([0-9\s]{16,20})/i);
-                if (kkMatch) {
-                    data.noKK = kkMatch[2].replace(/\s/g, '').trim();
-                    break;
-                }
-                // Try plain 16-digit number
-                const plainKK = line.match(/\b([0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})\b/);
-                if (plainKK && !data.noKK) {
-                    data.noKK = plainKK[1].replace(/\s/g, '');
-                }
-            }
-
-            // Extract Nama Kepala Keluarga
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-                if (/kepala\s*keluarga|nama\s*kk/i.test(line)) {
-                    // Check next line or same line after colon
-                    const namaMatch = line.match(/[:;]\s*([A-Za-z\s\.]+)/i);
-                    if (namaMatch) {
-                        data.namaKK = namaMatch[1].trim();
-                    } else if (lines[i + 1] && !/\d/.test(lines[i + 1].substring(0, 2))) {
-                        data.namaKK = lines[i + 1].trim();
-                    }
-                    break;
-                }
-            }
-
-            // Extract Alamat
-            for (let line of lines) {
-                const alamatMatch = line.match(/alamat[\s:]*(.+)/i);
-                if (alamatMatch) {
-                    data.alamat = alamatMatch[1].trim();
-                    break;
-                }
-            }
-
-            // Extract RT/RW
-            for (let line of lines) {
-                const rtRwMatch = line.match(/RT\s*[\/]?\s*RW[\s:]*([0-9]+)[\s\/]+([0-9]+)/i);
-                if (rtRwMatch) {
-                    data.rt = rtRwMatch[1].padStart(3, '0');
-                    data.rw = rtRwMatch[2].padStart(3, '0');
-                    break;
-                }
-                const rtMatch = line.match(/RT[\s:]*([0-9]+)/i);
-                const rwMatch = line.match(/RW[\s:]*([0-9]+)/i);
-                if (rtMatch) data.rt = rtMatch[1].padStart(3, '0');
-                if (rwMatch) data.rw = rwMatch[1].padStart(3, '0');
-            }
-
-            // Extract Kode Pos
-            for (let line of lines) {
-                const kpMatch = line.match(/kode\s*pos[\s:]*([0-9]{5})/i);
-                if (kpMatch) {
-                    data.kodePos = kpMatch[1];
-                    break;
-                }
-            }
-
-            // Extract Wilayah (Desa, Kec, Kab, Prov)
-            for (let line of lines) {
-                if (/desa|kelurahan/i.test(line)) {
-                    const match = line.match(/(desa|kelurahan)[\s:]*(.+)/i);
-                    if (match) data.desa = match[2].trim();
-                }
-                if (/kecamatan/i.test(line)) {
-                    const match = line.match(/kecamatan[\s:]*(.+)/i);
-                    if (match) data.kecamatan = match[2].trim();
-                }
-                if (/kabupaten|kota/i.test(line)) {
-                    const match = line.match(/(kabupaten|kota)[\s:]*(.+)/i);
-                    if (match) data.kabupaten = match[2].trim();
-                }
-                if (/provinsi/i.test(line)) {
-                    const match = line.match(/provinsi[\s:]*(.+)/i);
-                    if (match) data.provinsi = match[2].trim();
-                }
-            }
-
-            // Extract Tanggal Dikeluarkan
-            for (let line of lines) {
-                const tglMatch = line.match(/(tanggal|tgl)[\s:]*([0-9]{1,2})[\s\-/]([0-9]{1,2})[\s\-/]([0-9]{2,4})/i);
-                if (tglMatch) {
-                    const d = tglMatch[2].padStart(2, '0');
-                    const m = tglMatch[3].padStart(2, '0');
-                    let y = tglMatch[4];
-                    if (y.length === 2) y = '20' + y;
-                    data.tglDikeluarkan = `${y}-${m}-${d}`;
-                    break;
-                }
-            }
-
-            // Extract Anggota Keluarga (table rows)
-            // Look for patterns: NIK, Nama, Tempat/Tgl Lahir, Jenis Kelamin, Status
-            data.anggota = extractAnggotaFromLines(lines);
-
-            return data;
-        }
-
-        function extractAnggotaFromLines(lines) {
-            const anggota = [];
-            let inTable = false;
-
-            for (let i = 0; i < lines.length; i++) {
-                const line = lines[i];
-
-                // Detect NIK pattern (16 digits)
-                const nikMatch = line.match(/\b([0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4})\b/);
-                if (nikMatch) {
-                    const nik = nikMatch[1].replace(/\s/g, '');
-                    // Look for name in surrounding lines
-                    let nama = '';
-                    let tempatLahir = '';
-                    let tglLahir = '';
-                    let jenisKelamin = '';
-                    let status = '';
-
-                    // Check next few lines for additional data
-                    for (let j = i + 1; j < Math.min(i + 5, lines.length); j++) {
-                        const nextLine = lines[j];
-                        if (/LAKI|PEREMPUAN|Laki|Perempuan/i.test(nextLine)) {
-                            jenisKelamin = /LAKI|Laki/i.test(nextLine) ? 'Laki-laki' : 'Perempuan';
-                        }
-                        if (/KEPALA|ISTRI|ANAK|CUCU|MENANTU|ORANG\s*TUA|MERTUA/i.test(nextLine)) {
-                            const statusMatch = nextLine.match(/(KEPALA\s*KELUARGA|ISTRI|ANAK|CUCU|MENANTU|ORANG\s*TUA|MERTUA|FAMILI\s*LAIN|PEMBANTU|LAINNYA)/i);
-                            if (statusMatch) {
-                                status = statusMatch[1].replace(/\s+/g, ' ').trim();
-                                status = status.charAt(0).toUpperCase() + status.slice(1).toLowerCase();
-                            }
-                        }
-                        if (/[0-9]{1,2}[\s\-/][0-9]{1,2}[\s\-/][0-9]{4}/.test(nextLine) && !tglLahir) {
-                            const tglMatch = nextLine.match(/([0-9]{1,2})[\s\-/]([0-9]{1,2})[\s\-/]([0-9]{4})/);
-                            if (tglMatch) {
-                                tempatLahir = nextLine.split(/[0-9]{1,2}[\s\-/]/)[0].replace(/[,;]/g, '').trim();
-                                const d = tglMatch[1].padStart(2, '0');
-                                const m = tglMatch[2].padStart(2, '0');
-                                const y = tglMatch[3];
-                                tglLahir = `${y}-${m}-${d}`;
-                            }
-                        }
-                        // Stop if we hit another NIK
-                        if (/\b[0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\s*[0-9]{4}\b/.test(nextLine) && j > i) break;
-                    }
-
-                    // Try to get name from previous line
-                    if (i > 0 && !nama) {
-                        const prevLine = lines[i - 1];
-                        if (prevLine.length > 3 && !/\d{4}/.test(prevLine)) {
-                            nama = prevLine;
-                        }
-                    }
-
-                    anggota.push({
-                        nik: nik,
-                        nama: nama,
-                        tempatLahir: tempatLahir,
-                        tglLahir: tglLahir,
-                        jenisKelamin: jenisKelamin,
-                        status: status
-                    });
-                }
-            }
-
-            return anggota;
-        }
-
-        function tambahAnggotaOCR() {
+        // ===== ANGGOTA KELUARGA =====
+        function tambahAnggota() {
             anggotaCount++;
-            const container = document.getElementById('anggotaKeluargaOCR');
-            const row = document.createElement('div');
-            row.className = 'anggota-row mb-3 p-3';
-            row.style.cssText = 'background:#f8f9fa; border-radius:10px; border:1px solid var(--border-color);';
-            row.id = 'anggota_' + anggotaCount;
-            row.innerHTML = `
-                <div class="d-flex justify-content-between align-items-center mb-2">
-                    <strong style="color:var(--primary-color); font-size:0.9rem;">Anggota #${anggotaCount}</strong>
-                    <button type="button" class="btn btn-sm btn-outline-danger" onclick="hapusAnggotaOCR(${anggotaCount})" style="padding:2px 8px; font-size:0.75rem;">
-                        <i class="bi bi-trash"></i>
-                    </button>
+            const div = document.createElement('div');
+            div.className = 'member-card';
+            div.id = 'anggota_' + anggotaCount;
+            div.innerHTML = `
+                <button type="button" class="remove-btn" onclick="hapusAnggota(${anggotaCount})">×</button>
+                <div class="form-group">
+                    <label>Nama Anggota</label>
+                    <input type="text" class="ag_nama" placeholder="Nama lengkap" oninput="saveFormState()">
                 </div>
-                <div class="row g-2">
-                    <div class="col-12">
-                        <label class="form-label" style="font-size:0.75rem;">NIK</label>
-                        <input type="text" class="form-control form-control-sm anggota-nik" placeholder="16 digit NIK" maxlength="16">
+                <div class="form-group">
+                    <label>Pekerjaan</label>
+                    <input type="text" class="ag_pekerjaan" placeholder="Contoh: Buruh, Pedagang, dll" oninput="saveFormState()">
+                </div>
+                <div class="form-group">
+                    <label>Gaji/Pendapatan per Bulan (Rp)</label>
+                    <input type="text" class="ag_gaji" placeholder="0" oninput="formatRupiah(this); saveFormState()">
+                </div>
+            `;
+            document.getElementById('anggotaList').appendChild(div);
+            saveFormState();
+        }
+
+        function hapusAnggota(id) {
+            document.getElementById('anggota_' + id).remove();
+            saveFormState();
+        }
+
+        // ===== USAHA FORM =====
+        function getUsahaHTML(prefix, id, isLangsung) {
+            return `
+                <div class="member-card" id="${prefix}_${id}">
+                    <button type="button" class="remove-btn" onclick="hapusUsaha('${prefix}', ${id})">×</button>
+                    <div class="form-group">
+                        <label>Nama Usaha</label>
+                        <input type="text" class="u_nama" placeholder="Nama usaha" oninput="saveFormState()">
                     </div>
-                    <div class="col-12">
-                        <label class="form-label" style="font-size:0.75rem;">Nama Lengkap</label>
-                        <input type="text" class="form-control form-control-sm anggota-nama" placeholder="Nama lengkap">
+                    <div class="form-group">
+                        <label>Tahun Usaha Berdiri</label>
+                        <input type="text" class="u_tahun" placeholder="Contoh: 2018" oninput="saveFormState()">
                     </div>
-                    <div class="col-6">
-                        <label class="form-label" style="font-size:0.75rem;">Tempat Lahir</label>
-                        <input type="text" class="form-control form-control-sm anggota-tempat" placeholder="Tempat lahir">
+                    <div class="form-group">
+                        <label>Jenis Usaha</label>
+                        <input type="text" class="u_jenis" placeholder="Contoh: Warung, Bengkel, dll" oninput="saveFormState()">
                     </div>
-                    <div class="col-6">
-                        <label class="form-label" style="font-size:0.75rem;">Tanggal Lahir</label>
-                        <input type="date" class="form-control form-control-sm anggota-tgl">
+                    <div class="form-group">
+                        <label>Produk Utama</label>
+                        <input type="text" class="u_produk" placeholder="Produk/jasa utama" oninput="saveFormState()">
                     </div>
-                    <div class="col-6">
-                        <label class="form-label" style="font-size:0.75rem;">Jenis Kelamin</label>
-                        <select class="form-select form-select-sm anggota-jk">
-                            <option value="" disabled selected>Pilih...</option>
+
+                    <div class="section-title">💰 Perhitungan Otomatis (1 Tahun)</div>
+
+                    <div class="form-group">
+                        <label>Nilai Biaya Produksi</label>
+                        <div class="calc-row">
+                            <input type="text" class="u_biaya_produksi" placeholder="0" oninput="formatRupiah(this); hitungUsaha('${prefix}', ${id}); saveFormState()">
+                            <select class="u_biaya_produksi_periode" onchange="hitungUsaha('${prefix}', ${id}); saveFormState()">
+                                <option value="1">per Hari</option>
+                                <option value="7">per Minggu</option>
+                                <option value="30">per Bulan</option>
+                                <option value="365">per Tahun</option>
+                            </select>
+                        </div>
+                        <div class="calc-result">1 Tahun: <span class="u_biaya_produksi_hasil">Rp 0</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Biaya Operasional</label>
+                        <div class="calc-row">
+                            <input type="text" class="u_biaya_ops" placeholder="0" oninput="formatRupiah(this); hitungUsaha('${prefix}', ${id}); saveFormState()">
+                            <select class="u_biaya_ops_periode" onchange="hitungUsaha('${prefix}', ${id}); saveFormState()">
+                                <option value="1">per Hari</option>
+                                <option value="7">per Minggu</option>
+                                <option value="30">per Bulan</option>
+                                <option value="365">per Tahun</option>
+                            </select>
+                        </div>
+                        <div class="calc-result">1 Tahun: <span class="u_biaya_ops_hasil">Rp 0</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Nilai Barang yang Diproduksi/Modal Belanja</label>
+                        <div class="calc-row">
+                            <input type="text" class="u_modal" placeholder="0" oninput="formatRupiah(this); hitungUsaha('${prefix}', ${id}); saveFormState()">
+                            <select class="u_modal_periode" onchange="hitungUsaha('${prefix}', ${id}); saveFormState()">
+                                <option value="1">per Hari</option>
+                                <option value="7">per Minggu</option>
+                                <option value="30">per Bulan</option>
+                                <option value="365">per Tahun</option>
+                            </select>
+                        </div>
+                        <div class="calc-result">1 Tahun: <span class="u_modal_hasil">Rp 0</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Omset Usaha Bruto</label>
+                        <div class="calc-row">
+                            <input type="text" class="u_omset" placeholder="0" oninput="formatRupiah(this); hitungUsaha('${prefix}', ${id}); saveFormState()">
+                            <select class="u_omset_periode" onchange="hitungUsaha('${prefix}', ${id}); saveFormState()">
+                                <option value="1">per Hari</option>
+                                <option value="7">per Minggu</option>
+                                <option value="30">per Bulan</option>
+                                <option value="365">per Tahun</option>
+                            </select>
+                        </div>
+                        <div class="calc-result">1 Tahun: <span class="u_omset_hasil">Rp 0</span></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Apakah memiliki karyawan/anggota keluarga yang dibayar?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="u_karyawan_${prefix}_${id}" id="uk_${prefix}_${id}_ya" value="Ya" onchange="toggleKaryawan('${prefix}', ${id}); saveFormState()">
+                                <label for="uk_${prefix}_${id}_ya">✅ Ya</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="u_karyawan_${prefix}_${id}" id="uk_${prefix}_${id}_tidak" value="Tidak" onchange="toggleKaryawan('${prefix}', ${id}); saveFormState()">
+                                <label for="uk_${prefix}_${id}_tidak">❌ Tidak</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="karyawan_${prefix}_${id}" class="hidden dynamic-field">
+                        <div class="form-group">
+                            <label>Jumlah Karyawan</label>
+                            <div class="input-group">
+                                <input type="number" class="u_kar_jml" placeholder="Total" min="0" oninput="saveFormState()">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Pria</label>
+                            <input type="number" class="u_kar_pria" placeholder="0" min="0" oninput="saveFormState()">
+                        </div>
+                        <div class="form-group">
+                            <label>Wanita</label>
+                            <input type="number" class="u_kar_wanita" placeholder="0" min="0" oninput="saveFormState()">
+                        </div>
+                        <div class="form-group">
+                            <label>Total Gaji/Upah dalam 1 Tahun (Rp)</label>
+                            <div class="calc-row">
+                                <input type="text" class="u_kar_gaji" placeholder="0" oninput="formatRupiah(this); hitungGajiKaryawan('${prefix}', ${id}); saveFormState()">
+                                <select class="u_kar_gaji_periode" onchange="hitungGajiKaryawan('${prefix}', ${id}); saveFormState()">
+                                    <option value="1">per Hari</option>
+                                    <option value="7">per Minggu</option>
+                                    <option value="30">per Bulan</option>
+                                    <option value="365">per Tahun</option>
+                                </select>
+                            </div>
+                            <div class="calc-result">1 Tahun: <span class="u_kar_gaji_hasil">Rp 0</span></div>
+                        </div>
+                    </div>
+
+                    <div class="section-title">👤 Penanggung Jawab/Pemilik</div>
+                    <div class="form-group">
+                        <label>Nama</label>
+                        <input type="text" class="u_pj_nama" placeholder="Nama penanggung jawab" oninput="saveFormState()">
+                    </div>
+                    <div class="form-group">
+                        <label>Umur</label>
+                        <input type="number" class="u_pj_umur" placeholder="0" min="0" oninput="saveFormState()">
+                    </div>
+                    <div class="form-group">
+                        <label>NIK</label>
+                        <input type="text" class="u_pj_nik" placeholder="16 digit NIK" oninput="saveFormState()">
+                    </div>
+                    <div class="form-group">
+                        <label>Jenis Kelamin</label>
+                        <select class="u_pj_jk" onchange="saveFormState()">
+                            <option value="">-- Pilih --</option>
                             <option value="Laki-laki">Laki-laki</option>
                             <option value="Perempuan">Perempuan</option>
                         </select>
                     </div>
-                    <div class="col-6">
-                        <label class="form-label" style="font-size:0.75rem;">Status Hubungan</label>
-                        <select class="form-select form-select-sm anggota-status">
-                            <option value="" disabled selected>Pilih...</option>
-                            <option value="Kepala Keluarga">Kepala Keluarga</option>
-                            <option value="Istri">Istri</option>
-                            <option value="Anak">Anak</option>
-                            <option value="Menantu">Menantu</option>
-                            <option value="Cucu">Cucu</option>
-                            <option value="Orang Tua">Orang Tua</option>
-                            <option value="Mertua">Mertua</option>
-                            <option value="Famili Lain">Famili Lain</option>
-                            <option value="Pembantu">Pembantu</option>
-                            <option value="Lainnya">Lainnya</option>
-                        </select>
+                    <div class="form-group">
+                        <label>Apakah memiliki NIB?</label>
+                        <div class="radio-group">
+                            <div class="radio-option">
+                                <input type="radio" name="u_nib_${prefix}_${id}" id="un_${prefix}_${id}_ya" value="Ya" onchange="toggleNIB('${prefix}', ${id}); saveFormState()">
+                                <label for="un_${prefix}_${id}_ya">✅ Ya</label>
+                            </div>
+                            <div class="radio-option">
+                                <input type="radio" name="u_nib_${prefix}_${id}" id="un_${prefix}_${id}_tidak" value="Tidak" onchange="toggleNIB('${prefix}', ${id}); saveFormState()">
+                                <label for="un_${prefix}_${id}_tidak">❌ Tidak</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="nib_${prefix}_${id}" class="hidden form-group dynamic-field">
+                        <label>Nomor NIB</label>
+                        <input type="text" class="u_nib_no" placeholder="Nomor NIB" oninput="saveFormState()">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Alamat Usaha (jika beda dengan tempat tinggal)</label>
+                        <textarea class="u_alamat" placeholder="Alamat lengkap usaha..." oninput="saveFormState()"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Nilai Aset Tanah & Bangunan yang Digunakan (Rp)</label>
+                        <input type="text" class="u_aset_tanah" placeholder="0" oninput="formatRupiah(this); saveFormState()">
+                    </div>
+                    <div class="form-group">
+                        <label>Nilai Aset Selain Tanah & Bangunan (Rp)</label>
+                        <input type="text" class="u_aset_lain" placeholder="0" oninput="formatRupiah(this); saveFormState()">
+                    </div>
+                    <div class="form-group">
+                        <label>Nomor HP</label>
+                        <input type="tel" class="u_hp" placeholder="08xxxxxxxxxx" oninput="saveFormState()">
                     </div>
                 </div>
             `;
-            container.appendChild(row);
         }
 
-        function hapusAnggotaOCR(id) {
-            const row = document.getElementById('anggota_' + id);
-            if (row) row.remove();
+        function tambahUsaha() {
+            usahaCount++;
+            const div = document.createElement('div');
+            div.innerHTML = getUsahaHTML('usaha', usahaCount, false);
+            document.getElementById('usahaFields').appendChild(div.firstElementChild);
+            saveFormState();
         }
 
-        function getAnggotaKeluargaData() {
-            const rows = document.querySelectorAll('.anggota-row');
-            let data = [];
-            rows.forEach(row => {
-                const nik = row.querySelector('.anggota-nik').value;
-                const nama = row.querySelector('.anggota-nama').value;
-                const tempat = row.querySelector('.anggota-tempat').value;
-                const tgl = row.querySelector('.anggota-tgl').value;
-                const jk = row.querySelector('.anggota-jk').value;
-                const status = row.querySelector('.anggota-status').value;
-                if (nik || nama) {
-                    data.push({ nik, nama, tempat, tgl, jk, status });
+        function tambahUsahaLangsung() {
+            usahaLangsungCount++;
+            const div = document.createElement('div');
+            div.innerHTML = getUsahaHTML('usahaLangsung', usahaLangsungCount, true);
+            document.getElementById('usahaFieldsLangsung').appendChild(div.firstElementChild);
+            saveFormState();
+        }
+
+        function hapusUsaha(prefix, id) {
+            const el = document.getElementById(prefix + '_' + id);
+            if (el) el.remove();
+            saveFormState();
+        }
+
+        function toggleKaryawan(prefix, id) {
+            const val = document.querySelector(`input[name="u_karyawan_${prefix}_${id}"]:checked`)?.value;
+            document.getElementById('karyawan_' + prefix + '_' + id).classList.toggle('hidden', val !== 'Ya');
+            saveFormState();
+        }
+
+        function toggleNIB(prefix, id) {
+            const val = document.querySelector(`input[name="u_nib_${prefix}_${id}"]:checked`)?.value;
+            document.getElementById('nib_' + prefix + '_' + id).classList.toggle('hidden', val !== 'Ya');
+            saveFormState();
+        }
+
+        // ===== CALCULATIONS =====
+        function hitungUsaha(prefix, id) {
+            const card = document.getElementById(prefix + '_' + id);
+            const fields = ['biaya_produksi', 'biaya_ops', 'modal', 'omset'];
+            fields.forEach(f => {
+                const input = card.querySelector('.u_' + f);
+                const periode = card.querySelector('.u_' + f + '_periode');
+                const hasil = card.querySelector('.u_' + f + '_hasil');
+                if (input && periode && hasil) {
+                    const val = parseRupiah(input.value);
+                    const p = parseInt(periode.value) || 30;
+                    const total = val * (365 / p);
+                    hasil.textContent = formatRupiahStr(total);
                 }
             });
-            return data;
         }
 
-        function selectUsaha(option) {
-            document.getElementById('f_punya_usaha').value = option;
-            document.getElementById('btnUsahaTidak').classList.toggle('selected', option === 'tidak');
-            document.getElementById('btnUsahaYa').classList.toggle('selected', option === 'ya');
-            document.getElementById('fieldUsaha').classList.toggle('show', option === 'ya');
-        }
-
-        function previewImage(input, previewId) {
-            const file = input.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const img = document.getElementById(previewId);
-                    img.src = e.target.result;
-                    img.parentElement.classList.add('has-image');
-                };
-                reader.readAsDataURL(file);
+        function hitungGajiKaryawan(prefix, id) {
+            const card = document.getElementById(prefix + '_' + id);
+            const input = card.querySelector('.u_kar_gaji');
+            const periode = card.querySelector('.u_kar_gaji_periode');
+            const hasil = card.querySelector('.u_kar_gaji_hasil');
+            if (input && periode && hasil) {
+                const val = parseRupiah(input.value);
+                const p = parseInt(periode.value) || 30;
+                const total = val * (365 / p);
+                hasil.textContent = formatRupiahStr(total);
             }
         }
 
-        function getLocation(mode) {
+        // ===== FORMAT RUPIAH =====
+        function formatRupiah(el) {
+            let val = el.value.replace(/[^0-9]/g, '');
+            el.value = formatRupiahStr(parseInt(val) || 0);
+        }
+
+        function formatRupiahStr(num) {
+            return 'Rp ' + num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        function parseRupiah(str) {
+            return parseInt((str || '').replace(/[^0-9]/g, '')) || 0;
+        }
+
+        // ===== GPS =====
+        function getGPS(mode) {
             if (!navigator.geolocation) {
-                alert('Browser tidak mendukung geolokasi. Silakan aktifkan GPS.');
+                showToast('❌ GPS tidak didukung di perangkat ini');
                 return;
             }
-
-            const btn = event.target;
-            const originalText = btn.innerHTML;
-            btn.innerHTML = '<i class="bi bi-arrow-repeat spin me-2"></i>Mengambil lokasi...';
-            btn.disabled = true;
-
+            showToast('📍 Mengambil lokasi...');
             navigator.geolocation.getCurrentPosition(
-                function(position) {
-                    const lat = position.coords.latitude;
-                    const long = position.coords.longitude;
-
-                    if (mode === 'family') {
-                        document.getElementById('f_lat').value = lat;
-                        document.getElementById('f_long').value = long;
-                        document.getElementById('coordFamilyText').textContent = lat + ', ' + long;
-                        document.getElementById('coordFamily').style.display = 'block';
-                    } else {
-                        document.getElementById('b_lat').value = lat;
-                        document.getElementById('b_long').value = long;
-                        document.getElementById('coordBusinessText').textContent = lat + ', ' + long;
-                        document.getElementById('coordBusiness').style.display = 'block';
-                    }
-
-                    btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i>Lokasi Berhasil Diambil';
-                    btn.classList.remove('btn-outline-primary');
-                    btn.classList.add('btn-success');
-                    setTimeout(() => {
-                        btn.innerHTML = originalText;
-                        btn.disabled = false;
-                        btn.classList.remove('btn-success');
-                        btn.classList.add('btn-outline-primary');
-                    }, 2000);
+                (pos) => {
+                    const lat = pos.coords.latitude.toFixed(6);
+                    const lon = pos.coords.longitude.toFixed(6);
+                    const url = `https://maps.google.com/?q=${lat},${lon}`;
+                    document.getElementById('gps_lat_' + mode).value = lat;
+                    document.getElementById('gps_lon_' + mode).value = lon;
+                    document.getElementById('gps_url_' + mode).value = url;
+                    const display = document.getElementById('gpsDisplay_' + mode);
+                    display.innerHTML = `<strong>✅ Lokasi Tertag:</strong><br>Lat: ${lat}<br>Lon: ${lon}<br><a href="${url}" target="_blank" style="color:#1976d2;">📍 Buka di Maps</a>`;
+                    display.classList.remove('hidden');
+                    showToast('✅ Lokasi berhasil diambil!');
+                    saveFormState();
                 },
-                function(error) {
-                    let msg = 'Gagal mengambil lokasi. ';
-                    switch(error.code) {
-                        case error.PERMISSION_DENIED:
-                            msg += 'Izin lokasi ditolak. Harap aktifkan izin GPS di pengaturan browser.';
-                            break;
-                        case error.POSITION_UNAVAILABLE:
-                            msg += 'Informasi lokasi tidak tersedia.';
-                            break;
-                        case error.TIMEOUT:
-                            msg += 'Waktu pengambilan lokasi habis.';
-                            break;
-                        default:
-                            msg += 'Error tidak diketahui.';
-                    }
-                    alert(msg);
-                    btn.innerHTML = originalText;
-                    btn.disabled = false;
+                (err) => {
+                    showToast('❌ Gagal mengambil lokasi: ' + err.message);
                 },
-                { enableHighAccuracy: true, timeout: 10000, maximumAge: 0 }
+                { enableHighAccuracy: true, timeout: 15000, maximumAge: 0 }
             );
         }
 
-        function formatRupiah(angka) {
-            if (!angka) return '0';
-            return 'Rp ' + parseInt(angka).toLocaleString('id-ID');
-        }
+        // ===== SAVE DATA =====
+        function saveData(mode) {
+            let data = {};
+            data.mode = mode;
+            data.timestamp = new Date().toLocaleString('id-ID');
+            data.id = Date.now();
 
-        function submitFamily(e) {
-            e.preventDefault();
-
-            const lat = document.getElementById('f_lat').value;
-            const long = document.getElementById('f_long').value;
-
-            if (!lat || !long) {
-                alert('Lokasi belum diambil! Harap klik "Ambil Lokasi Realtime" terlebih dahulu.');
-                return false;
-            }
-
-            const punyaUsaha = document.getElementById('f_punya_usaha').value;
-            if (!punyaUsaha) {
-                alert('Harap pilih opsi usaha keluarga (Ya/Tidak)!');
-                return false;
-            }
-
-            let text = `*SENSUS EKONOMI 2026 - MODE KELUARGA*
-`;
-            text += `================================
-
-`;
-            text += `*DATA DASAR*
-`;
-            text += `No. Urut Bangunan: ${document.getElementById('f_no_bangunan').value}
-`;
-            text += `No. Urut Keluarga: ${document.getElementById('f_no_keluarga').value}
-`;
-            text += `Nama KK: ${document.getElementById('f_nama_kk').value}
-`;
-            text += `No. KK: ${document.getElementById('f_no_kk').value}
-`;
-            text += `Sumber Data: ${document.getElementById('f_sumber_data').value || '-'}
-
-`;
-
-            // === DATA OCR (jika Assignment Baru) ===
-            const sumberData = document.getElementById('f_sumber_data').value;
-            if (sumberData === 'assignment') {
-                text += `*DATA KARTU KELUARGA (OCR)*
-`;
-                text += `No. KK (OCR): ${document.getElementById('f_no_kk_ocr').value || '-'}
-`;
-                text += `Nama KK (OCR): ${document.getElementById('f_nama_kk_ocr').value || '-'}
-`;
-                text += `Alamat: ${document.getElementById('f_alamat_kk_ocr').value || '-'}
-`;
-                text += `RT/RW: ${document.getElementById('f_rt_kk_ocr').value || '-'} / ${document.getElementById('f_rw_kk_ocr').value || '-'}
-`;
-                text += `Kode Pos: ${document.getElementById('f_kodepos_kk_ocr').value || '-'}
-`;
-                text += `Desa/Kel: ${document.getElementById('f_desa_kk_ocr').value || '-'}
-`;
-                text += `Kecamatan: ${document.getElementById('f_kecamatan_kk_ocr').value || '-'}
-`;
-                text += `Kabupaten/Kota: ${document.getElementById('f_kabupaten_kk_ocr').value || '-'}
-`;
-                text += `Provinsi: ${document.getElementById('f_provinsi_kk_ocr').value || '-'}
-`;
-                text += `Tgl Dikeluarkan: ${document.getElementById('f_tgl_kk_ocr').value || '-'}
-
-`;
-
-                // Anggota keluarga dari OCR
-                const anggota = getAnggotaKeluargaData();
-                if (anggota.length > 0) {
-                    text += `*ANGGOTA KELUARGA (OCR)*
-`;
-                    anggota.forEach((a, i) => {
-                        text += `[${i+1}] ${a.nama || '-'} | NIK: ${a.nik || '-'} | ${a.jk || '-'} | ${a.status || '-'} | ${a.tempat || ''}${a.tgl ? ', ' + a.tgl : ''}
-`;
+            if (mode === 'keluarga') {
+                if (!validateStep(currentStep)) return;
+                data.kk_no = document.getElementById('kk_no').value;
+                data.kk_nama = document.getElementById('kk_nama').value;
+                data.no_urut_bangunan = document.getElementById('no_urut_bangunan').value;
+                data.no_urut_keluarga = document.getElementById('no_urut_keluarga').value;
+                data.kk_pekerjaan = document.getElementById('kk_pekerjaan').value;
+                data.kk_gaji = document.getElementById('kk_gaji').value;
+                data.anggota = [];
+                document.querySelectorAll('#anggotaList .member-card').forEach(card => {
+                    data.anggota.push({
+                        nama: card.querySelector('.ag_nama')?.value || '',
+                        pekerjaan: card.querySelector('.ag_pekerjaan')?.value || '',
+                        gaji: card.querySelector('.ag_gaji')?.value || ''
                     });
-                    text += `
-`;
+                });
+                data.peng_makanan = document.getElementById('peng_makanan').value;
+                data.peng_nonmakanan = document.getElementById('peng_nonmakanan').value;
+                data.peng_tahunan = document.getElementById('peng_tahunan').value;
+                data.peng_listrik = document.getElementById('peng_listrik').value;
+                data.id_pln = document.getElementById('id_pln').value;
+                data.peng_internet = document.getElementById('peng_internet').value;
+                data.rumah_milik = document.querySelector('input[name="rumah_milik"]:checked')?.value || '';
+                data.rumah_nilai = document.getElementById('rumah_nilai').value;
+                data.rumah_surat = document.getElementById('rumah_surat').value;
+                data.jml_motor = document.getElementById('jml_motor').value;
+                data.motor_nilai = document.getElementById('motor_nilai').value;
+                data.jml_mobil = document.getElementById('jml_mobil').value;
+                data.mobil_nilai = document.getElementById('mobil_nilai').value;
+                data.jml_ac = document.getElementById('jml_ac').value;
+                data.jml_kulkas = document.getElementById('jml_kulkas').value;
+                data.punya_usaha = document.querySelector('input[name="punya_usaha"]:checked')?.value || '';
+                data.usaha = collectUsahaData('usaha');
+                data.gps_lat = document.getElementById('gps_lat_keluarga').value;
+                data.gps_lon = document.getElementById('gps_lon_keluarga').value;
+                data.gps_url = document.getElementById('gps_url_keluarga').value;
+                data.catatan = document.getElementById('catatan_keluarga').value;
+            } else if (mode === 'usaha') {
+                data.no_bangunan = document.getElementById('ub_no_bangunan').value;
+                data.usaha = collectUsahaData('usahaLangsung');
+                data.gps_lat = document.getElementById('gps_lat_usaha').value;
+                data.gps_lon = document.getElementById('gps_lon_usaha').value;
+                data.gps_url = document.getElementById('gps_url_usaha').value;
+                data.catatan = document.getElementById('catatan_usaha').value;
+            } else if (mode === 'khusus') {
+                data.no_bangunan = document.getElementById('bk_no_bangunan').value;
+                data.jenis = document.getElementById('bk_jenis').value;
+                data.jenis_lain = document.getElementById('bk_jenis_lain').value;
+                data.nama = document.getElementById('bk_nama').value;
+                data.gps_lat = document.getElementById('gps_lat_khusus').value;
+                data.gps_lon = document.getElementById('gps_lon_khusus').value;
+                data.gps_url = document.getElementById('gps_url_khusus').value;
+                data.catatan = document.getElementById('catatan_khusus').value;
+            }
+
+            let saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            saved.push(data);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+            clearFormState();
+            showToast('✅ Data berhasil disimpan!');
+            goHome();
+        }
+
+        function collectUsahaData(prefix) {
+            const usahaList = [];
+            document.querySelectorAll(`[id^="${prefix}_"]`).forEach(card => {
+                const u = {};
+                u.nama = card.querySelector('.u_nama')?.value || '';
+                u.tahun = card.querySelector('.u_tahun')?.value || '';
+                u.jenis = card.querySelector('.u_jenis')?.value || '';
+                u.produk = card.querySelector('.u_produk')?.value || '';
+                u.biaya_produksi = card.querySelector('.u_biaya_produksi')?.value || '';
+                u.biaya_produksi_hasil = card.querySelector('.u_biaya_produksi_hasil')?.textContent || '';
+                u.biaya_ops = card.querySelector('.u_biaya_ops')?.value || '';
+                u.biaya_ops_hasil = card.querySelector('.u_biaya_ops_hasil')?.textContent || '';
+                u.modal = card.querySelector('.u_modal')?.value || '';
+                u.modal_hasil = card.querySelector('.u_modal_hasil')?.textContent || '';
+                u.omset = card.querySelector('.u_omset')?.value || '';
+                u.omset_hasil = card.querySelector('.u_omset_hasil')?.textContent || '';
+                u.punya_karyawan = card.querySelector('input[type="radio"]:checked')?.value || '';
+                u.kar_jml = card.querySelector('.u_kar_jml')?.value || '';
+                u.kar_pria = card.querySelector('.u_kar_pria')?.value || '';
+                u.kar_wanita = card.querySelector('.u_kar_wanita')?.value || '';
+                u.kar_gaji = card.querySelector('.u_kar_gaji')?.value || '';
+                u.kar_gaji_hasil = card.querySelector('.u_kar_gaji_hasil')?.textContent || '';
+                u.pj_nama = card.querySelector('.u_pj_nama')?.value || '';
+                u.pj_umur = card.querySelector('.u_pj_umur')?.value || '';
+                u.pj_nik = card.querySelector('.u_pj_nik')?.value || '';
+                u.pj_jk = card.querySelector('.u_pj_jk')?.value || '';
+                u.nib = card.querySelector('.u_nib_no')?.value || '';
+                u.alamat = card.querySelector('.u_alamat')?.value || '';
+                u.aset_tanah = card.querySelector('.u_aset_tanah')?.value || '';
+                u.aset_lain = card.querySelector('.u_aset_lain')?.value || '';
+                u.hp = card.querySelector('.u_hp')?.value || '';
+                usahaList.push(u);
+            });
+            return usahaList;
+        }
+
+        // ===== LOAD SAVED DATA =====
+        function loadSavedData() {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const count = saved.length;
+            document.getElementById('savedCount').textContent = count;
+            const list = document.getElementById('savedDataList');
+
+            if (count === 0) {
+                list.innerHTML = `
+                    <div class="empty-state">
+                        <div class="icon">📭</div>
+                        <p>Belum ada data tersimpan</p>
+                    </div>`;
+                return;
+            }
+
+            list.innerHTML = '';
+            saved.forEach((item, idx) => {
+                let title = '', subtitle = '', badge = '';
+                if (item.mode === 'keluarga') {
+                    title = '🏠 ' + (item.kk_nama || 'Keluarga');
+                    subtitle = 'KK: ' + (item.kk_no || '-') + ' | No.Bang: ' + (item.no_urut_bangunan || '-');
+                    badge = '<span class="badge badge-orange">Keluarga</span>';
+                } else if (item.mode === 'usaha') {
+                    const u = item.usaha?.[0];
+                    title = '🏭 ' + (u?.nama || 'Usaha');
+                    subtitle = 'No.Bang: ' + (item.no_bangunan || '-');
+                    badge = '<span class="badge badge-green">Usaha</span>';
+                } else {
+                    title = '🏢 ' + (item.nama || item.jenis || 'Bangunan Khusus');
+                    subtitle = 'No.Bang: ' + (item.no_bangunan || '-');
+                    badge = '<span class="badge badge-blue">Khusus</span>';
                 }
-            }
 
-            text += `*PEKERJAAN & PENGHASILAN*
-`;
-            text += `Pekerjaan KK: ${document.getElementById('f_pekerjaan_kk').value || '-'}
-`;
-            text += `Pekerjaan Istri/Anggota: ${document.getElementById('f_pekerjaan_istri').value || '-'}
-`;
-            text += `Penghasilan KK/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_kk').value)}
-`;
-            text += `Penghasilan Anggota/Bulan: ${formatRupiah(document.getElementById('f_penghasilan_anggota').value)}
-
-`;
-
-            text += `*KEPEMILIKAN ASET*
-`;
-            const rumah = document.getElementById('f_rumah').value;
-            text += `Rumah: ${rumah || '-'}
-`;
-            if (rumah === 'Milik') {
-                text += `  Jenis Surat: ${document.getElementById('f_jenis_surat').value || '-'}
-`;
-            } else if (rumah === 'Sewa') {
-                text += `  Sewa/Bulan: ${formatRupiah(document.getElementById('f_sewa_bulan').value)}
-`;
-            }
-            text += `Luas Tanah: ${document.getElementById('f_tanah_luas').value || 0} m² (P:${document.getElementById('f_tanah_panjang').value || 0}m x L:${document.getElementById('f_tanah_lebar').value || 0}m)
-`;
-            text += `Luas Bangunan: ${document.getElementById('f_bangunan_luas').value || 0} m² (P:${document.getElementById('f_bangunan_panjang').value || 0}m x L:${document.getElementById('f_bangunan_lebar').value || 0}m)
-`;
-            text += `Sepeda Motor: ${document.getElementById('f_motor').value || 0} unit | Nilai: ${document.getElementById('f_motor_harga').value || '-'}
-`;
-            text += `Mobil: ${document.getElementById('f_mobil').value || 0} unit | Perkiraan Harga: ${formatRupiah(document.getElementById('f_mobil_harga').value)}
-`;
-            text += `Kulkas: ${document.getElementById('f_kulkas').value || 0} unit
-`;
-            text += `AC: ${document.getElementById('f_ac').value || 0} unit
-
-`;
-
-            text += `*PENGELUARAN*
-`;
-            text += `Listrik/Bulan: ${formatRupiah(document.getElementById('f_listrik').value)}
-`;
-            text += `Nomor Meter PLN: ${document.getElementById('f_no_meter_pln').value || '-'}
-`;
-            text += `Daya Meter: ${document.getElementById('f_daya_meter').value ? document.getElementById('f_daya_meter').value + ' VA' : '-'}
-`;
-
-            text += `WiFi/Internet/Bulan: ${formatRupiah(document.getElementById('f_internet').value)}
-`;
-            text += `Pengeluaran Rutin/Tahun: ${formatRupiah(document.getElementById('f_pengeluaran_tahun').value)}
-
-`;
-
-            text += `*PENDIDIKAN*
-`;
-            text += `KK: ${document.getElementById('f_pendidikan_kk').value || '-'}
-`;
-            text += `Istri: ${document.getElementById('f_pendidikan_istri').value || '-'}
-`;
-            text += `Anak 1: ${document.getElementById('f_pendidikan_anak1').value || '-'}
-`;
-            text += `Anak 2: ${document.getElementById('f_pendidikan_anak2').value || '-'}
-`;
-            text += `Anak 3: ${document.getElementById('f_pendidikan_anak3').value || '-'}
-`;
-            text += `Anak 4: ${document.getElementById('f_pendidikan_anak4').value || '-'}
-`;
-            text += `Anak 5: ${document.getElementById('f_pendidikan_anak5').value || '-'}
-
-`;
-
-            text += `*USAHA KELUARGA*
-`;
-            text += `Memiliki Usaha: ${punyaUsaha.toUpperCase()}
-`;
-            if (punyaUsaha === 'ya') {
-                text += `Nama Usaha: ${document.getElementById('f_nama_usaha').value || '-'}
-`;
-                text += `Jenis Usaha: ${document.getElementById('f_jenis_usaha').value || '-'}
-`;
-                text += `Tahun Mulai: ${document.getElementById('f_tahun_usaha').value || '-'}
-`;
-                text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('f_biaya_produksi').value)}
-`;
-                text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('f_biaya_operasional').value)}
-`;
-                text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('f_nilai_produksi').value)}
-`;
-                text += `Jumlah Pekerja: ${document.getElementById('f_pekerja_total').value || 0}
-`;
-                text += `Pekerja Wanita: ${document.getElementById('f_pekerja_wanita').value || 0}
-`;
-                text += `Pekerja Pria: ${document.getElementById('f_pekerja_pria').value || 0}
-`;
-                text += `Pekerja Digaji: ${document.getElementById('f_pekerja_gaji').value || 0}
-`;
-                text += `Pemilik: ${document.getElementById('f_pemilik_usaha').value || '-'}
-`;
-                text += `Lokasi Usaha: ${document.getElementById('f_lokasi_usaha').value || '-'}
-`;
-            }
-            text += `
-`;
-
-            text += `*LOKASI*
-`;
-            text += `Koordinat: ${lat}, ${long}
-`;
-            text += `Maps: https://maps.google.com/?q=${lat},${long}
-
-`;
-            text += `*DOKUMENTASI*
-`;
-            text += `Foto KK: ${document.getElementById('f_foto_kk').files.length > 0 ? '✓ Dilampirkan' : '-'}
-`;
-            text += `Foto Rumah Depan: ${document.getElementById('f_foto_rumah').files.length > 0 ? '✓ Dilampirkan' : '-'}
-`;
-            text += `Foto Ruang Tamu: ${document.getElementById('f_foto_ruang').files.length > 0 ? '✓ Dilampirkan' : '-'}
-
-`;
-            text += `================================
-`;
-            text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
-
-            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(waUrl,"_blank");
-            return false;
+                const div = document.createElement('div');
+                div.className = 'data-item';
+                div.innerHTML = `
+                    <div class="data-item-info">
+                        <div class="title">${title} ${badge}</div>
+                        <div class="subtitle">${subtitle} | ${item.timestamp}</div>
+                    </div>
+                    <div class="data-item-actions">
+                        <button class="btn-send" onclick="sendToWA(${idx})">📤</button>
+                        <button class="btn-delete" onclick="deleteData(${idx})">🗑️</button>
+                    </div>
+                `;
+                list.appendChild(div);
+            });
         }
 
-function submitBusiness(e) {
-            e.preventDefault();
-
-            const lat = document.getElementById('b_lat').value;
-            const long = document.getElementById('b_long').value;
-
-            if (!lat || !long) {
-                alert('Lokasi belum diambil! Harap klik "Ambil Lokasi Realtime" terlebih dahulu.');
-                return false;
-            }
-
-            let text = `*SENSUS EKONOMI 2026 - MODE BANGUNAN USAHA*\n`;
-            text += `================================\n\n`;
-            text += `*DATA BANGUNAN & USAHA*\n`;
-            text += `No. Urut Bangunan: ${document.getElementById('b_no_bangunan').value}\n`;
-            text += `Nama Usaha: ${document.getElementById('b_nama_usaha').value}\n`;
-            text += `Jenis Usaha: ${document.getElementById('b_jenis_usaha').value}\n`;
-            text += `Tahun Mulai: ${document.getElementById('b_tahun_usaha').value}\n`;
-            text += `Biaya Produksi/Tahun: ${formatRupiah(document.getElementById('b_biaya_produksi').value)}\n`;
-            text += `Biaya Operasional/Tahun: ${formatRupiah(document.getElementById('b_biaya_operasional').value)}\n`;
-            text += `Nilai Produksi/Tahun: ${formatRupiah(document.getElementById('b_nilai_produksi').value)}\n`;
-            text += `Jumlah Pekerja: ${document.getElementById('b_pekerja_total').value}\n`;
-            text += `Pekerja Wanita: ${document.getElementById('b_pekerja_wanita').value || 0}\n`;
-            text += `Pekerja Pria: ${document.getElementById('b_pekerja_pria').value || 0}\n`;
-            text += `Pekerja Digaji: ${document.getElementById('b_pekerja_gaji').value || 0}\n`;
-            text += `Penanggung Jawab: ${document.getElementById('b_pemilik').value}\n`;
-            text += `NIK: ${document.getElementById('b_nik').value}\n`;
-            text += `Umur: ${document.getElementById('b_umur').value} tahun\n`;
-            text += `Lokasi Usaha: ${document.getElementById('b_lokasi').value || '-'}\n\n`;
-
-            text += `*LOKASI*\n`;
-            text += `Koordinat: ${lat}, ${long}\n`;
-            text += `Maps: https://maps.google.com/?q=${lat},${long}\n\n`;
-            text += `*Dokumentasi:*\n`;
-            text += `[Foto Bangunan Depan, Interior Usaha dilampirkan]\n\n`;
-            text += `================================\n`;
-            text += `_Terima kasih telah berpartisipasi dalam Sensus Ekonomi 2026_`;
-
-            const waUrl = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
-            window.open(waUrl,"_blank");
-            return false;
+        // ===== DELETE DATA =====
+        function deleteData(idx) {
+            if (!confirm('Yakin ingin menghapus data ini?')) return;
+            let saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            saved.splice(idx, 1);
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+            loadSavedData();
+            showToast('🗑️ Data dihapus');
         }
 
-        // Progress bar simulation
-        document.querySelectorAll('input, select').forEach(input => {
-            input.addEventListener('change', updateProgress);
-            input.addEventListener('input', updateProgress);
-        });
+        // ===== SEND TO WHATSAPP =====
+        function sendToWA(idx) {
+            const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+            const item = saved[idx];
+            if (!item) return;
 
-        function updateProgress() {
-            // Simple progress update logic can be added here
+            let msg = '';
+            msg += '═══════════════════════\n';
+            msg += '📊 *SENSUS EKONOMI 2026*\n';
+            msg += '🏘️ *DESA SUKADAMAI*\n';
+            msg += '═══════════════════════\n\n';
+
+            if (item.mode === 'keluarga') {
+                msg += '🏠 *MODE: DATA KELUARGA*\n';
+                msg += '─────────────────────\n';
+                msg += `📋 No.KK: ${item.kk_no || '-'}\n`;
+                msg += `👤 Kepala Keluarga: ${item.kk_nama || '-'}\n`;
+                msg += `🏠 No.Urut Bangunan: ${item.no_urut_bangunan || '-'}\n`;
+                msg += `👪 No.Urut Keluarga: ${item.no_urut_keluarga || '-'}\n`;
+                msg += `💼 Pekerjaan KK: ${item.kk_pekerjaan || '-'}\n`;
+                msg += `💰 Gaji KK: ${item.kk_gaji || '-'}\n\n`;
+
+                if (item.anggota && item.anggota.length > 0) {
+                    msg += '👥 *ANGGOTA KELUARGA BEKERJA:*\n';
+                    item.anggota.forEach((a, i) => {
+                        msg += `${i+1}. ${a.nama} - ${a.pekerjaan} (${a.gaji})\n`;
+                    });
+                    msg += '\n';
+                }
+
+                msg += '💰 *PENGELUARAN KELUARGA:*\n';
+                msg += `🍚 Makanan (7 hari): ${item.peng_makanan || '-'}\n`;
+                msg += `📦 Non-Makanan (30 hari): ${item.peng_nonmakanan || '-'}\n`;
+                msg += `🎁 Khusus Tahunan: ${item.peng_tahunan || '-'}\n`;
+                msg += `⚡ Listrik/Bulan: ${item.peng_listrik || '-'}\n`;
+                msg += `🔌 ID PLN: ${item.id_pln || '-'}\n`;
+                msg += `📶 WiFi/Data/Bulan: ${item.peng_internet || '-'}\n\n`;
+
+                msg += '🏠 *ASET RUMAH:*\n';
+                msg += `Status: ${item.rumah_milik || '-'}\n`;
+                if (item.rumah_milik === 'Milik') {
+                    msg += `Nilai Rumah: ${item.rumah_nilai || '-'}\n`;
+                    msg += `Surat: ${item.rumah_surat || '-'}\n`;
+                }
+                msg += `🛵 Motor: ${item.jml_motor || '0'} unit (${item.motor_nilai || '-'} )\n`;
+                msg += `🚗 Mobil: ${item.jml_mobil || '0'} unit (${item.mobil_nilai || '-'} )\n`;
+                msg += `❄️ AC: ${item.jml_ac || '0'} unit\n`;
+                msg += `🧊 Kulkas: ${item.jml_kulkas || '0'} unit\n\n`;
+
+                msg += `🏪 Punya Usaha: ${item.punya_usaha || '-'}\n`;
+                if (item.punya_usaha === 'Ya' && item.usaha) {
+                    item.usaha.forEach((u, i) => {
+                        msg += `\n📌 *USAHA ${i+1}:*\n`;
+                        msg += formatUsaha(u);
+                    });
+                }
+            } else if (item.mode === 'usaha') {
+                msg += '🏭 *MODE: BANGUNAN KHUSUS USAHA*\n';
+                msg += '─────────────────────\n';
+                msg += `🏠 No.Urut Bangunan: ${item.no_bangunan || '-'}\n\n`;
+                if (item.usaha) {
+                    item.usaha.forEach((u, i) => {
+                        msg += `📌 *USAHA ${i+1}:*\n`;
+                        msg += formatUsaha(u);
+                    });
+                }
+            } else if (item.mode === 'khusus') {
+                msg += '🏢 *MODE: BANGUNAN KHUSUS*\n';
+                msg += '─────────────────────\n';
+                msg += `🏠 No.Urut Bangunan: ${item.no_bangunan || '-'}\n`;
+                msg += `Jenis: ${item.jenis || '-'}\n`;
+                if (item.jenis === 'Lainnya') msg += `Lainnya: ${item.jenis_lain || '-'}\n`;
+                msg += `Nama: ${item.nama || '-'}\n`;
+            }
+
+            msg += '\n📍 *LOKASI GPS:*\n';
+            msg += `Lat: ${item.gps_lat || '-'}\n`;
+            msg += `Lon: ${item.gps_lon || '-'}\n`;
+            if (item.gps_url) msg += `🗺️ Maps: ${item.gps_url}\n`;
+
+            if (item.catatan) msg += `\n📝 Catatan: ${item.catatan}\n`;
+            msg += `\n⏰ ${item.timestamp}`;
+
+            const waUrl = `https://wa.me/${WA_NUMBER}?text=` + encodeURIComponent(msg);
+            window.open(waUrl, '_blank');
+
+            // Hapus data setelah kirim
+            setTimeout(() => {
+                let saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+                saved.splice(idx, 1);
+                localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+                loadSavedData();
+                showToast('✅ Data terkirim & dihapus dari daftar');
+            }, 3000);
+        }
+
+        function formatUsaha(u) {
+            let s = '';
+            s += `Nama: ${u.nama || '-'}\n`;
+            s += `Berdiri: ${u.tahun || '-'}\n`;
+            s += `Jenis: ${u.jenis || '-'}\n`;
+            s += `Produk: ${u.produk || '-'}\n`;
+            s += `💰 Biaya Produksi: ${u.biaya_produksi || '-'} (${u.biaya_produksi_hasil || '-'} )\n`;
+            s += `💰 Biaya Operasional: ${u.biaya_ops || '-'} (${u.biaya_ops_hasil || '-'} )\n`;
+            s += `💰 Modal Belanja: ${u.modal || '-'} (${u.modal_hasil || '-'} )\n`;
+            s += `💰 Omset Bruto: ${u.omset || '-'} (${u.omset_hasil || '-'} )\n`;
+            s += `👥 Karyawan: ${u.punya_karyawan || '-'}\n`;
+            if (u.punya_karyawan === 'Ya') {
+                s += `  Total: ${u.kar_jml || '-'} (Pria: ${u.kar_pria || '-'}, Wanita: ${u.kar_wanita || '-'})\n`;
+                s += `  Gaji/Thn: ${u.kar_gaji || '-'} (${u.kar_gaji_hasil || '-'} )\n`;
+            }
+            s += `👤 PJ: ${u.pj_nama || '-'} (${u.pj_umur || '-'} th, ${u.pj_jk || '-'})\n`;
+            s += `🆔 NIK PJ: ${u.pj_nik || '-'}\n`;
+            s += `📋 NIB: ${u.nib || 'Tidak'}\n`;
+            s += `📍 Alamat: ${u.alamat || '-'}\n`;
+            s += `🏠 Aset Tanah: ${u.aset_tanah || '-'}\n`;
+            s += `🏭 Aset Lain: ${u.aset_lain || '-'}\n`;
+            s += `📱 HP: ${u.hp || '-'}\n`;
+            return s;
+        }
+
+        // ===== FORM STATE (Auto-save) =====
+        function saveFormState() {
+            const state = {
+                currentMode: currentMode,
+                currentStep: currentStep,
+                anggotaCount: anggotaCount,
+                usahaCount: usahaCount,
+                usahaLangsungCount: usahaLangsungCount,
+                // Form values
+                kk_no: document.getElementById('kk_no')?.value || '',
+                kk_nama: document.getElementById('kk_nama')?.value || '',
+                no_urut_bangunan: document.getElementById('no_urut_bangunan')?.value || '',
+                no_urut_keluarga: document.getElementById('no_urut_keluarga')?.value || '',
+                kk_pekerjaan: document.getElementById('kk_pekerjaan')?.value || '',
+                kk_gaji: document.getElementById('kk_gaji')?.value || '',
+                peng_makanan: document.getElementById('peng_makanan')?.value || '',
+                peng_nonmakanan: document.getElementById('peng_nonmakanan')?.value || '',
+                peng_tahunan: document.getElementById('peng_tahunan')?.value || '',
+                peng_listrik: document.getElementById('peng_listrik')?.value || '',
+                id_pln: document.getElementById('id_pln')?.value || '',
+                peng_internet: document.getElementById('peng_internet')?.value || '',
+                rumah_nilai: document.getElementById('rumah_nilai')?.value || '',
+                rumah_surat: document.getElementById('rumah_surat')?.value || '',
+                jml_motor: document.getElementById('jml_motor')?.value || '',
+                motor_nilai: document.getElementById('motor_nilai')?.value || '',
+                jml_mobil: document.getElementById('jml_mobil')?.value || '',
+                mobil_nilai: document.getElementById('mobil_nilai')?.value || '',
+                jml_ac: document.getElementById('jml_ac')?.value || '',
+                jml_kulkas: document.getElementById('jml_kulkas')?.value || '',
+                catatan_keluarga: document.getElementById('catatan_keluarga')?.value || '',
+                catatan_usaha: document.getElementById('catatan_usaha')?.value || '',
+                catatan_khusus: document.getElementById('catatan_khusus')?.value || '',
+                ub_no_bangunan: document.getElementById('ub_no_bangunan')?.value || '',
+                bk_no_bangunan: document.getElementById('bk_no_bangunan')?.value || '',
+                bk_jenis: document.getElementById('bk_jenis')?.value || '',
+                bk_jenis_lain: document.getElementById('bk_jenis_lain')?.value || '',
+                bk_nama: document.getElementById('bk_nama')?.value || '',
+                // Radio values
+                rumah_milik: document.querySelector('input[name="rumah_milik"]:checked')?.value || '',
+                punya_usaha: document.querySelector('input[name="punya_usaha"]:checked')?.value || '',
+                // GPS
+                gps_lat_keluarga: document.getElementById('gps_lat_keluarga')?.value || '',
+                gps_lon_keluarga: document.getElementById('gps_lon_keluarga')?.value || '',
+                gps_url_keluarga: document.getElementById('gps_url_keluarga')?.value || '',
+                gps_lat_usaha: document.getElementById('gps_lat_usaha')?.value || '',
+                gps_lon_usaha: document.getElementById('gps_lon_usaha')?.value || '',
+                gps_url_usaha: document.getElementById('gps_url_usaha')?.value || '',
+                gps_lat_khusus: document.getElementById('gps_lat_khusus')?.value || '',
+                gps_lon_khusus: document.getElementById('gps_lon_khusus')?.value || '',
+                gps_url_khusus: document.getElementById('gps_url_khusus')?.value || ''
+            };
+            localStorage.setItem(FORM_STATE_KEY, JSON.stringify(state));
+        }
+
+        function restoreFormState() {
+            try {
+                const state = JSON.parse(localStorage.getItem(FORM_STATE_KEY) || '{}');
+                if (!state.currentMode) return;
+
+                // Restore basic values
+                if (state.kk_no) document.getElementById('kk_no').value = state.kk_no;
+                if (state.kk_nama) document.getElementById('kk_nama').value = state.kk_nama;
+                if (state.no_urut_bangunan) document.getElementById('no_urut_bangunan').value = state.no_urut_bangunan;
+                if (state.no_urut_keluarga) document.getElementById('no_urut_keluarga').value = state.no_urut_keluarga;
+                if (state.kk_pekerjaan) document.getElementById('kk_pekerjaan').value = state.kk_pekerjaan;
+                if (state.kk_gaji) document.getElementById('kk_gaji').value = state.kk_gaji;
+                if (state.peng_makanan) document.getElementById('peng_makanan').value = state.peng_makanan;
+                if (state.peng_nonmakanan) document.getElementById('peng_nonmakanan').value = state.peng_nonmakanan;
+                if (state.peng_tahunan) document.getElementById('peng_tahunan').value = state.peng_tahunan;
+                if (state.peng_listrik) document.getElementById('peng_listrik').value = state.peng_listrik;
+                if (state.id_pln) document.getElementById('id_pln').value = state.id_pln;
+                if (state.peng_internet) document.getElementById('peng_internet').value = state.peng_internet;
+                if (state.rumah_nilai) document.getElementById('rumah_nilai').value = state.rumah_nilai;
+                if (state.rumah_surat) document.getElementById('rumah_surat').value = state.rumah_surat;
+                if (state.jml_motor) document.getElementById('jml_motor').value = state.jml_motor;
+                if (state.motor_nilai) document.getElementById('motor_nilai').value = state.motor_nilai;
+                if (state.jml_mobil) document.getElementById('jml_mobil').value = state.jml_mobil;
+                if (state.mobil_nilai) document.getElementById('mobil_nilai').value = state.mobil_nilai;
+                if (state.jml_ac) document.getElementById('jml_ac').value = state.jml_ac;
+                if (state.jml_kulkas) document.getElementById('jml_kulkas').value = state.jml_kulkas;
+                if (state.catatan_keluarga) document.getElementById('catatan_keluarga').value = state.catatan_keluarga;
+                if (state.catatan_usaha) document.getElementById('catatan_usaha').value = state.catatan_usaha;
+                if (state.catatan_khusus) document.getElementById('catatan_khusus').value = state.catatan_khusus;
+                if (state.ub_no_bangunan) document.getElementById('ub_no_bangunan').value = state.ub_no_bangunan;
+                if (state.bk_no_bangunan) document.getElementById('bk_no_bangunan').value = state.bk_no_bangunan;
+                if (state.bk_jenis) document.getElementById('bk_jenis').value = state.bk_jenis;
+                if (state.bk_jenis_lain) document.getElementById('bk_jenis_lain').value = state.bk_jenis_lain;
+                if (state.bk_nama) document.getElementById('bk_nama').value = state.bk_nama;
+
+                // Restore radios
+                if (state.rumah_milik) {
+                    const r = document.querySelector(`input[name="rumah_milik"][value="${state.rumah_milik}"]`);
+                    if (r) { r.checked = true; toggleRumahMilik(); }
+                }
+                if (state.punya_usaha) {
+                    const r = document.querySelector(`input[name="punya_usaha"][value="${state.punya_usaha}"]`);
+                    if (r) { r.checked = true; toggleUsaha(); }
+                }
+
+                // Restore GPS displays
+                if (state.gps_lat_keluarga && state.gps_lon_keluarga) {
+                    document.getElementById('gps_lat_keluarga').value = state.gps_lat_keluarga;
+                    document.getElementById('gps_lon_keluarga').value = state.gps_lon_keluarga;
+                    document.getElementById('gps_url_keluarga').value = state.gps_url_keluarga;
+                    const d = document.getElementById('gpsDisplay_keluarga');
+                    d.innerHTML = `<strong>✅ Lokasi Tertag:</strong><br>Lat: ${state.gps_lat_keluarga}<br>Lon: ${state.gps_lon_keluarga}<br><a href="${state.gps_url_keluarga}" target="_blank" style="color:#1976d2;">📍 Buka di Maps</a>`;
+                    d.classList.remove('hidden');
+                }
+                if (state.gps_lat_usaha && state.gps_lon_usaha) {
+                    document.getElementById('gps_lat_usaha').value = state.gps_lat_usaha;
+                    document.getElementById('gps_lon_usaha').value = state.gps_lon_usaha;
+                    document.getElementById('gps_url_usaha').value = state.gps_url_usaha;
+                    const d = document.getElementById('gpsDisplay_usaha');
+                    d.innerHTML = `<strong>✅ Lokasi Tertag:</strong><br>Lat: ${state.gps_lat_usaha}<br>Lon: ${state.gps_lon_usaha}<br><a href="${state.gps_url_usaha}" target="_blank" style="color:#1976d2;">📍 Buka di Maps</a>`;
+                    d.classList.remove('hidden');
+                }
+                if (state.gps_lat_khusus && state.gps_lon_khusus) {
+                    document.getElementById('gps_lat_khusus').value = state.gps_lat_khusus;
+                    document.getElementById('gps_lon_khusus').value = state.gps_lon_khusus;
+                    document.getElementById('gps_url_khusus').value = state.gps_url_khusus;
+                    const d = document.getElementById('gpsDisplay_khusus');
+                    d.innerHTML = `<strong>✅ Lokasi Tertag:</strong><br>Lat: ${state.gps_lat_khusus}<br>Lon: ${state.gps_lon_khusus}<br><a href="${state.gps_url_khusus}" target="_blank" style="color:#1976d2;">📍 Buka di Maps</a>`;
+                    d.classList.remove('hidden');
+                }
+
+                // Restore dynamic visibility
+                toggleMotor(); toggleMobil(); toggleKhususLain();
+            } catch(e) { console.log('Restore state error', e); }
+        }
+
+        function clearFormState() {
+            localStorage.removeItem(FORM_STATE_KEY);
+        }
+
+        // ===== TOAST =====
+        function showToast(msg) {
+            const t = document.getElementById('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 3000);
+        }
+
+        // ===== SERVICE WORKER (PWA) =====
+        if ('serviceWorker' in navigator) {
+            const swCode = `
+                self.addEventListener('install', e => self.skipWaiting());
+                self.addEventListener('activate', e => e.waitUntil(self.clients.claim()));
+                self.addEventListener('fetch', e => e.respondWith(fetch(e.request).catch(() => caches.match(e.request))));
+            `;
+            const swBlob = new Blob([swCode], { type: 'application/javascript' });
+            const swUrl = URL.createObjectURL(swBlob);
+            navigator.serviceWorker.register(swUrl).catch(() => {});
         }
     </script>
 </body>
